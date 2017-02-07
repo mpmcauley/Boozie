@@ -26,8 +26,16 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 
 Here are some examples, Boozie on the left, JavaScript on the right.
 
+#### "Hello World" Example
+  - No printing in Boozie....no,no,no! You belch!
+
+```
+burp("WAZZZZZAAAHHHHH World!")                console.log("Hello World!")
+```
+
 #### Variable Assignment
-For variable assignment the types are inferred. Quick and easy! You can also have multiple variable assignment without all the brackets.
+  - For variable assignment the types are inferred. Quick and easy! You can also have multiple variable assignment without all the brackets.
+
 ```
 let beer, fruit = "Blue Moon", "orange"       let [beer, fruit] = ["Blue Moon", "orange"];                  
 
