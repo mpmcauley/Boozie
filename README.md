@@ -26,6 +26,11 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 
 Here are some examples, Boozie on the left, JavaScript on the right.
 
+#### Variable Assignment
+For variable assignment the types are inferred. Quick and easy! You can also have multiple variable assignment without all the brackets.
 ```
-    Boozie on the left              JavaScript on the right
+
+let beer, fruit = "Blue Moon", "orange"       let [beer, fruit] = ["Blue Moon", "orange"];                  
+
+set cup = "Stein"                             const CUP = "Stein";  
 ```
