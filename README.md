@@ -1,6 +1,16 @@
 # Boozie
 
-The ideal programming language for pursuing Ballmer's Peak.
+The ideal programming language for pursuing the Ballmer Peak.
+
+## Summary
+
+There exists a legend in the world of programming known as the Ballmer Peak. This fabled phenomenon grants a significant "level-up" with respect to their coding abilities at a particular range of blood alcohol content (BAC). Yet this territory of productivity is elusive, operating at a very narrow range of BAC values.
+
+There's a relevant ![xkcd](https://xkcd.com/) for this:
+
+![Apple uses automated schnapps IVs.](ballmer_peak.png)
+
+Our language is designed with this phenomenon in mind, to help facilitate programmers who wish to pursue this unicorn, by making it easy for even the most inebriated of workers to code efficiently!
 
 ### Outline:
 - Pattern Matching (Ocaml style)
