@@ -6,7 +6,7 @@ The ideal programming language for pursuing the Ballmer Peak.
 
 There exists a legend in the world of programming known as the Ballmer Peak. This fabled phenomenon grants a significant "level-up" with respect to their coding abilities at a particular range of blood alcohol content (BAC). Yet this territory of productivity is elusive, operating at a very narrow range of BAC values.
 
-There's a relevant ![xkcd](https://xkcd.com/) for this:
+There's a relevant [xkcd](https://xkcd.com/) for this:
 
 ![Apple uses automated schnapps IVs.](ballmer_peak.png)
 
