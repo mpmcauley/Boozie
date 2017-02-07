@@ -12,12 +12,12 @@ There's a relevant ![xkcd](https://xkcd.com/) for this:
 
 Our language is designed with this phenomenon in mind, to help facilitate programmers who wish to pursue this unicorn, by making it easy for even the most inebriated of workers to code efficiently!
 
-### Outline:
-- Pattern Matching (Ocaml style)
-- Static type, static scope
+### List of Features
+
+- Pattern Matching (OCaml style)
+- Static typing, static scoping
 - String interpolation
 - Curly braces for closure
-- instead of semicolons a burp or for someplace else maybe comments are burp or belch
+- instead of semicolons, a burp (or for someplace else maybe comments are burp or belch)
 - for each loops
 - all integers are floats - lol
-
