@@ -21,3 +21,11 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 - instead of semicolons, a burp (or for someplace else maybe comments are burp or belch)
 - for each loops
 - all integers are floats - lol
+
+### Example Programs
+
+Here are some examples, Boozie on the left, JavaScript on the right.
+
+```
+    Boozie on the left              JavaScript on the right
+```
