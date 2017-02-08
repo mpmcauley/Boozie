@@ -36,7 +36,7 @@ burp("WAZZZZZAAAHHHHHP World!")                     console.log("Hello World!");
 
 #### Data Types and Built-ins
   - Boozie supports the typical assortment of built-in data types:
-      * Booleans (true, false)
+      * Booleans (`true`, `false`)
       * String literals (anything contained within matching pairs of ASCII single ('), double ("), or back (\`) quotes)
       * Number literals (IEEE 754 double-precision floating point)
   - Thus, one important takeaway: all numbers in Boozie are floats!
@@ -48,7 +48,7 @@ burp("WAZZZZZAAAHHHHHP World!")                     console.log("Hello World!");
 let volume = 16                                     let volume = 16.0;
 let beer, fruit = "Blue Moon", "orange"             let [beer, fruit] = ["Blue Moon", "orange"];                  
 ```
-  - Constants (with the same behavior as JavaScript) are supported with the "set" keyword, for terseness, muscle-memory convenience (all letters on one hand!), and consistency with "let."
+  - Constants (with the same behavior as JavaScript) are supported with the `set` keyword, for terseness, muscle-memory convenience (all letters on one hand!), and consistency with `let`.
 
 ```
 set cup = "Stein"                                   const CUP = "Stein";
@@ -61,13 +61,15 @@ set capacity = 16.9                                 const CAPACITY = 16.9;
 let pairsWellWithBeer = ["pizza", "burgers"]        let pairsWellWithBeer = ["pizza", "burgers"];
 
 set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+```
 
 #### Loops
-
+  - Boozie supports two types of control-flow loops: `for` with a similar "for-each" syntax to Python, and `while`.
 
 ##### For
 
 ##### While
+
 
 #### Functions
   - Functions in Boozie are basically.... well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions... especially whilst drinking!
