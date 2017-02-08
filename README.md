@@ -67,6 +67,11 @@ set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3
   - Boozie supports two types of control-flow loops: `for` with a similar "for-each" syntax to Python, and `while`.
 
 ##### For
+```
+for brand in allBrands {                            allBrands.forEach(function(brand) {
+  burp(brand)                                         console.log(brand);
+}                                                   });
+```
 
 ##### While
 
