@@ -31,7 +31,7 @@ Here are some examples, Boozie on the left, JavaScript on the right.
   - No printing in Boozie.... no, no, no! You *belch!*
 
 ```
-burp("WAZZZZZAAAHHHHHP World!")                 console.log("Hello World!");
+burp("WAZZZZZAAAHHHHHP World!")                     console.log("Hello World!");
 ```
 
 #### Data Types and Built-ins
@@ -45,22 +45,22 @@ burp("WAZZZZZAAAHHHHHP World!")                 console.log("Hello World!");
   - For variable assignment, the types are inferred. Quick and easy! You can also perform multiple variable assignment without all the nasty brackets.
 
 ```
-let volume = 16                                 let volume = 16.0;
-let beer, fruit = "Blue Moon", "orange"         let [beer, fruit] = ["Blue Moon", "orange"];                  
+let volume = 16                                     let volume = 16.0;
+let beer, fruit = "Blue Moon", "orange"             let [beer, fruit] = ["Blue Moon", "orange"];                  
 ```
   - Constants (with the same behavior as JavaScript) are supported with the "set" keyword, for terseness, muscle-memory convenience (all letters on one hand!), and consistency with "let."
 
 ```
-set cup = "Stein"                               const CUP = "Stein";
-set capacity = 16.9                             const CAPACITY = 16.9;
+set cup = "Stein"                                   const CUP = "Stein";
+set capacity = 16.9                                 const CAPACITY = 16.9;
 ```
 
   - Arrays are declared and assigned in the same way, with the same static type inference.
 
 ```
-let pairsWellWithBeer = ["pizza", "burgers"]    let pairsWellWithBeer = ["pizza", "burgers"];
+let pairsWellWithBeer = ["pizza", "burgers"]        let pairsWellWithBeer = ["pizza", "burgers"];
 
-set sixpack = [1, 2, 3, 4, 5, 6]                const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
 
 #### Loops
 
@@ -73,14 +73,14 @@ set sixpack = [1, 2, 3, 4, 5, 6]                const SIXPACK = [1.0, 2.0, 3.0, 
   - Functions in Boozie are basically.... well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions... especially whilst drinking!
 
 ```
-let stir = (ingredients) => {                   let stir = (ingredients) => {
-    ingredients.mix()                               ingredients.mix();
-}                                               };
+let stir = (ingredients) => {                       let stir = (ingredients) => {
+    ingredients.mix()                                   ingredients.mix();
+}                                                   };
 
-let pour = (beer, glass) => {                     let pour = (beer, glass) => {
-    beer.volume = 0                                 beer.volume = 0;
-    glass.volume = 16                               glass.volume = 16.0;
-}                                               };
+let pour = (beer, glass) => {                       let pour = (beer, glass) => {
+    beer.volume = 0                                     beer.volume = 0;
+    glass.volume = 16                                   glass.volume = 16.0;
+}                                                   };
 ```
   - One important consequence of this is that Boozie supports first-class functions!
 
