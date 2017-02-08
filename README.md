@@ -15,12 +15,13 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 ### List of Features
 
 - Pattern Matching (OCaml style)
+- First-class functions
 - Static typing, static scoping
 - String interpolation
 - Curly braces for closure
 - instead of semicolons, EOL characters
 - for each loops
-- all integers are floats - lol
+- all numbers are floats - lol
 
 ### Example Programs
 
@@ -41,21 +42,27 @@ burp("WAZZZZZAAAHHHHHP World!")                 console.log("Hello World!");
   - Thus, one important takeaway: all numbers in Boozie are floats!
 
 #### Variable Assignment
-  - For variable assignment the types are inferred. Quick and easy! You can also have multiple variable assignment without all the nasty brackets.
+  - For variable assignment, the types are inferred. Quick and easy! You can also perform multiple variable assignment without all the nasty brackets.
 
 ```
 let volume = 16                                 let volume = 16.0;
 let beer, fruit = "Blue Moon", "orange"         let [beer, fruit] = ["Blue Moon", "orange"];                  
 ```
-  - Constants (with the same behavior as JavaScript) are supported with the "set" keyword, for terseness, muscle-memory convenience (all one hand!), and consistency with "let."
+  - Constants (with the same behavior as JavaScript) are supported with the "set" keyword, for terseness, muscle-memory convenience (all letters on one hand!), and consistency with "let."
 
 ```
 set cup = "Stein"                               const CUP = "Stein";
 set capacity = 16.9                             const CAPACITY = 16.9;
 ```
 
+#### Loops
+
+
+##### For
+##### While
+
 #### Functions
-  - Functions in Boozie are basically....well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions...especially whilst drinking!
+  - Functions in Boozie are basically.... well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions... especially whilst drinking!
 
 ```
 let stir = (ingredients) => {                   let stir = (ingredients) => {
@@ -67,3 +74,5 @@ let pour = (beer, glass) => {                     let pour = (beer, glass) => {
     glass.volume = 16                               glass.volume = 16.0;
 }                                               };
 ```
+  - One important consequence of this is that Boozie supports first-class functions!
+
