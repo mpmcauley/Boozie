@@ -1,0 +1,33 @@
+{
+  "name": "boozie",
+  "version": "0.0.1",
+  "description": "The ideal programming language for pursuing the Ballmer Peak",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpmcauley/Boozie.git"
+  },
+  "keywords": [
+    "programming",
+    "language",
+    "ballmer",
+    "peak",
+    "beer",
+    "code"
+  ],
+  "author": "Mike McAuley, Geoff Colman, Anna Gotsis, Justin Lee, Khiem Lu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpmcauley/Boozie/issues"
+  },
+  "homepage": "https://github.com/mpmcauley/Boozie#readme",
+  "dependencies": {
+    "ohm-js": "^0.12.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  }
+}
