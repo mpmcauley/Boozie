@@ -1,5 +1,7 @@
 # Boozie
 
+!["logo"](BoozieLogo.png)
+
 The ideal programming language for pursuing the Ballmer Peak. Compiles to JavaScript.
 
 ### Summary
