@@ -41,3 +41,12 @@ let beer, fruit = "Blue Moon", "orange"       let [beer, fruit] = ["Blue Moon", 
 
 set cup = "Stein"                             const CUP = "Stein";  
 ```
+
+#### Functions
+  - Functions in Boozie are basically....well exactly the same as JavaScript(ES6). Why? Because we feel that is the optimal way to define functions...especially whilst drinking!
+
+```
+let stir = (ingredients) => {                 let stir = (ingredients) => {
+  ingredients.mix()                             ingredients.mix();
+}                                              };
+```
