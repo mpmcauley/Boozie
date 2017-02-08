@@ -1,16 +1,16 @@
 # Boozie
 
-The ideal programming language for pursuing the Ballmer Peak.
+The ideal programming language for pursuing the Ballmer Peak. Compiles to JavaScript.
 
 ### Summary
 
-There exists a legend in the world of programming known as the Ballmer Peak. This fabled phenomenon grants a significant "level-up" with respect to their coding abilities at a particular range of blood alcohol content (BAC). Yet this territory of productivity is elusive, operating at a very narrow range of BAC values.
+There exists a legend in the world of programming known as the Ballmer Peak. This fabled phenomenon grants a significant "level-up" with respect to coding abilities at a particular range of blood alcohol content (BAC). Yet this territory of productivity is elusive, operating at a very narrow range of BAC values.
 
 There's a relevant [xkcd](https://xkcd.com/) for this:
 
 ![Apple uses automated schnapps IVs.](ballmer_peak.png)
 
-Our language is designed with this phenomenon in mind, to help facilitate programmers who wish to pursue this unicorn, by making it easy for even the most inebriated of workers to code efficiently!
+Our language is designed with this phenomenon in mind, to help facilitate programmers who wish to pursue this unicorn, by making it easy for even the most inebriated of coders to work efficiently!
 
 ### List of Features
 
@@ -47,7 +47,7 @@ burp("WAZZZZZAAAHHHHHP World!")                 console.log("Hello World!");
 let volume = 16                                 let volume = 16.0;
 let beer, fruit = "Blue Moon", "orange"         let [beer, fruit] = ["Blue Moon", "orange"];                  
 ```
-  - Constants are supported with the "set" keyword, for terseness, muscle-memory convenience (all one hand!), and consistency with "let."
+  - Constants (with the same behavior as JavaScript) are supported with the "set" keyword, for terseness, muscle-memory convenience (all one hand!), and consistency with "let."
 
 ```
 set cup = "Stein"                               const CUP = "Stein";
