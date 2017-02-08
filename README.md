@@ -55,10 +55,18 @@ set cup = "Stein"                               const CUP = "Stein";
 set capacity = 16.9                             const CAPACITY = 16.9;
 ```
 
+  - Arrays are declared and assigned in the same way, with the same static type inference.
+
+```
+let pairsWellWithBeer = ["pizza", "burgers"]    let pairsWellWithBeer = ["pizza", "burgers"];
+
+set sixpack = [1, 2, 3, 4, 5, 6]                const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+
 #### Loops
 
 
 ##### For
+
 ##### While
 
 #### Functions
@@ -76,3 +84,4 @@ let pour = (beer, glass) => {                     let pour = (beer, glass) => {
 ```
   - One important consequence of this is that Boozie supports first-class functions!
 
+#### String interpolation
