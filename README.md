@@ -117,6 +117,10 @@ BoolExp2    ::= BoolExp3 (MulOp BoolExp3)* (EqualsOp BoolExp3)
 BoolExp3    ::= '-'?BoolExp4
 BoolExp4    ::= 'Some Value'
 
+stringlit ::= "\"" char "\""
+char ::= escape | ~escape any
+escape ::= "\'" | "\"" | "\r" | "\n" | "\" | "
+
 ```
 
 #### Microsyntax
