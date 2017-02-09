@@ -65,8 +65,8 @@ let pairsWellWithBeer = ["pizza", "burgers"]        let pairsWellWithBeer = ["pi
 set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
 ```
 
-#### Loops
-  - Boozie supports two types of control-flow loops: `for` with a similar "for-each" syntax to Python, and `while`.
+#### Loop & Conditional Statements
+  - Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`. Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially missing) parens, because there aren't any!
 
 ##### For
 ```
@@ -78,7 +78,21 @@ for brand in allBrands {                            for(let brand of allBrands) 
 
 ##### While
 ```
-while
+while beer = -empty {                               while (beer = !empty) {
+    drink(beer)                                         drink(beer);
+}                                                   };
+```
+Note that booleans are negated with the intuitive `-` rather than an arbitrary operator or keyword that requires multiple keystrokes. How many times have you forgotten whether the language you were using used `not` or `!` while drinking? ...  Or is that just me?
+
+##### 'If-Then-(Else)' Statements
+```
+if beer.volume === 0 {                              if (beer.volume === 0) {
+    beer = pour(new beer)                               beer = pour(new beer);
+} else if beer.volume >= 1 {                        } else if (beer.volume >= 1) {               
+    drink(beer)                                         drink(beer);
+} else {                                            } else {
+    chug(beer)                                          chug(beer);
+}                                                   };
 ```
 
 #### Functions
@@ -118,10 +132,11 @@ BoolExp2    ::= BoolExp3 (MulOp BoolExp3)* (EqualsOp BoolExp3)
 BoolExp3    ::= '-'?BoolExp4
 BoolExp4    ::= 'Some Value'
 
-stringlit ::= "\"" char "\""
-char ::= escape | ~escape any
-escape ::= "\'" | "\"" | "\r" | "\n" | "\" | "
-
+stringlit   ::= "\"" char "\""
+char        ::= escape | ~escape any
+escape      ::= "\'" | "\"" | "\r" | "\n" | "\" | "
+keywords    ::= "let" | "set" | "burp" | "for" | "in" | "while"
+              | "match" | "if" | "else" | "new"
 ```
 
 #### Microsyntax
