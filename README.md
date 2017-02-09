@@ -43,6 +43,8 @@ burp("WAZZZZZAAAHHHHHP World!")                     console.log("Hello World!");
       * Number literals (IEEE 754 double-precision floating point)
   - Thus, one important takeaway: all numbers in Boozie are floats!
 
+  All ordinary arithmetic (+, -, *, /, and %) and relational (<, <=, >, >=, ==, !=) operators are supported. Boolean comparisons are made with the intuitive phrases `and` and `or`.
+
 #### Variable Assignment
   - For variable assignment, the types are inferred. Quick and easy! You can also perform multiple variable assignment without all the nasty brackets.
 
@@ -66,7 +68,7 @@ set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3
 ```
 
 #### Loop & Conditional Statements
-  - Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`. Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially missing) parens, because there aren't any!
+  - Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`. Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially forgetting) parens, because there aren't any!
 
 ##### For
 ```
@@ -86,7 +88,7 @@ Note that booleans are negated with the intuitive `-` rather than an arbitrary o
 
 ##### 'If-Then-(Else)' Statements
 ```
-if beer.volume === 0 {                              if (beer.volume === 0) {
+if beer.volume == 0 {                               if (beer.volume == 0) {
     beer = pour(new beer)                               beer = pour(new beer);
 } else if beer.volume >= 1 {                        } else if (beer.volume >= 1) {               
     drink(beer)                                         drink(beer);
@@ -114,37 +116,38 @@ let pour = (beer, glass) => {                       let pour = (beer, glass) => 
 
 #### Macrosyntax
 ```
-Program     ::= Block
-Block       ::= (Stmt Newline)*
-Stmt        ::= WhileStmt | ForStmt | MatchStmt | IfStmt
-              | ReturnStmt | Exp | VarDecl
-IfStmt      ::= 'if' BoolExp '{' Stmt '}'
-              ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
-WhileStmt   ::= 'while' BoolExp '{' Stmt '}'
-ForStmt     ::= 'for' id 'in'
-MatchStmt   ::= 'match' Exp 'with'
+Program         ::= Block
+Block           ::= (Stmt Newline)*
+Stmt            ::= WhileStmt | ForStmt | MatchStmt | IfStmt
+                  | ReturnStmt | Exp | VarDecl
+IfStmt          ::= 'if' BoolExp '{' Stmt '}'
+                    ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
+WhileStmt       ::= 'while' BoolExp '{' Block '}'
+ForStmt         ::= 'for' id 'in' id '{' Block '}'
+MatchStmt       ::= 'match' Exp 'with'
 
-BoolExp     ::= BoolExp1 ('&&' BoolExp1)*
-BoolExp1    ::= BoolExp2 (AddOp BoolExp2)* (EqualsOp BoolExp2)
-              | BoolExp2 (AddOp BoolExp2)* (CompareOp BoolExp2)
-BoolExp2    ::= BoolExp3 (MulOp BoolExp3)* (EqualsOp BoolExp3)
-              | BoolExp3 (MulOp BoolExp3)* (CompareOp BoolExp3)
-BoolExp3    ::= '-'?BoolExp4
-BoolExp4    ::= 'Some Value'
+BoolExp         ::= Exp1 ('and' Exp1)* | Exp1 ('or' Exp1)*
+                  | Exp1 (relationalOp Exp1)*
+Exp1            ::= Exp2 (addOp Exp2)*
+Exp2            ::= Exp3 (mulOp Exp3)*
+Exp3            ::= '-'?boollit | Exp4
+Exp4            ::= numlit | stringlit
 
-stringlit   ::= "\"" char "\""
-char        ::= escape | ~escape any
-escape      ::= "\'" | "\"" | "\r" | "\n" | "\" | "
-keywords    ::= "let" | "set" | "burp" | "for" | "in" | "while"
-              | "match" | "if" | "else" | "new"
+boollit         ::= "true" | "false"
+numlit          ::= digit+("."digit+)?
+stringlit       ::= "\"" char "\""
+char            ::= escape | ~escape any
+escape          ::= "\'" | "\"" | "\r" | "\n" | "\" | "
+keywords        ::= "let" | "set" | "burp" | "for" | "in"  |"while"
+                  | "match" | "if" | "else" | "new"| "true"|"false"
+id              ::= ~keywords stringlit
 ```
 
 #### Microsyntax
 ```
-AssignOp    ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
-EqualsOp    ::= '!==' | '===' | '!=' | '=='
-CompareOp   ::= '>=' | '>' | '<=' | '<'
-AddOp       ::= '+' | '-'
-MulOp       ::= '*' | '/' | '%'
-Newline     ::= '\n'
+assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
+relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
+addOp           ::= '+' | '-'
+mulOp           ::= '*' | '/'  | '%'
+newline         ::= '\n'
 ```
