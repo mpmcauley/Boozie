@@ -1,0 +1,33 @@
+Boozie {
+	Program         ::= Block
+	Block           ::= (Stmt Newline)*
+	Stmt            ::= WhileStmt | ForStmt | MatchStmt | IfStmt
+	                  | ReturnStmt | Exp | VarDecl
+	IfStmt          ::= 'if' BoolExp '{' Stmt '}'
+	                    ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
+	WhileStmt       ::= 'while' BoolExp '{' Block '}'
+	ForStmt         ::= 'for' id 'in' id '{' Block '}'
+	MatchStmt       ::= 'match' Exp 'with'
+
+	BoolExp         ::= Exp1 ('and' Exp1)* | Exp1 ('or' Exp1)*
+	                  | Exp1 (relationalOp Exp1)*
+	Exp1            ::= Exp2 (addOp Exp2)*
+	Exp2            ::= Exp3 (mulOp Exp3)*
+	Exp3            ::= '-'?boollit | Exp4
+	Exp4            ::= numlit | stringlit
+
+	boollit         ::= "true" | "false"
+	numlit          ::= digit+("."digit+)?
+	stringlit       ::= ~comment "\"" char "\""
+	char            ::= escape | ~escape any
+	escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   | "
+	keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
+	                  | "match" | "if"  | "else"  | "new" | "true" | "false"
+	id              ::= ~keywords stringlit
+	comment         ::= space | "//" any "\n"
+	assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
+	relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
+	addOp           ::= '+' | '-'
+	mulOp           ::= '*' | '/'  | '%'
+	newline         ::= '\n'
+}
