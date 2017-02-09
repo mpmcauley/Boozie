@@ -108,6 +108,13 @@ IfStmt      ::= 'if' Exp '{' Stmt '}' ('else if' Exp '{' Stmt '}')* ('else' '{' 
 WhileStmt   ::= 'while' Exp '{' Stmt '}'
 ForStmt     ::= 'for' id 'in'
 MatchStmt   ::= 'match' Exp 'with'
+
+Exp         ::= Exp1 ((EqualsOp Exp1) ('&&' Exp1 (EqualsOp Exp1))*)?
+Exp1        ::= Exp2 (CompareOp Exp2)?
+Exp2        ::= Exp3 (AddOp Exp3)*
+Exp3        ::= Exp4 (MulOp Exp4)*
+Exp4        ::= '-'?Exp5
+
 ```
 
 #### Microsyntax
