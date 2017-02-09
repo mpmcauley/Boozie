@@ -138,7 +138,7 @@ BoolExp         ::= Exp1 ('and' Exp1)* | Exp1 ('or' Exp1)*
 Exp1            ::= Exp2 (addOp Exp2)*
 Exp2            ::= Exp3 (mulOp Exp3)*
 Exp3            ::= '-'?boollit | Exp4
-Exp4            ::= numlit | stringlit
+Exp4            ::= floatlit | stringlit
 
 ```
 
@@ -148,11 +148,12 @@ boollit         ::= "true" | "false"
 floatlit        ::= digit+ “.” digit+ ((“E”|”e”) (“+”|”-“)?
 stringlit       ::= ~comment "\"" char "\""
 char            ::= escape | ~escape any
-escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   | "
+escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
                   | "match" | "if"  | "else"  | "new" | "true" | "false"
 id              ::= ~keywords stringlit
 comment         ::= space | "//" any "\n"
+
 assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
 relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
 addOp           ::= '+' | '-'
