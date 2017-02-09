@@ -151,7 +151,8 @@ char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
                   | "match" | "if"  | "else"  | "new" | "true" | "false"
-id              ::= ~keywords stringlit
+id              ::= ~keywords letter idrest
+idrest          ::= "_" | alnum
 comment         ::= space | "//" any "\n"
 
 assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
