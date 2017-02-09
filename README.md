@@ -145,7 +145,7 @@ Exp4            ::= floatlit | stringlit
 #### Microsyntax
 ```
 boollit         ::= "true" | "false"
-floatlit        ::= digit+ “.” digit+ ((“E”|”e”) (“+”|”-“)?
+floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
 stringlit       ::= ~comment "\"" char "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
