@@ -112,7 +112,14 @@ let pour = (beer, glass) => {                       let pour = (beer, glass) => 
 ```
   - One important consequence of this is that Boozie supports first-class functions!
 
-#### String interpolation
+#### String Interpolation
+  - One of our favorite features of languages like JavaScript and Ruby is the ability to generate strings from data by way of string interpolation. We want to be able to do this in Boozie, too! But we don't like all those ugly curly braces. Let's make it simpler.
+
+```
+let beer, cup, fruit = "Blue Moon", "pilsner glass", "orange"           let [beer, cup, fruit] = ["Blue Moon", "pilsner glass", "orange" ];
+burp(`Put the $fruit on the $cup full of $beer.`)                       console.log(`Put the ${fruit} on the ${cup} full of ${beer}.`);
+// Outputs "Put the orange on the pilsner glass full of Blue Moon."     // Outputs "Put the orange on the pilsner glass full of Blue Moon."
+```
 
 #### Macrosyntax
 ```
@@ -135,12 +142,13 @@ Exp4            ::= numlit | stringlit
 
 boollit         ::= "true" | "false"
 numlit          ::= digit+("."digit+)?
-stringlit       ::= "\"" char "\""
+stringlit       ::= ~comment "\"" char "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   | "
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
                   | "match" | "if"  | "else"  | "new" | "true" | "false"
 id              ::= ~keywords stringlit
+comment         ::= space | "//" any "\n"
 ```
 
 #### Microsyntax
