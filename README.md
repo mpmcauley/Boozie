@@ -104,8 +104,9 @@ Program     ::= Block
 Block       ::= (Stmt Newline)*
 Stmt        ::= WhileStmt | ForStmt | MatchStmt | IfStmt
               | ReturnStmt | Exp | VarDecl
-IfStmt      ::= 'if' Exp '{' Stmt '}' ('else if' Exp '{' Stmt '}')* ('else' '{' Stmt '}' )?
-WhileStmt   ::= 'while' Exp '{' Stmt '}'
+IfStmt      ::= 'if' BoolExp '{' Stmt '}'
+              ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
+WhileStmt   ::= 'while' BoolExp '{' Stmt '}'
 ForStmt     ::= 'for' id 'in'
 MatchStmt   ::= 'match' Exp 'with'
 
