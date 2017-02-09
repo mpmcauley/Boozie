@@ -140,8 +140,12 @@ Exp2            ::= Exp3 (mulOp Exp3)*
 Exp3            ::= '-'?boollit | Exp4
 Exp4            ::= numlit | stringlit
 
+```
+
+#### Microsyntax
+```
 boollit         ::= "true" | "false"
-numlit          ::= digit+("."digit+)?
+floatlit        ::= digit+ “.” digit+ ((“E”|”e”) (“+”|”-“)?
 stringlit       ::= ~comment "\"" char "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   | "
@@ -149,10 +153,6 @@ keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
                   | "match" | "if"  | "else"  | "new" | "true" | "false"
 id              ::= ~keywords stringlit
 comment         ::= space | "//" any "\n"
-```
-
-#### Microsyntax
-```
 assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
 relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
 addOp           ::= '+' | '-'
