@@ -70,13 +70,16 @@ set sixpack = [1, 2, 3, 4, 5, 6]                    const SIXPACK = [1.0, 2.0, 3
 
 ##### For
 ```
-for brand in allBrands {                            allBrands.forEach(function(brand) {
+for brand in allBrands {                            for(let brand of allBrands) {
   burp(brand)                                         console.log(brand);
-}                                                   });
+}                                                     brand += 1;
+                                                    };
 ```
 
 ##### While
-
+```
+while
+```
 
 #### Functions
   - Functions in Boozie are basically.... well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions... especially whilst drinking!
@@ -94,3 +97,25 @@ let pour = (beer, glass) => {                       let pour = (beer, glass) => 
   - One important consequence of this is that Boozie supports first-class functions!
 
 #### String interpolation
+
+#### Macrosyntax
+```
+Program     ::= Block
+Block       ::= (Stmt Newline)*
+Stmt        ::= WhileStmt | ForStmt | MatchStmt | IfStmt
+              | ReturnStmt | Exp | VarDecl
+IfStmt      ::= 'if' Exp '{' Stmt '}' ('else if' Exp '{' Stmt '}')* ('else' '{' Stmt '}' )?
+WhileStmt   ::= 'while' Exp '{' Stmt '}'
+ForStmt     ::= 'for' id 'in'
+MatchStmt   ::= 'match' Exp 'with'
+```
+
+#### Microsyntax
+```
+AssignOp    ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
+EqualsOp    ::= '!==' | '===' | '!=' | '=='
+CompareOp   ::= '>=' | '>' | '<=' | '<'
+AddOp       ::= '+' | '-'
+MulOp       ::= '*' | '/' | '%'
+Newline     ::= '\n'
+```
