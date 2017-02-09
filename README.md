@@ -109,12 +109,13 @@ WhileStmt   ::= 'while' Exp '{' Stmt '}'
 ForStmt     ::= 'for' id 'in'
 MatchStmt   ::= 'match' Exp 'with'
 
-Exp         ::= Exp1 ('&&' Exp1)*
-Exp1        ::= Exp2 (EqualsOp Exp2)?
-Exp2        ::= Exp3 (CompareOp Exp3)?
-Exp3        ::= Exp4 (AddOp Exp4)*
-Exp4        ::= Exp5 (MulOp Exp5)*
-Exp5        ::= '-'?Exp6
+BoolExp     ::= BoolExp1 ('&&' BoolExp1)*
+BoolExp1    ::= BoolExp2 (AddOp BoolExp2)* (EqualsOp BoolExp2)
+              | BoolExp2 (AddOp BoolExp2)* (CompareOp BoolExp2)
+BoolExp2    ::= BoolExp3 (MulOp BoolExp3)* (EqualsOp BoolExp3)
+              | BoolExp3 (MulOp BoolExp3)* (CompareOp BoolExp3)
+BoolExp3    ::= '-'?BoolExp4
+BoolExp4    ::= 'Some Value'
 
 ```
 
