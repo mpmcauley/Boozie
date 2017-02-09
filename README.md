@@ -137,9 +137,9 @@ boollit         ::= "true" | "false"
 numlit          ::= digit+("."digit+)?
 stringlit       ::= "\"" char "\""
 char            ::= escape | ~escape any
-escape          ::= "\'" | "\"" | "\r" | "\n" | "\" | "
-keywords        ::= "let" | "set" | "burp" | "for" | "in"  |"while"
-                  | "match" | "if" | "else" | "new"| "true"|"false"
+escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   | "
+keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
+                  | "match" | "if"  | "else"  | "new" | "true" | "false"
 id              ::= ~keywords stringlit
 ```
 
