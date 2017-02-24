@@ -21,7 +21,7 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 - Static typing, static scoping
 - String interpolation
 - Curly braces for closure
-- instead of semicolons, EOL characters
+- instead of semicolons, just hit enter!
 - for each loops
 - all numbers are floats - lol
 
@@ -124,9 +124,9 @@ burp(`Put the $fruit on the $cup full of $beer.`)                       console.
 #### Macrosyntax
 ```
 Program         ::= Block
-Block           ::= (Stmt Newline)*
-Stmt            ::= WhileStmt | ForStmt | MatchStmt | IfStmt
-                  | ReturnStmt | Exp | VarDecl
+Block           ::= (Stmt newline)*
+Stmt            ::= IfStmt | ForStmt | WhileStmt | MatchStmt
+                    | ReturnStmt     | VarDecl   | Exp
 IfStmt          ::= 'if' BoolExp '{' Stmt '}'
                     ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
 WhileStmt       ::= 'while' BoolExp '{' Block '}'
@@ -146,7 +146,7 @@ Exp4            ::= floatlit | stringlit
 ```
 boollit         ::= "true" | "false"
 floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
-stringlit       ::= ~comment "\"" char "\""
+stringlit       ::= "\"" char "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
