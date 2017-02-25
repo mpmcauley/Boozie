@@ -12,10 +12,12 @@ Boozie {
                         ("else if" BoolExp "{" Stmt "}")* ("else" "{" Stmt "}" )?
     WhileStmt       = "while" BoolExp "{" Block "}"
     ForStmt         = "for" id "in" id "{" Block "}"
-    MatchStmt       = "match" Exp "with"
+    MatchStmt       = "match" Exp "with" Exp
 
-    BoolExp         = Exp1 ("and" Exp1)* | Exp1 ("or" Exp1)*
-                    | Exp1 (relationalOp Exp1)*
+    Exp             = BoolExp | Exp1
+
+    BoolExp         = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
+                    | Exp1 (relationalOp Exp)*
     Exp1            = Exp2 (addOp Exp2)*
     Exp2            = Exp3 (mulOp Exp3)*
     Exp3            = "-"?boollit | Exp4
