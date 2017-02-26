@@ -161,7 +161,7 @@ Syntax error                                        // but valid in JavaScript!
 ## Macrosyntax
 ```
 Program         ::= Block
-Block           ::= (Stmt newline)*
+Block           ::= (Stmt "\n")*
 Stmt            ::= IfStmt | ForStmt | WhileStmt | MatchStmt
                     | ReturnStmt     | VarDecl   | Exp
 IfStmt          ::= 'if' BoolExp '{' Stmt '}'
@@ -186,16 +186,15 @@ boollit         ::= "true" | "false"
 floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
 stringlit       ::= "\"" char* "\""
 char            ::= escape | ~escape any
-escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
+escape          ::= "\'" | "\"" | "\r" | "\n" | "\/"
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
                   | "match" | "if"  | "else"  | "new" | "true" | "false"
 id              ::= ~keywords letter idrest
 idrest          ::= "_" | alnum
-comment         ::= "//" any "\n"
+comment         ::= "//" (~"\n" any)* "\n"
 
 assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
 relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
 addOp           ::= '+' | '-'
 mulOp           ::= '*' | '/'  | '%'
-newline         ::= '\n'
 ```
