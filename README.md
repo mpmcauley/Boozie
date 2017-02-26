@@ -185,7 +185,7 @@ Exp4            ::= floatlit | stringlit
 ```
 boollit         ::= "true" | "false"
 floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
-stringlit       ::= "\"" char "\""
+stringlit       ::= "\"" char* "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\"   
 keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
