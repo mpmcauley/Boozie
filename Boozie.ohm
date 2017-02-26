@@ -17,11 +17,11 @@ Boozie {
     Exp             = BoolExp | Exp1
 
     BoolExp         = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
-                    | Exp1 (relationalOp Exp)*
-    Exp1            = Exp2 (addOp Exp2)*
-    Exp2            = Exp3 (mulOp Exp3)*
-    Exp3            = "-"?boollit | Exp4
-    Exp4            = floatlit | stringlit
+    Exp1            = Exp 2 (relationalOp Exp2)?
+    Exp2            = Exp3 (addOp Exp3)*
+    Exp3            = Exp4 (mulOp Exp4)*
+    Exp4            = "-"?boollit | Exp5
+    Exp5            = floatlit | stringlit
 
     boollit         = "true" | "false"
     floatlit        = digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
