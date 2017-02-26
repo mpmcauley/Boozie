@@ -1,6 +1,6 @@
 {
   "name": "boozie",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The ideal programming language for pursuing the Ballmer Peak",
   "main": "index.js",
   "scripts": {
