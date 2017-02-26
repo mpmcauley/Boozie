@@ -43,7 +43,7 @@ burp("WAZZZZZAAAHHHHHP World!")                     console.log("Hello World!");
       * Number literals (IEEE 754 double-precision floating point)
   - Thus, one important takeaway: all numbers in Boozie are floats!
 
-  All ordinary arithmetic (`+`, `-`, `*`, `/`, and `%`) and relational (`<`, `<=`, `>`, `>=`, `==`, `!=`) operators are supported, and Boolean comparisons are made with the intuitive phrases `and` and `or`. Equivalency (`==`) is defined as JavaScript's "strict," triple-equals (`===`) equivalence. Why should programmers have to worry about the subtle differences between the interpretation of the two in the first place when, 9 times out of 10, `===` is what they mean?
+  All ordinary arithmetic (`+`, `-`, `*`, `/`, and `%`) and relational (`<`, `<=`, `>`, `>=`, `==`, `!=`) operators are supported, and Boolean comparisons are made with the intuitive phrases `and` and `or`. Relational operators are non-associative. Equivalency (`==`) is defined as JavaScript's "strict," triple-equals (`===`) equivalence. Why should programmers have to worry about the subtle differences between the interpretation of the two in the first place when, 9 times out of 10, `===` is what they mean?
 
   ```
   (null) == (undefined)                             (null) === (undefined);
@@ -171,13 +171,12 @@ ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' Exp
 
 Exp             ::= BoolExp | Exp1
-
 BoolExp         ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            ::= Exp2 (relationalOp Exp2)?
 Exp2            ::= Exp3 (addOp Exp3)*
 Exp3            ::= Exp4 (mulOp Exp4)*
-Exp4            ::= '-'?boollit | Exp5
-Exp5            ::= floatlit | stringlit
+Exp4            ::= '-'? Literal
+Literal         ::= floatlit | boollit | stringlit
 
 ```
 
