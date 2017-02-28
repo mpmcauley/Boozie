@@ -4,7 +4,8 @@
   "description": "The ideal programming language for pursuing the Ballmer Peak",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
