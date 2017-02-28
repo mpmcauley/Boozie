@@ -169,6 +169,8 @@ IfStmt          ::= 'if' BoolExp '{' Stmt '}'
 WhileStmt       ::= 'while' BoolExp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' Exp
+ReturnStmt      ::= "return" Exp
+VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)
 
 Exp             ::= BoolExp | Exp1
 BoolExp         ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
@@ -187,8 +189,9 @@ floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
 stringlit       ::= "\"" char* "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\/"
-keywords        ::= "let"   | "set" | "burp"  | "for" | "in"   | "while"
-                  | "match" | "if"  | "else"  | "new" | "true" | "false"
+keywords        = ("let"    | "set"   | "burp"  | "for"   | "in"
+                  | "while" | "match" | "if"    | "else"  | "new"
+                  | "true"  | "false" | "return") ~idrest
 id              ::= ~keywords letter idrest
 idrest          ::= "_" | alnum
 comment         ::= "//" (~"\n" any)* "\n"
