@@ -1,0 +1,4 @@
+let volume = 16
+let beer, fruit = "Blue Moon", "orange"
+set cup = "Stein"
+set capacity = 16.9
