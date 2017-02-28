@@ -184,6 +184,7 @@ Literal         ::= floatlit | boollit | stringlit
 
 ## Microsyntax
 ```
+type            ::= "float" | "bool" | "string"
 boollit         ::= "true" | "false"
 floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
 stringlit       ::= "\"" char* "\""
