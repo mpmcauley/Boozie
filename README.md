@@ -172,12 +172,12 @@ MatchStmt       ::= 'match' Exp 'with' Exp
 ReturnStmt      ::= "return" Exp
 VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
 
-Exp             ::= BoolExp | Exp1
+Exp             ::= "-"? BoolExp | "-"? Exp1
 BoolExp         ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            ::= Exp2 (relationalOp Exp2)?
 Exp2            ::= Exp3 (addOp Exp3)*
 Exp3            ::= Exp4 (mulOp Exp4)*
-Exp4            ::= '-'? Literal
+Exp4            ::= Literal | "(" Exp ")"
 Literal         ::= floatlit | boollit | stringlit
 
 ```
