@@ -30,8 +30,8 @@ Boozie {
     stringlit       = "\"" char* "\""
     char            = escape | ~escape any
     escape          = "\"" | "\"" | "\r" | "\n" | "\/"   
-    keywords        = "let"   | "set" | "burp"  | "for" | "in"   | "while"
-                    | "match" | "if"  | "else"  | "new" | "true" | "false"
+    keywords        = ("let"  | "set" | "burp"  | "for" | "in"   | "while"
+                    | "match" | "if"  | "else"  | "new" | "true" | "false") ~idrest
     id              = ~keywords letter idrest
     idrest          = "_" | alnum
     comment         = "//" (~"\n" any)* "\n"
