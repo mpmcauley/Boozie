@@ -170,7 +170,7 @@ WhileStmt       ::= 'while' BoolExp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' Exp
 ReturnStmt      ::= "return" Exp
-VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)
+VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
 
 Exp             ::= BoolExp | Exp1
 BoolExp         ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
