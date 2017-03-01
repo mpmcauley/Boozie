@@ -164,20 +164,20 @@ Program         ::= Block
 Block           ::= (Stmt "\n")*
 Stmt            ::= IfStmt | ForStmt | WhileStmt | MatchStmt
                     | ReturnStmt     | VarDecl   | Exp
-IfStmt          ::= 'if' BoolExp '{' Stmt '}'
-                    ('else if' BoolExp '{' Stmt '}')* ('else' '{' Stmt '}' )?
+IfStmt          ::= 'if' BoolExp '{' Block '}'
+                    ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
 WhileStmt       ::= 'while' BoolExp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' Exp
 ReturnStmt      ::= "return" Exp
 VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
-
-Exp             ::= "-"? BoolExp | "-"? Exp1
-BoolExp         ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
+                    | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"
+Exp             ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            ::= Exp2 (relationalOp Exp2)?
 Exp2            ::= Exp3 (addOp Exp3)*
 Exp3            ::= Exp4 (mulOp Exp4)*
-Exp4            ::= Literal | "(" Exp ")"
+Exp4            ::= "-"? Exp5
+Exp5            ::= Literal  | id | "(" Exp ")"
 Literal         ::= floatlit | boollit | stringlit
 
 ```
@@ -190,10 +190,10 @@ floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
 stringlit       ::= "\"" char* "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\/"
-keywords        = ("let"    | "set"   | "burp"  | "for"   | "in"
+keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "while" | "match" | "if"    | "else"  | "new"
                   | "true"  | "false" | "return") ~idrest
-id              ::= ~keywords letter idrest
+id              ::= ~keyword letter idrest
 idrest          ::= "_" | alnum
 comment         ::= "//" (~"\n" any)* "\n"
 
