@@ -1,49 +1,49 @@
 Boozie {
 
-Program         ::= Block
-Block           ::= (Stmt "\n")*
-Stmt            ::= IfStmt                                  -- if
+Program         = Block
+Block           = (Stmt "\n")*
+Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
                   | MatchStmt                               -- match
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- declaration
                   | Exp                                     -- exp
-IfStmt          ::= 'if' BoolExp '{' Block '}'
+IfStmt          = 'if' BoolExp '{' Block '}'
                     ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
-WhileStmt       ::= 'while' BoolExp '{' Block '}'
-ForStmt         ::= 'for' id 'in' id '{' Block '}'
-MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
-MatchPart       ::= '>>' Pattern ("::" Pattern)*
-Pattern         ::= Exp                                     -- exp
+WhileStmt       = 'while' BoolExp '{' Block '}'
+ForStmt         = 'for' id 'in' id '{' Block '}'
+MatchStmt       = 'match' Exp 'with' "\n" MatchPart
+MatchPart       = '>>' Pattern ("::" Pattern)*
+Pattern         = Exp                                     -- exp
                   | Other
-Other           ::= "_"                                     -- wildcard
-ReturnStmt      ::= "return" Exp
-VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
+Other           = "_"                                     -- wildcard
+ReturnStmt      = "return" Exp
+VarDecl         = ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
                     | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"
 
-Exp             ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
-Exp1            ::= Exp2 (relationalOp Exp2)?               -- rel
-Exp2            ::= Exp3 (addOp Exp3)*                      -- add
-Exp3            ::= Exp4 (mulOp Exp4)*                      -- mult
-Exp4            ::= "-"? Exp5                               -- negate
-Exp5            ::= Literal
+Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
+Exp1            = Exp2 (relationalOp Exp2)?               -- rel
+Exp2            = Exp3 (addOp Exp3)*                      -- add
+Exp3            = Exp4 (mulOp Exp4)*                      -- mult
+Exp4            = "-"? Exp5                               -- negate
+Exp5            = Literal
                   | id                                      -- id
                   | "(" Exp ")"
-Literal         ::= floatlit                                -- float
+Literal         = floatlit                                -- float
                     | boollit                               -- bool
                     | stringlit                             -- string
 
-type            ::= "float"                                 -- float
+type            = "float"                                 -- float
                   | "bool"                                  -- bool
                   | "string"                                -- string
-boollit         ::= "true"                                  -- true
+boollit         = "true"                                  -- true
                   | "false"                                 -- false
-floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
-stringlit       ::= "\"" char* "\""
-char            ::= escape
+floatlit        = digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
+stringlit       = "\"" char* "\""
+char            = escape
                   | ~escape any
-escape          ::= "\'"
+escape          = "\'"
                   | "\""
                   | "\r"
                   | "\n"
@@ -51,25 +51,25 @@ escape          ::= "\'"
 keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "while" | "match" | "if"    | "else"  | "new"
                   | "true"  | "false" | "return") ~idrest
-id              ::= ~keyword letter idrest
-idrest          ::= "_" | alnum
-comment         ::= "//" (~"\n" any)* "\n"
+id              = ~keyword letter idrest
+idrest          = "_" | alnum
+comment         = "//" (~"\n" any)* "\n"
 
-assignOp        ::= '='                                     -- equals
+assignOp        = '='                                     -- equals
                   | '+='                                    -- plusEq
                   | '*='                                    -- timesEq
                   | '-='                                    -- minusEq
                   | '/='                                    -- divEq
                   | '%='                                    -- modEq
-relationalOp    ::= '=='                                    -- equals
+relationalOp    = '=='                                    -- equals
                   | '>'                                     -- greater
                   | '<'                                     -- less
                   | '>='                                    -- greaterEq
                   | '<='                                    -- lessEq
                   | '!='                                    -- notEq
-addOp           ::= '+'                                     -- add
+addOp           = '+'                                     -- add
                   | '-'                                     -- subtract
-mulOp           ::= '*'                                     -- times
+mulOp           = '*'                                     -- times
                   | '/'                                     -- divide
                   | '%'                                     -- mod
 
