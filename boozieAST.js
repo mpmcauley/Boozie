@@ -1,56 +1,104 @@
-// Anna is a poopy head - <3 Trixie
+
 const ohm = require('ohm-js');
 const fs = require('fs');
-const grammar = ohm.grammar('Boozie {
-    Program         = Block
-    Block           = (Stmt "\n")*
-    Stmt            = IfStmt
-                    | ForStmt
-                    | WhileStmt
-                    | MatchStmt
-                    | ReturnStmt
-                    | VarDecl
-                    | Exp
-    IfStmt          = "if" BoolExp "{" Block "}"
-                        ("else if" BoolExp "{" Block "}")* ("else" "{" Block "}" )?
-    WhileStmt       = "while" BoolExp "{" Block "}"
-    ForStmt         = "for" id "in" id "{" Block "}"
-    MatchStmt       = "match" Exp "with" Exp
-    ReturnStmt      = "return" Exp
-    VarDecl         = ("let" | "set") id ("," id)* "=" Exp ("," Exp)*   -- simpledecl
-                    | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"    -- arraydecl
+const grammar = ohm.grammar();
 
-    Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
-    Exp1            = Exp 2 (relationalOp Exp2)?
-    Exp2            = Exp3 (addOp Exp3)*
-    Exp3            = Exp4 (mulOp Exp4)*
-    Exp4            = "-"? Exp5
-    Exp5            = Literal
-                    | id
-                    | "(" Exp ")"                       -- parens
-    Literal         = floatlit
-                    | boollit
-                    | stringlit
+class Program {
+  constructor(e) {
+    this.body = e;
+  }
+}
 
-    type            = "float" | "bool" | "string"
-    boollit         = "true" | "false"
-    floatlit        = digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
-    stringlit       = "\"" char* "\""
-    char            = escape | ~escape any
-    escape          = "\"" | "\"" | "\r" | "\n" | "\/"
-    keyword         = ("let"  | "set"   | "burp"  | "for"   | "in"
-                    | "while" | "match" | "if"    | "else"  | "new"
-                    | "true"  | "false" | "return") ~idrest
-    id              = ~keyword letter idrest
-    idrest          = "_" | alnum
-    comment         = "//" (~"\n" any)* "\n"
-    space          += comment
+class Block {
+  constuctor(stmt) {
+    this.statement = stmt;
+  }
+}
 
-    assignOp        = "=" | "+=" | "*=" | "-=" | "/=" | "%="
-    relationalOp    = "=="| ">"  | "<"  | ">=" | "<=" | "!="
-    addOp           = "+" | "-"
-    mulOp           = "*" | "/"  | "%"
-}');
+class Statement {
+}
+
+class IfStatement extends Statement {
+  constructor(ifStmt, body) {
+    this.if = ifStmt;
+    this.body = body;
+  }
+  return this.if + "else " + this.body;
+}
+
+class ForStatement extends Statement {
+
+}
+
+class WhileStatement extends Statement {
+
+}
+
+class ReturnStatement extends Statement {
+
+}
+
+class VariableDeclaration extends Statement {
+
+}
+
+class IfStatement extends Statement {
+
+}
+
+class Expression {
+}
+
+class BinaryExpression extends Expression {
+  constructor(e1, op, e2) {
+    super();
+    this.left = e1;
+    this.op = op;
+    this.right = e2;
+  }
+}
+
+class UnaryExpression extends Expression {
+  constructor(op, e) {
+    super();
+    this.op = op;
+    this.operand = e;
+  }
+}
+
+class IdExpression extends Expression {
+  constructor(idValue) {
+    super();
+    this.value = idValue;
+  }
+}
+
+
+class Literal {
+}
+
+class FloatLiteral extends Literal {
+  constructor(float) {
+    super();
+    this.value = float;
+  }
+}
+
+class BooleanLiteral extends Literal {
+  constructor(bool) {
+    super();
+    this.value = bool;
+  }
+}
+
+class StringLiteral extends Literal {
+  constructor(string) {
+    super();
+    this.value = string;
+  }
+}
+
+
 
 const semantics = grammar.createSemantics().addOperation('ast', {
 
@@ -81,10 +129,10 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Stmt_arrayDecl() {
     return new VariableDeclaration(id.sourceString);
   },
-  Exp_binary(e1, _, e2) {
+  Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
-  Exp_binary(e1, _, e2) {
+  Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "and", e2.ast());
   },
   Exp1_binary(e1, op, e2) {
