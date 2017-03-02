@@ -19,31 +19,63 @@ class Statement {
 }
 
 class IfStatement extends Statement {
-  constructor(ifStmt, body) {
-    this.if = ifStmt;
+  constructor(condition, body, elseIfStmt, elseStmt) {
+    this.if = condition;
     this.body = body;
+    this.elseIf = elseIfStmt;
+    this.else = elseStmt
   }
-  return this.if + "else " + this.body;
+  if(let single)
+  return "if " + this.if + " else " + this.body;
 }
 
 class ForStatement extends Statement {
-
+  constructor(identifier, body) {
+    this.for = identifier;
+    this.body = body;
+  }
+    return "for " + this.for + " in " + this.body;
 }
 
 class WhileStatement extends Statement {
+  constructor(condition, body) {
+    this.condition = condition;
+    this.body = body;
+  }
+  return "while " + this.condition + " " + this.body;
+}
 
+class MatchStatement extends Statement {
+  constructor(e1, e2) {
+    this.e1 = e1;
+    this.e2 = e2;
+  }
+  return "match " + this.e1 + " with " + this.e2;
 }
 
 class ReturnStatement extends Statement {
-
+  constructor(body) {
+    this.body = body;
+  }
+  return this.body;
 }
 
-class VariableDeclaration extends Statement {
-
+class SimpleVariableDeclaration extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  return 
 }
 
-class IfStatement extends Statement {
-
+class ArrayVariableDeclaration extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  return
 }
 
 class Expression {
@@ -72,7 +104,6 @@ class IdExpression extends Expression {
     this.value = idValue;
   }
 }
-
 
 class Literal {
 }
@@ -108,27 +139,27 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt, _) {
     return new Block(stmt.ast());
   },
-  Stmt_if() {
-    return new IfStatement();
-  },
-  Stmt_for() {
-    return new ForStatement();
-  },
-  Stmt_while() {
-    return new WhileStatement();
-  },
-  Stmt_match() {
-    return new MatchStatement();
-  },
-  Stmt_return() {
-    return new ReturnStatement();
-  },
-  Stmt_varDecl() {
-    return new VariableDeclaration(id.sourceString);
-  },
-  Stmt_arrayDecl() {
-    return new VariableDeclaration(id.sourceString);
-  },
+  // Stmt_if() {
+  //   return new IfStatement();
+  // },
+  // Stmt_for() {
+  //   return new ForStatement();
+  // },
+  // Stmt_while() {
+  //   return new WhileStatement();
+  // },
+  // Stmt_match() {
+  //   return new MatchStatement();
+  // },
+  // Stmt_return() {
+  //   return new ReturnStatement();
+  // },
+  // Stmt_varDecl() {
+  //   return new VariableDeclaration(id.sourceString);
+  // },
+  // Stmt_arrayDecl() {
+  //   return new VariableDeclaration(id.sourceString);
+  // },
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
