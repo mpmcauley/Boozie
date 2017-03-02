@@ -35,7 +35,9 @@ class ForStatement extends Statement {
     this.in = structure;
     this.body = body;
   }
-    return "for " + this.for + " in " + this.in + "{" + this.body + "}";
+    toString() {
+      "for " + this.for + " in " + this.in + " { " + this.body + " } ";
+    }
 }
 
 class WhileStatement extends Statement {
@@ -43,7 +45,9 @@ class WhileStatement extends Statement {
     this.condition = condition;
     this.body = body;
   }
-  return "while " + this.condition + "{" + this.body + "}";
+  toString() {
+    "while " + this.condition + " { " + this.body + " } ";
+  }
 }
 
 class MatchStatement extends Statement {
@@ -51,14 +55,17 @@ class MatchStatement extends Statement {
     this.e1 = e1;
     this.e2 = e2;
   }
-  return "match " + this.e1 + " with " + this.e2;
+  toString() {
+    "match " + this.e1 + " with " + this.e2;
+  }
 }
-
 class ReturnStatement extends Statement {
   constructor(body) {
     this.body = body;
   }
-  return "return " + this.body;
+  toString() {
+    "return " + this.body;
+  }
 }
 
 // class SimpleVariableDeclaration extends Statement {
