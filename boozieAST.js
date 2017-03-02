@@ -18,16 +18,28 @@ class Block {
 class Statement {
 }
 
-// class IfStatement extends Statement {
-//   constructor(condition, body, elseIfStmt, elseStmt) {
-//     this.condition = condition;
-//     this.body = body;
-//     this.elseIf = elseIfStmt;
-//     this.else = elseStmt;
-//   }
-//   if()
-//   return "if " + "{" + this.condition + "}" + " else " + "{" + this.body + "}";
-// }
+class IfStatement extends Statement {
+  constructor(condition, body, elseIfStmt, elseStmt) {
+    this.condition = condition;
+    this.body = body;
+    this.elseIf = elseIfStmt;
+    this.else = elseStmt;
+  }
+  toString() {
+    "if " + " { " + this.condition + " } " + " else " + " { " + this.body + " } ";
+  }
+}
+
+class ElseIfStatement extends Statement {
+  constructor(condition, body, elseIfStmt) {
+    this.condition = condition;
+    this.body = body;
+    // this.elseIf = elseIfStmt;
+  }
+    toString() {
+      "else if " + " { " + this.condition + " } " + " then " + " { " + this.body + " } ";
+    }
+}
 
 class ForStatement extends Statement {
   constructor(identifier, structure, body) {
@@ -59,6 +71,7 @@ class MatchStatement extends Statement {
     "match " + this.e1 + " with " + this.e2;
   }
 }
+
 class ReturnStatement extends Statement {
   constructor(body) {
     this.body = body;
@@ -68,23 +81,49 @@ class ReturnStatement extends Statement {
   }
 }
 
-// class SimpleVariableDeclaration extends Statement {
-//   constructor(id, type, value){
-//     this.id = id;
-//     this.type = type;
-//     this.value = value;
-//   }
-//   return
-// }
-//
-// class ArrayVariableDeclaration extends Statement {
-//   constructor(id, type, value){
-//     this.id = id;
-//     this.type = type;
-//     this.value = value;
-//   }
-//   return
-// }
+class VariableDecl extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  toString() {
+    "let " + this.id.join(" , ") + " = " + this.value.join(" , ");
+  }
+}
+
+class ArrayVariableDecl extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  toString() {
+    "let " + this.id.join(" , ") + " = " + " [ " + this.value.join(" , ") + " ] ";
+  }
+}
+
+class ConstDecl extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  toString() {
+    "set " + this.id.join(" , ") + " = " + this.value.join(" , ");
+  }
+}
+
+class ArrayConstDecl extends Statement {
+  constructor(id, type, value){
+    this.id = id;
+    this.type = type;
+    this.value = value;
+  }
+  toString() {
+    "set " + this.id.join(" , ") + " = " + " [ " + this.value.join(" , ") + " ] ";
+  }
+}
 
 class Expression {
 }
@@ -151,24 +190,31 @@ const semantics = grammar.createSemantics().addOperation('ast', {
 //   Stmt_if() {
 //     return new IfStatement();
 //   },
-//   Stmt_for() {
-//     return new ForStatement();
-//   },
-//   Stmt_while() {
-//     return new WhileStatement();
-//   },
-//   Stmt_match() {
-//     return new MatchStatement();
-//   },
-//   Stmt_return() {
-//     return new ReturnStatement();
-//   },
-//   Stmt_varDecl() {
-//     return new VariableDeclaration(id.sourceString);
-//   },
-//   Stmt_arrayDecl() {
-//     return new VariableDeclaration(id.sourceString);
-//   },
+  Stmt_for(fr, e, i, struct, l, b, r) {
+    return new ForStatement(e.ast(), struct.ast(), b.ast();
+  },
+  Stmt_while(w, e, l, b, r) {
+    return new WhileStatement(e.ast(), b.ast());
+  },
+  Stmt_match(m, e1, w, e2) {
+    return new MatchStatement(e1.ast(), e2.ast());
+  },
+  Stmt_return(r, b) {
+    return new ReturnStatement(b.ast());
+  },
+  Var_Decl(l, id, _, eq, v, _) {
+    return new VariableDecl(v.sourceString);
+  },
+  Array_Decl(l, arr,  _, eq, l, v, _, r) {
+    return new ArrayVariableDecl(v.sourceString);
+  },
+
+  Const_Decl(s, id, _, eq, v, _) {
+    return new ConstDecl(v.sourceString);
+  },
+  Array_ConstDecl(s, id, _, eq, l, v, _, r) {
+    return new ArrayConstDecl(v.sourceString);
+  },
 
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
