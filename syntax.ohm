@@ -1,1 +1,51 @@
+Boozie {
 
+Program         ::= Block
+Block           ::= (Stmt "\n")*
+Stmt            ::= IfStmt
+                    | ForStmt
+                    | WhileStmt
+                    | MatchStmt
+                    | ReturnStmt
+                    | VarDecl
+                    | Exp
+IfStmt          ::= 'if' BoolExp '{' Block '}'
+                    ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
+WhileStmt       ::= 'while' BoolExp '{' Block '}'
+ForStmt         ::= 'for' id 'in' id '{' Block '}'
+MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
+MatchPart       ::= '>>' Pattern ("::" Pattern)*
+Pattern         ::= Exp
+                    | Other
+Other           ::= "_"
+ReturnStmt      ::= "return" Exp
+VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
+                    | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"
+
+Exp             ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
+Exp1            ::= Exp2 (relationalOp Exp2)?
+Exp2            ::= Exp3 (addOp Exp3)*
+Exp3            ::= Exp4 (mulOp Exp4)*
+Exp4            ::= "-"? Exp5
+Exp5            ::= Literal  | id | "(" Exp ")"
+Literal         ::= floatlit | boollit | stringlit
+
+type            ::= "float" | "bool" | "string"
+boollit         ::= "true" | "false"
+floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
+stringlit       ::= "\"" char* "\""
+char            ::= escape | ~escape any
+escape          ::= "\'" | "\"" | "\r" | "\n" | "\/"
+keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
+                  | "while" | "match" | "if"    | "else"  | "new"
+                  | "true"  | "false" | "return") ~idrest
+id              ::= ~keyword letter idrest
+idrest          ::= "_" | alnum
+comment         ::= "//" (~"\n" any)* "\n"
+
+assignOp        ::= '=' | '+=' | '*=' | '-=' | '/=' | '%='
+relationalOp    ::= '=='| '>'  | '<'  | '>=' | '<=' | '!='
+addOp           ::= '+' | '-'
+mulOp           ::= '*' | '/'  | '%'
+
+}
