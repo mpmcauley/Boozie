@@ -10,32 +10,32 @@ class Program {
 }
 
 class Block {
-  constuctor(stmt) {
-    this.statement = stmt;
+  constuctor(body) {
+    this.body = body;
   }
 }
 
 class Statement {
 }
 
-class IfStatement extends Statement {
-  constructor(condition, body, elseIfStmt, elseStmt) {
-    this.if = condition;
-    this.body = body;
-    this.elseIf = elseIfStmt;
-    this.else = elseStmt
-  }
-  if(let single)
-  return "if " + this.if + " else " + this.body;
-}
+// class IfStatement extends Statement {
+//   constructor(condition, body, elseIfStmt, elseStmt) {
+//     this.condition = condition;
+//     this.body = body;
+//     this.elseIf = elseIfStmt;
+//     this.else = elseStmt;
+//   }
+//   if()
+//   return "if " + "{" + this.condition + "}" + " else " + "{" + this.body + "}";
+// }
 
-<<<<<<< HEAD
 class ForStatement extends Statement {
-  constructor(identifier, body) {
+  constructor(identifier, structure, body) {
     this.for = identifier;
+    this.in = structure;
     this.body = body;
   }
-    return "for " + this.for + " in " + this.body;
+    return "for " + this.for + " in " + this.in + "{" + this.body + "}";
 }
 
 class WhileStatement extends Statement {
@@ -43,7 +43,7 @@ class WhileStatement extends Statement {
     this.condition = condition;
     this.body = body;
   }
-  return "while " + this.condition + " " + this.body;
+  return "while " + this.condition + "{" + this.body + "}";
 }
 
 class MatchStatement extends Statement {
@@ -58,26 +58,26 @@ class ReturnStatement extends Statement {
   constructor(body) {
     this.body = body;
   }
-  return this.body;
+  return "return " + this.body;
 }
 
-class SimpleVariableDeclaration extends Statement {
-  constructor(id, type, value){
-    this.id = id;
-    this.type = type;
-    this.value = value;
-  }
-  return 
-}
-
-class ArrayVariableDeclaration extends Statement {
-  constructor(id, type, value){
-    this.id = id;
-    this.type = type;
-    this.value = value;
-  }
-  return
-}
+// class SimpleVariableDeclaration extends Statement {
+//   constructor(id, type, value){
+//     this.id = id;
+//     this.type = type;
+//     this.value = value;
+//   }
+//   return
+// }
+//
+// class ArrayVariableDeclaration extends Statement {
+//   constructor(id, type, value){
+//     this.id = id;
+//     this.type = type;
+//     this.value = value;
+//   }
+//   return
+// }
 
 class Expression {
 }
@@ -140,28 +140,28 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt, _) {
     return new Block(stmt.ast());
   },
-<<<<<<< HEAD
-  // Stmt_if() {
-  //   return new IfStatement();
-  // },
-  // Stmt_for() {
-  //   return new ForStatement();
-  // },
-  // Stmt_while() {
-  //   return new WhileStatement();
-  // },
-  // Stmt_match() {
-  //   return new MatchStatement();
-  // },
-  // Stmt_return() {
-  //   return new ReturnStatement();
-  // },
-  // Stmt_varDecl() {
-  //   return new VariableDeclaration(id.sourceString);
-  // },
-  // Stmt_arrayDecl() {
-  //   return new VariableDeclaration(id.sourceString);
-  // },
+
+//   Stmt_if() {
+//     return new IfStatement();
+//   },
+//   Stmt_for() {
+//     return new ForStatement();
+//   },
+//   Stmt_while() {
+//     return new WhileStatement();
+//   },
+//   Stmt_match() {
+//     return new MatchStatement();
+//   },
+//   Stmt_return() {
+//     return new ReturnStatement();
+//   },
+//   Stmt_varDecl() {
+//     return new VariableDeclaration(id.sourceString);
+//   },
+//   Stmt_arrayDecl() {
+//     return new VariableDeclaration(id.sourceString);
+//   },
 
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
