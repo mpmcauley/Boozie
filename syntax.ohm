@@ -1,28 +1,34 @@
 Boozie {
 
 Program         = Block
-Block           = (Stmt "\n")*
+Block           = (Stmt)*("\n" Stmt)*
 Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
                   | MatchStmt                               -- match
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- declaration
+                  | FunDecl                                 -- fundecl
+                  | Print                                   -- print
                   | Exp                                     -- exp
+
 IfStmt          = "if" Exp "{" Block "}"
                     ("else if" Exp "{" Block "}")* ("else" "{" Block "}" )?
 WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
+FunDecl         = "let" id "=" Params "=>" "{" Block "}"
+Params          = "(" id* ("," id)* ")"
 MatchStmt       = "match" Exp "with" "\n" MatchPart
 MatchPart       = ">>" Pattern ("::" Pattern)*
 Pattern         = Exp                                     -- exp
                   | Other
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
-ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*   -- const
-ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"   -- constarray
-VarDecl         = "let" id ("," id)* "=" Exp ("," Exp)*   -- var
-VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"    -- vararray
+ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*       -- const
+ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"       -- constarray
+VarDecl         = "let" id ("," id)* assignOp Exp ("," Exp)*  -- var
+VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"        -- vararray
+Print           = "burp(" Exp ")"
 Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            = Exp2 (relationalOp Exp2)?               -- rel
 Exp2            = Exp3 (addOp Exp3)*                      -- add
@@ -30,10 +36,12 @@ Exp3            = Exp4 (mulOp Exp4)*                      -- mult
 Exp4            = "-"? Exp5                               -- negate
 Exp5            = Literal
                   | id                                      -- id
-                  | "(" Exp ")"
+                  | "(" Exp ")"                             -- parens
+                  | id "(" Args ")"                         -- funcall
+Args            = Exp ("," Exp)*
 Literal         = floatlit                                  -- float
-                    | boollit                               -- bool
-                    | stringlit                             -- string
+                  | boollit                                 -- bool
+                  | stringlit                               -- string
 
 type            = "float"                                   -- float
                   | "bool"                                  -- bool
@@ -42,17 +50,17 @@ boollit         = "true"                                    -- true
                   | "false"                                 -- false
 floatlit        = digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
 stringlit       = "\"" char* "\""
-char            = escape
-                  | ~escape any
+char            = ~escape any
+                | escape
 escape          = "\'"
                   | "\""
                   | "\r"
                   | "\n"
-                  | "\/"
+
 keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "while" | "match" | "if"    | "else"  | "new"
                   | "true"  | "false" | "return") ~idrest
-id              = ~keyword letter idrest
+id              = ~keyword letter idrest*
 idrest          = "_" | alnum
 comment         = "//" (~"\n" any)* "\n"
 
