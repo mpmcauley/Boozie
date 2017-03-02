@@ -172,6 +172,10 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new ForStatement(identifier.ast(), structure.ast(), body.ast());
   },
 
+  While_stmt(condition, body) {
+    return new WhileStatement(condition.ast(), body.ast());
+  },
+
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
