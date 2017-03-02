@@ -163,6 +163,17 @@ const semantics = grammar.createSemantics().addOperation('ast', {
 //     return new VariableDeclaration(id.sourceString);
 //   },
 
+  If_stmt(condition, body, elseIfStmt, elseStmt) {
+    return new IfStatement("if", condition.ast(), "{", body.ast(), "}", elseIfStmt.ast(),
+      elseStmt.ast());
+  },
+
+  // Not sure if this is correct
+  For_stmt(identifier, structure, body) {
+    return new ForStatement("for ", identifier.ast(), " in ", structure.ast(), "{",
+      body.ast(), "}");
+  },
+
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
