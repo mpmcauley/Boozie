@@ -13,7 +13,7 @@ Stmt            = IfStmt                                    -- if
                   | Exp                                     -- exp
 
 IfStmt          = "if" Exp "{" Block "}"
-                    ("else if" Exp "{" Block "}")* ("else" "{" Block "}" )?
+                  ("else if" Exp "{" Block "}")* ("else" "{" Block "}" )?
 WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
 FunDecl         = "let" id "=" Params "=>" "{" Block "}"
