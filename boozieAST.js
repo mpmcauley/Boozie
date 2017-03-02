@@ -164,14 +164,12 @@ const semantics = grammar.createSemantics().addOperation('ast', {
 //   },
 
   If_stmt(condition, body, elseIfStmt, elseStmt) {
-    return new IfStatement("if", condition.ast(), "{", body.ast(), "}", elseIfStmt.ast(),
-      elseStmt.ast());
+    return new IfStatement(condition.ast(), body.ast(), elseIfStmt.ast(), elseStmt.ast());
   },
 
   // Not sure if this is correct
   For_stmt(identifier, structure, body) {
-    return new ForStatement("for ", identifier.ast(), " in ", structure.ast(), "{",
-      body.ast(), "}");
+    return new ForStatement(identifier.ast(), structure.ast(), body.ast());
   },
 
   Exp_binary(e1, op, e2) {
