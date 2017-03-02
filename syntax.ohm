@@ -19,9 +19,10 @@ Pattern         ::= Exp                                     -- exp
                   | Other
 Other           ::= "_"                                     -- wildcard
 ReturnStmt      ::= "return" Exp
-VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
-                    | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"
-
+ConstDecl       ::= "set" id ("," id)* "=" Exp ("," Exp)*   -- const
+ConstArrayDecl  ::= "set"  id "=" "[" Exp? ("," Exp)* "]"   -- constarray
+VarDecl         ::= "let" id ("," id)* "=" Exp ("," Exp)*   -- var
+VarArrayDecl    ::= "let" id "=" "[" Exp? ("," Exp)* "]"    -- vararray
 Exp             ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            ::= Exp2 (relationalOp Exp2)?               -- rel
 Exp2            ::= Exp3 (addOp Exp3)*                      -- add
