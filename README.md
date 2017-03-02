@@ -164,9 +164,9 @@ Program         ::= Block
 Block           ::= (Stmt "\n")*
 Stmt            ::= IfStmt  | ForStmt   | WhileStmt  | MatchStmt
                     VarDecl | ConstDecl | ReturnStmt | Exp
-IfStmt          ::= 'if' BoolExp '{' Block '}'
-                    ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
-WhileStmt       ::= 'while' BoolExp '{' Block '}'
+IfStmt          ::= 'if' Exp '{' Block '}'
+                    ('else if' Exp '{' Block '}')* ('else' '{' Block '}' )?
+WhileStmt       ::= 'while' Exp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
 MatchPart       ::= '>>' Pattern ("::" Pattern)*
