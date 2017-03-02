@@ -8,8 +8,8 @@ Stmt            = IfStmt                                    -- if
                   | MatchStmt                               -- match
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- declaration
-                  | FunDecl                                 -- fundecl
                   | Print                                   -- print
+                  | FunDecl                                 -- fundecl
                   | Exp                                     -- exp
 
 IfStmt          = "if" Exp "{" Block "}"
@@ -28,7 +28,7 @@ ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*       -- const
 ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"       -- constarray
 VarDecl         = "let" id ("," id)* assignOp Exp ("," Exp)*  -- var
 VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"        -- vararray
-Print           = "burp(" Exp ")"
+Print           = "burp" "(" Exp ")"                             -- print
 Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            = Exp2 (relationalOp Exp2)?               -- rel
 Exp2            = Exp3 (addOp Exp3)*                      -- add
@@ -49,7 +49,7 @@ type            = "float"                                   -- float
 boollit         = "true"                                    -- true
                   | "false"                                 -- false
 floatlit        = digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
-stringlit       = "\"" char* "\""
+stringlit       = "\"" (char | "\'")* "\""
 char            = ~escape any
                 | escape
 escape          = "\'"
