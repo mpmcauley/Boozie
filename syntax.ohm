@@ -9,12 +9,12 @@ Stmt            ::= IfStmt                                  -- if
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- declaration
                   | Exp                                     -- exp
-IfStmt          ::= 'if' BoolExp '{' Block '}'
-                    ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
-WhileStmt       ::= 'while' BoolExp '{' Block '}'
-ForStmt         ::= 'for' id 'in' id '{' Block '}'
-MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
-MatchPart       ::= '>>' Pattern ("::" Pattern)*
+IfStmt          ::= "if" BoolExp "{" Block "}"
+                    ("else if" BoolExp "{" Block "}")* ("else" "{" Block "}" )?
+WhileStmt       ::= "while" BoolExp "{" Block "}"
+ForStmt         ::= "for" id "in" id "{" Block "}"
+MatchStmt       ::= "match" Exp "with" "\n" MatchPart
+MatchPart       ::= ">>" Pattern ("::" Pattern)*
 Pattern         ::= Exp                                     -- exp
                   | Other
 Other           ::= "_"                                     -- wildcard
@@ -39,7 +39,7 @@ type            ::= "float"                                 -- float
                   | "string"                                -- string
 boollit         ::= "true"                                  -- true
                   | "false"                                 -- false
-floatlit        ::= digit+ ('.' digit+)? (('E'|'e') ('+'|'-'))?
+floatlit        ::= digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
 stringlit       ::= "\"" char* "\""
 char            ::= escape
                   | ~escape any
@@ -55,22 +55,22 @@ id              ::= ~keyword letter idrest
 idrest          ::= "_" | alnum
 comment         ::= "//" (~"\n" any)* "\n"
 
-assignOp        ::= '='                                     -- equals
-                  | '+='                                    -- plusEq
-                  | '*='                                    -- timesEq
-                  | '-='                                    -- minusEq
-                  | '/='                                    -- divEq
-                  | '%='                                    -- modEq
-relationalOp    ::= '=='                                    -- equals
-                  | '>'                                     -- greater
-                  | '<'                                     -- less
-                  | '>='                                    -- greaterEq
-                  | '<='                                    -- lessEq
-                  | '!='                                    -- notEq
-addOp           ::= '+'                                     -- add
-                  | '-'                                     -- subtract
-mulOp           ::= '*'                                     -- times
-                  | '/'                                     -- divide
-                  | '%'                                     -- mod
+assignOp        ::= "="                                     -- equals
+                  | "+="                                    -- plusEq
+                  | "*="                                    -- timesEq
+                  | "-="                                    -- minusEq
+                  | "/="                                    -- divEq
+                  | "%="                                    -- modEq
+relationalOp    ::= "=="                                    -- equals
+                  | ">"                                     -- greater
+                  | "<"                                     -- less
+                  | ">="                                    -- greaterEq
+                  | "<="                                    -- lessEq
+                  | "!="                                    -- notEq
+addOp           ::= "+"                                     -- add
+                  | "-"                                     -- subtract
+mulOp           ::= "*"                                     -- times
+                  | "/"                                     -- divide
+                  | "%"                                     -- mod
 
 }
