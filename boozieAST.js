@@ -26,25 +26,25 @@ class IfStatement extends Statement {
   return this.if + "else " + this.body;
 }
 
-class ForStatement extends Statement {
+// class ForStatement extends Statement {
 
-}
+// }
 
-class WhileStatement extends Statement {
+// class WhileStatement extends Statement {
 
-}
+// }
 
-class ReturnStatement extends Statement {
+// class ReturnStatement extends Statement {
 
-}
+// }
 
-class VariableDeclaration extends Statement {
+// class VariableDeclaration extends Statement {
 
-}
+// }
 
-class IfStatement extends Statement {
+// class IfStatement extends Statement {
 
-}
+// }
 
 class Expression {
 }
@@ -108,27 +108,27 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt, _) {
     return new Block(stmt.ast());
   },
-  Stmt_if() {
-    return new IfStatement();
-  },
-  Stmt_for() {
-    return new ForStatement();
-  },
-  Stmt_while() {
-    return new WhileStatement();
-  },
-  Stmt_match() {
-    return new MatchStatement();
-  },
-  Stmt_return() {
-    return new ReturnStatement();
-  },
-  Stmt_varDecl() {
-    return new VariableDeclaration(id.sourceString);
-  },
-  Stmt_arrayDecl() {
-    return new VariableDeclaration(id.sourceString);
-  },
+//   Stmt_if() {
+//     return new IfStatement();
+//   },
+//   Stmt_for() {
+//     return new ForStatement();
+//   },
+//   Stmt_while() {
+//     return new WhileStatement();
+//   },
+//   Stmt_match() {
+//     return new MatchStatement();
+//   },
+//   Stmt_return() {
+//     return new ReturnStatement();
+//   },
+//   Stmt_varDecl() {
+//     return new VariableDeclaration(id.sourceString);
+//   },
+//   Stmt_arrayDecl() {
+//     return new VariableDeclaration(id.sourceString);
+//   },
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
