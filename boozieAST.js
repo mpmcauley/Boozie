@@ -18,28 +18,28 @@ class Block {
 class Statement {
 }
 
-class IfStatement extends Statement {
-  constructor(condition, body, elseIfStmt, elseStmt) {
-    this.condition = condition;
-    this.body = body;
-    this.elseIf = elseIfStmt;
-    this.else = elseStmt;
-  }
-  toString() {
-    "if " + " { " + this.condition + " } " + " else " + " { " + this.body + " } ";
-  }
-}
-
-class ElseIfStatement extends Statement {
-  constructor(condition, body, elseIfStmt) {
-    this.condition = condition;
-    this.body = body;
-    // this.elseIf = elseIfStmt;
-  }
-    toString() {
-      "else if " + " { " + this.condition + " } " + " then " + " { " + this.body + " } ";
-    }
-}
+// class IfStatement extends Statement {
+//   constructor(condition, body, elseIfStmt, elseStmt) {
+//     this.condition = condition;
+//     this.body = body;
+//     this.elseIf = elseIfStmt;
+//     this.else = elseStmt;
+//   }
+//   toString() {
+//     "if " + " { " + this.condition + " } " + " else " + " { " + this.body + " } ";
+//   }
+// }
+//
+// class ElseIfStatement extends Statement {
+//   constructor(condition, body, elseIfStmt) {
+//     this.condition = condition;
+//     this.body = body;
+//     // this.elseIf = elseIfStmt;
+//   }
+//     toString() {
+//       "else if " + " { " + this.condition + " } " + " then " + " { " + this.body + " } ";
+//     }
+// }
 
 class ForStatement extends Statement {
   constructor(identifier, structure, body) {
@@ -176,8 +176,6 @@ class StringLiteral extends Literal {
   }
 }
 
-
-
 const semantics = grammar.createSemantics().addOperation('ast', {
 
   Program(body) {
@@ -208,14 +206,12 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Array_Decl(l, arr,  _, eq, l, v, _, r) {
     return new ArrayVariableDecl(v.sourceString);
   },
-
   Const_Decl(s, id, _, eq, v, _) {
     return new ConstDecl(v.sourceString);
   },
   Array_ConstDecl(s, id, _, eq, l, v, _, r) {
     return new ArrayConstDecl(v.sourceString);
   },
-
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
