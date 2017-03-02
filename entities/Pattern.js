@@ -6,3 +6,5 @@ class Pattern extends Expression {
     this.value;
   }
 }
+
+module.exports = Pattern;

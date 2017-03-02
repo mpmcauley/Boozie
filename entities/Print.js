@@ -6,3 +6,5 @@ class Print extends Statement {
     this.body;
   }
 }
+
+module.exports = Print;
