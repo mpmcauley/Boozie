@@ -18,25 +18,25 @@ class Block {
 class Statement {
 }
 
-class IfStatement extends Statement {
-  constructor(condition, body, elseIfStmt, elseStmt) {
-    this.condition = condition;
-    this.body = body;
-    this.elseIf = elseIfStmt;
-    this.else = elseStmt;
-  }
-  if(let single)
-  return "if " + "{" + this.condition + "}" + " else " + "{" + this.body + "}";
-}
-
-// class ForStatement extends Statement {
-//   constructor(identifier, structure, body) {
-//     this.for = identifier;
-//     this.in = structure;
+// class IfStatement extends Statement {
+//   constructor(condition, body, elseIfStmt, elseStmt) {
+//     this.condition = condition;
 //     this.body = body;
+//     this.elseIf = elseIfStmt;
+//     this.else = elseStmt;
 //   }
-//     return "for " + this.for + " in " + this.in + "{" + this.body + "}";
+//   if()
+//   return "if " + "{" + this.condition + "}" + " else " + "{" + this.body + "}";
 // }
+
+class ForStatement extends Statement {
+  constructor(identifier, structure, body) {
+    this.for = identifier;
+    this.in = structure;
+    this.body = body;
+  }
+    return "for " + this.for + " in " + this.in + "{" + this.body + "}";
+}
 
 class WhileStatement extends Statement {
   constructor(condition, body) {
