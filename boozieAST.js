@@ -216,6 +216,19 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new ArrayConstDecl(v.sourceString);
   },
 
+  If_stmt(condition, body, elseIfStmt, elseStmt) {
+    return new IfStatement(condition.ast(), body.ast(), elseIfStmt.ast(), elseStmt.ast());
+  },
+
+  // Not sure if this is correct
+  For_stmt(identifier, structure, body) {
+    return new ForStatement(identifier.ast(), structure.ast(), body.ast());
+  },
+
+  While_stmt(condition, body) {
+    return new WhileStatement(condition.ast(), body.ast());
+  },
+
   Exp_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), "or", e2.ast());
   },
