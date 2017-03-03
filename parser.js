@@ -21,8 +21,9 @@ const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const ohm = require('ohm-js');
 const fs = require('fs');
 
-const grammar = ohm.grammar(fs.readFileSync('syntax.ohm'));
+const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
 
+/* eslint-disable no-unused-vars */
 const semantics = grammar.createSemantics().addOperation('ast', {
 
   Program(body) {
@@ -55,7 +56,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Var_Decl(l, id, _, eq, v, x) {
     return new VariableDecl(v.sourceString);
   },
-  Array_Decl(l, arr,  _, eq, le, v, x, r) {
+  Array_Decl(l, arr, _, eq, le, v, x, r) {
     return new ArrayVariableDecl(v.sourceString);
   },
   Const_Decl(s, id, _, eq, v, x) {
@@ -77,7 +78,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp3_binary(e1, op, e2) {
-    return new BinaryExpression(e1.ast(),op.sourceString, e2.ast());
+    return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp4_unary(op, e) {
     return new UnaryExpression('-', e.ast());
@@ -96,12 +97,12 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   stringlit(string) {
     return new StringLiteral(this.sourceString);
-  }
+  },
 });
+/* eslint-enable */
 
-module.exports = parse = function(text) {
-  var match;
-  match = grammar.match(text);
+module.exports = (text) => {
+  const match = grammar.match(text);
   if (!match.succeeded()) {
     throw match.message;
   }
