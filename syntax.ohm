@@ -48,13 +48,10 @@ type            = "float"                                   -- float
 boollit         = "true"                                    -- true
                   | "false"                                 -- false
 floatlit        = digit+ ("." digit+)? (("E"|"e") ("+"|"-"))?
-stringlit       = "\"" (char | "\'")* "\""
-char            = ~escape any
-                | escape
-escape          = "\'"
-                  | "\""
-                  | "\r"
-                  | "\n"
+stringlit       = "\"" char* "\""
+    char        = ~"'" ~"\"" (escape | any)
+    escape      = "\\" ("r" | "n" | "'" | "\"" | coded)
+    coded       = "u" hexDigit hexDigit hexDigit hexDigit
 
 keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "while" | "match" | "if"    | "else"  | "new"

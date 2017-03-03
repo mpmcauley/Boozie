@@ -21,11 +21,8 @@ describe('Boozie', () => {
     const match = parse('burp("HelloWorld")');
     assert.ok(match.succeeded());
   });
-  it('print("Hello World") should not be a valid function', () => {
-    const match = parse('print("Hello World")');
-    assert.ok(match.failed());
-  });
 });
+
 
 describe('Variable declaration', () => {
   it('let x = 4 should be a valid function', () => {
