@@ -1,11 +1,14 @@
+const Statement = require('../entities/Statement.js');
+
 class ConstDecl extends Statement {
-  constructor(id, type, value){
+  constructor(id, type, value) {
+    super();
     this.id = id;
     this.type = type;
     this.value = value;
   }
   toString() {
-    "set " + this.id.join(" , ") + " = " + this.value.join(" , ");
+    return (`set ${this.id.join(', ')} = ${this.value.join(', ')}`);
   }
 }
 

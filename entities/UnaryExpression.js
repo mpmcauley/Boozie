@@ -1,3 +1,5 @@
+const Expression = require('../entities/Expression');
+
 class UnaryExpression extends Expression {
   constructor(op, e) {
     super();
@@ -5,7 +7,7 @@ class UnaryExpression extends Expression {
     this.exp = e;
   }
   toString() {
-    this.op + " " + this.exp;
+    return (`${this.op} ${this.exp}`);
   }
 }
 

@@ -1,3 +1,4 @@
+const Literal = require('../entities/Literal.js');
 
 class BooleanLiteral extends Literal {
   constructor(bool) {
@@ -5,7 +6,7 @@ class BooleanLiteral extends Literal {
     this.value = bool;
   }
   toString() {
-    this.value;
+    return (this.value);
   }
 }
 

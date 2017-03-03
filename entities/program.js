@@ -1,7 +1,9 @@
 class Program {
-  constructor(e) {
-    this.body = e;
+  constructor(block) {
+    this.body = block;
   }
-
+  toString() {
+    return (`(Program  ${this.body})`);
+  }
 }
 module.exports = Program;

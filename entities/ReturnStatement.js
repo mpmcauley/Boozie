@@ -1,10 +1,13 @@
+const Statement = require('../entities/Statement.js');
+
 class ReturnStatement extends Statement {
   constructor(body) {
+    super();
     this.body = body;
   }
   toString() {
-    "return " + this.body;
+    return (`return ${this.body}`);
   }
 }
 
-module.exports = ReturnStatemnt;
+module.exports = ReturnStatement;

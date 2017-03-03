@@ -1,6 +1,5 @@
-class Block {
-  constuctor(body) {
-    super();
+class Literal {
+  constructor(body) {
     this.body = body;
   }
   toString() {
@@ -8,4 +7,4 @@ class Block {
   }
 }
 
-module.exports = Block;
+module.exports = Literal;

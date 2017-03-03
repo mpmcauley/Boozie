@@ -1,10 +1,12 @@
+const Literal = require('../entities/Literal.js');
+
 class FloatLiteral extends Literal {
   constructor(float) {
     super();
     this.value = float;
   }
   toString() {
-    this.value + ".0";
+    return (`${this.value}.0`);
   }
 }
 
