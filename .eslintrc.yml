@@ -6,3 +6,5 @@ plugins:
 rules:
   no-multi-assign:
     off
+  linebreak-style:
+    off
