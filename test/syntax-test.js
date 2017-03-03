@@ -23,7 +23,6 @@ describe('Boozie', () => {
   });
 });
 
-
 describe('Variable declaration', () => {
   it('let x = 4 should be a valid function', () => {
     const match = parse('let x = 4');
