@@ -4,7 +4,7 @@ class StringLiteral extends Literal {
     this.value = string;
   }
   toString() {
-    "' " +  this.value + " '";
+    return (`" +  ${this.value} "`);
   }
 }
 

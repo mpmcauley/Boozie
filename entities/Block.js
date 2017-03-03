@@ -1,9 +1,10 @@
 class Block {
   constuctor(body) {
+    super();
     this.body = body;
   }
-  toString(){
-
+  toString() {
+    return (this.body);
   }
 }
 

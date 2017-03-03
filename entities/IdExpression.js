@@ -4,7 +4,7 @@ class IdExpression extends Expression {
     this.value = idValue;
   }
   toString() {
-    this.value;
+    return (this.value);
   }
 }
 

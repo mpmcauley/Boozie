@@ -4,7 +4,7 @@ class FloatLiteral extends Literal {
     this.value = float;
   }
   toString() {
-    this.value + ".0";
+    return (`${this.value}.0`);
   }
 }
 

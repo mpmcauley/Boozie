@@ -1,7 +1,7 @@
 
 const ohm = require('ohm-js');
 const fs = require('fs');
-const grammar = ohm.grammar();
+const grammar = ohm.grammar(fs.readFileSync './syntax.ohm');
 
 const semantics = grammar.createSemantics().addOperation('ast', {
 
@@ -11,10 +11,15 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt, _) {
     return new Block(stmt.ast());
   },
-
-//   Stmt_if() {
-//     return new IfStatement();
-//   },
+  Stmt_if(f, con, l, b, r) {
+    return new IfStatement(con.ast(), b.ast());
+  },
+  Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
+    return new IfStatement(con.ast(), b.ast(), el.ast());
+  },
+  Stmt_elseif(f, con, fl, b, fr, elif, elifcon, sl, elsifst, sr, els, l, el, r) {
+    return new IfStatement(con.ast(), b.ast(), elifcon.ast(), elsifst.ast(), el.ast());
+  },
   Stmt_for(fr, e, i, struct, l, b, r) {
     return new ForStatement(e.ast(), struct.ast(), b.ast();
   },

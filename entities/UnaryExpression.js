@@ -5,7 +5,7 @@ class UnaryExpression extends Expression {
     this.exp = e;
   }
   toString() {
-    this.op + " " + this.exp;
+    return (`${this.op} ${this.exp}`);
   }
 }
 

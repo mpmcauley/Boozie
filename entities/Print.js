@@ -1,9 +1,10 @@
 class Print extends Statement {
   constuctor(body) {
+    super();
     this.body = body;
   }
   toString() {
-    this.body;
+    return (this.body);
   }
 }
 

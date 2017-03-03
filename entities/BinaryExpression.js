@@ -6,7 +6,7 @@ class BinaryExpression extends Expression {
     this.e2 = e2;
   }
   toString() {
-    this.e1 + " " + this.op + " " + this.e2;
+    return (`${this.e1} + ${this.op} + ${this.e2}`);
   }
 }
 
