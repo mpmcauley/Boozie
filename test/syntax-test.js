@@ -53,31 +53,28 @@ describe('If statement tests', () => {
     assert.ok(match.failed());
   });
   it('put expression in statment', () => {
-    const match = parse(`if(x == 7) { let y = a + b }`);
+    const match = parse('if(x == 7) { let y = a + b }');
     assert.ok(match.succeeded());
   });
   it('simple if-else statement', () => {
-    const match = parse(`if(x == 7) { let b = r + 1 } else { let q = 8 * 55 }`);
+    const match = parse('if(x == 7) { let b = r + 1 } else { let q = 8 * 55 }');
     assert.ok(match.succeeded());
   });
   it('bad simple if-else statement', () => {
-    const match = parse(`if(x == 7) { let let } else { let q = 8 * 55 }`);
+    const match = parse('if(x == 7) { let let } else { let q = 8 * 55 }');
     assert.ok(match.failed());
   });
   it('if-else if statement', () => {
-    const match = parse(`if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 }`);
+    const match = parse('if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 }');
     assert.ok(match.succeeded());
   });
   it('bad if-else statement', () => {
-    const match = parse(`if(x == 7) { let b = r + 1 } else if { let q = 8 * 55 }`);
+    const match = parse('if(x == 7) { let b = r + 1 } else if { let q = 8 * 55 }');
     assert.ok(match.failed());
   });
 
   it('if-elseif-else statement', () => {
-    const match = parse(`if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 } else { burp("5") }`);
-    if (match.failed()) {
-      console.log(match.message);
-    }
+    const match = parse('if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 } else { burp("5") }');
     assert.ok(match.succeeded());
   });
 });
@@ -99,7 +96,6 @@ describe('While loop tests', () => {
     const match = parse('while true { while x < 5 { let y = "hey" } }');
     assert.ok(match.succeeded());
   });
-
 });
 
 describe('For loop tests', () => {
