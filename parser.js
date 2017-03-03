@@ -65,11 +65,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Array_ConstDecl(s, id, _, eq, l, v, x, r) {
     return new ArrayConstDecl(v.sourceString);
   },
-  Exp_orbinary(e1, op, e2) {
-    return new BinaryExpression(e1.ast(), 'or', e2.ast());
-  },
-  Exp_andbinary(e1, op, e2) {
-    return new BinaryExpression(e1.ast(), 'and', e2.ast());
+  Exp_binary(e1, op, e2) {
+    return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp1_binary(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
