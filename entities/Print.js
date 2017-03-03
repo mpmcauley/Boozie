@@ -6,7 +6,7 @@ class Print extends Statement {
     this.body = body;
   }
   toString() {
-    return (this.body);
+    return (`burp ${this.body}`);
   }
 }
 
