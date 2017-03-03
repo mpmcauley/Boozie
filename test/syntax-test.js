@@ -3,7 +3,7 @@ const ohm = require('ohm-js');
 const assert = require('assert');
 
 function parse(string) {
-  const grammar = ohm.grammar(fs.readFileSync(`./syntax.ohm`));
+  const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
   return grammar.match(string);
 }
 
@@ -13,7 +13,7 @@ describe('Boozie', () => {
     assert.ok(match.succeeded());
   });
   it('simple one-string program', () => {
-    const match = parse("hey");
+    const match = parse('hey');
     assert.ok(match.succeeded());
   });
   // This is insanely interesting TODO
@@ -41,16 +41,15 @@ describe('Variable declaration', () => {
     const match = parse('let x, y = 5, 7');
     assert.ok(match.succeeded());
   });
-
 });
 
 describe('If statement tests', () => {
   it('simple if statement', () => {
-    const match = parse(`if(x == 7) { "yes" }`);
+    const match = parse('if(x == 7) { "yes" }');
     assert.ok(match.succeeded());
   });
   it('bad simple if statement ', () => {
-    const match = parse(`if(x 7) { no }`);
+    const match = parse('if(x 7) { no }');
     assert.ok(match.failed());
   });
   it('put expression in statment', () => {
