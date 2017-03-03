@@ -1,3 +1,5 @@
+const Expression = require('../entities/Expression');
+
 class UnaryExpression extends Expression {
   constructor(op, e) {
     super();

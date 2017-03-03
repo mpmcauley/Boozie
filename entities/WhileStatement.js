@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class WhileStatement extends Statement {
   constructor(condition, body) {
     super();

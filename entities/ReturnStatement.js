@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class ReturnStatement extends Statement {
   constructor(body) {
     super();

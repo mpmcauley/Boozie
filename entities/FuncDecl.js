@@ -1,4 +1,6 @@
-class FuncDecl extends Statement{
+const Statement = require('../entities/Statement.js');
+
+class FuncDecl extends Statement {
   constructor(id, args) {
     super();
     this.id = id;

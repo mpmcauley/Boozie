@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class ElseIfStatement extends Statement {
   constructor(condition, body, elseCond, elseIfStmt, elseStmt) {
     super();

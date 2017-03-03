@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class Print extends Statement {
   constuctor(body) {
     super();

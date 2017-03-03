@@ -1,3 +1,5 @@
+const Expression = require('../entities/Expression.js');
+
 class IdExpression extends Expression {
   constructor(idValue) {
     super();

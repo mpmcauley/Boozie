@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class ConstDecl extends Statement {
   constructor(id, type, value) {
     super();

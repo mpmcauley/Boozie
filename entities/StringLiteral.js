@@ -1,3 +1,5 @@
+const Literal = require('../entities/Literal.js');
+
 class StringLiteral extends Literal {
   constructor(string) {
     super();

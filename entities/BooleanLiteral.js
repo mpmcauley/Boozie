@@ -1,3 +1,5 @@
+const Literal = require('../entities/Literal.js');
+
 class BooleanLiteral extends Literal {
   constructor(bool) {
     super();

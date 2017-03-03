@@ -1,3 +1,5 @@
+const Literal = require('../entities/Literal.js');
+
 class FloatLiteral extends Literal {
   constructor(float) {
     super();

@@ -1,3 +1,5 @@
+const Statement = require('../entities/Statement.js');
+
 class MatchPattern extends Statement {
   constuctor(p1, p2) {
     super();

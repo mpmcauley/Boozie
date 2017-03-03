@@ -1,3 +1,5 @@
+const Expression = require('../entities/Expression.js');
+
 class BinaryExpression extends Expression {
   constructor(e1, op, e2) {
     super();
