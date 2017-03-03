@@ -4,7 +4,7 @@ class FunctionCall {
     this.args = args;
   }
   toString() {
-    return (`${this.id} (${this.args}) `);
+    return (`${this.id} (${this.args})`);
   }
 }
 
