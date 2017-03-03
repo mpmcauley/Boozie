@@ -44,7 +44,6 @@ describe('Variable declaration', () => {
 
 });
 
-// String literals are not working for some reason as a block, but works as a program alone.
 describe('If statement tests', () => {
   it('simple if statement', () => {
     const match = parse(`if(x == 7) { "yes" }`);
@@ -76,7 +75,7 @@ describe('If statement tests', () => {
   });
 
   it('if-elseif-else statement', () => {
-    const match = parse(`if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 } else { burp(5) }`);
+    const match = parse(`if(x == 7) { let b = r + 1 } else if (y == 2) { let q = 8 * 55 } else { burp("5") }`);
     if (match.failed()) {
       console.log(match.message);
     }
@@ -94,7 +93,7 @@ describe('While loop tests', () => {
     assert.ok(match.succeeded());
   });
   it('bad while loop', () => {
-    const match = parse('while let x = 8 { hey }');
+    const match = parse('while let x = 8 { burp("hey") }');
     assert.ok(match.failed());
   });
   it('nested while loop', () => {
@@ -104,10 +103,24 @@ describe('While loop tests', () => {
 
 });
 
-
 describe('For loop tests', () => {
   it('simple for loop', () => {
     const match = parse('for breed in dog { let x = 7 }');
+    assert.ok(match.succeeded());
+  });
+  it('bad for loop', () => {
+    const match = parse('for let in dog { let x = 7 }');
+    assert.ok(match.failed());
+  });
+});
+
+describe('Function declaration', () => {
+  it('Empty params, empty block', () => {
+    const match = parse('let x = () => {}');
+    assert.ok(match.succeeded());
+  });
+  it('params', () => {
+    const match = parse('let x = (param) => {}');
     assert.ok(match.succeeded());
   });
 });
