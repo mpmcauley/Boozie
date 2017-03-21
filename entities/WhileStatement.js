@@ -8,4 +8,9 @@ class WhileStatement extends Statement {
   }
 }
 
+WhileStatement.prototype.analyze = (context) => {
+  this.condition.analyze(context);
+  return this.body.analyze(context);
+};
+
 module.exports = WhileStatement;

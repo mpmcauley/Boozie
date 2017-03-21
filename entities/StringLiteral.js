@@ -8,4 +8,8 @@ class StringLiteral extends Literal {
   }
 }
 
+StringLiteral.prototype.analyze = (context) => {
+  this.type = Type.STRLIT;
+}
+
 module.exports = StringLiteral;

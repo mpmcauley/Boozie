@@ -9,4 +9,9 @@ class VariableDecl extends Statement {
   }
 }
 
+VariableDecl.prototype.analyze = (context) => {
+  this.id.analyze(context);
+  return context.addVariable(this.id, this);
+}
+
 module.exports = VariableDecl;
