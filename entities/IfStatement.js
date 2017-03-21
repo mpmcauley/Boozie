@@ -13,7 +13,9 @@ class IfStatement extends Statement {
 
 IfStatement.prototype.analyze = (context) => {
   this.condition.analyze(context);
-  return this.body.analyze(context);
+  const booleanCondition = 'Condition in "if" statement must be boolean';
+  this.condition.type.mustBeBoolean(booleanCondition);
+  this.body.analyze(context);
 };
 
 module.exports = IfStatement;
