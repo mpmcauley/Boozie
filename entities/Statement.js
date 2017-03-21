@@ -9,5 +9,4 @@ class Statement {
     this.body.analyze(context);
   }
 }
-
 module.exports = Statement;

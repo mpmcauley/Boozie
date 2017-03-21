@@ -8,6 +8,9 @@ class Pattern extends Expression {
   toString() {
     return (this.value);
   }
+  Pattern.prototype.analyze = (context) => {
+    this.value.analyze(context);
+  }
 }
 
 module.exports = Pattern;
