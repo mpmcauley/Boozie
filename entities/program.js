@@ -5,5 +5,8 @@ class Program {
   toString() {
     return (`(Program  ${this.body})`);
   }
+  Program.prototype.analyze = (context) => {
+    this.body.analyze(context);
+  }
 }
 module.exports = Program;
