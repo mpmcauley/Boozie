@@ -12,4 +12,16 @@ class IfElseStatement extends Statement {
   }
 }
 
+IfElseStatement.prototype.analyze = (context) => {
+  let booleanCondition;
+  this.condition.analyze(context);
+  booleanCondition = 'Condition in "if" statement must be boolean';
+  this.condition.type.mustBeBoolean(booleanCondition);
+  if (this.condition) {
+    return this.body.analyze(context);
+  } else {
+    return this.elseStmt.analyze(context);
+  }
+};
+
 module.exports = IfElseStatement;
