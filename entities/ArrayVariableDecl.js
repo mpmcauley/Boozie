@@ -6,7 +6,11 @@ class ArrayVariableDecl extends Statement {
     this.id = id;
     this.type = type;
     this.value = value;
-  }
+  };
+  ArrayVariableDecl.prototype.analyze = (context) => {
+    context.variableMustNotBeAlreadyDeclared(this.id);
+    return context.addVariable(this.id, this);
+  };
   toString() {
     return (`let ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
   }
