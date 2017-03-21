@@ -1,6 +1,4 @@
-let error;
-
-error = (message, location) => {
+const error = (message, location) => {
   if (location && location.line) {
     message += '  at line ' + location.line;
     if (location.col) {
@@ -8,7 +6,7 @@ error = (message, location) => {
     }
   }
   if (!error.quiet) {
-    console.log('Error: ' + message);
+    console.log(`Error: ${this.message}`);
   }
   return error.count++;
 };

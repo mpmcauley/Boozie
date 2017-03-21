@@ -13,13 +13,18 @@ AnalysisContext.prototype.createChildContext = () => {
   return new AnalysisContext(this);
 };
 
+AnalysisContext.prototype.variableMustNotBeAlreadyDeclared = (name) => {
+  if (this.symbolTable[name]) {
+    return error('Variable ' + name + ' already declared', name);
+  }
+};
+
 AnalysisContext.prototype.addVariable = (name, entity) => {
   this.symbolTable[name] = entity;
 };
 
 AnalysisContext.prototype.lookupVariable = (name) => {
-  let variable;
-  variable = this.symbolTable[name];
+  const variable = this.symbolTable[name];
   if (variable) {
     return variable;
   } else if (!this.parent) {
