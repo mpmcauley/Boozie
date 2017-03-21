@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint"
+    "lint": "eslint **/*.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,10 @@
     "coffee-script": "latest"
   },
   "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
     "mocha": "latest",
-    "should": "latest",
-    "eslint": "^3.15.0"
+    "should": "latest"
   }
 }

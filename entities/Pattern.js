@@ -1,9 +1,12 @@
+const Expression = require('../entities/Expression.js');
+
 class Pattern extends Expression {
   constructor(value) {
+    super();
     this.value = value;
   }
   toString() {
-    this.value;
+    return (this.value);
   }
 }
 

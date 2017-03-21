@@ -162,19 +162,21 @@ Syntax error                                        // but valid in JavaScript!
 ```
 Program         ::= Block
 Block           ::= (Stmt "\n")*
-Stmt            ::= IfStmt | ForStmt | WhileStmt | MatchStmt
-                    | ReturnStmt     | VarDecl   | Exp
-IfStmt          ::= 'if' BoolExp '{' Block '}'
-                    ('else if' BoolExp '{' Block '}')* ('else' '{' Block '}' )?
-WhileStmt       ::= 'while' BoolExp '{' Block '}'
+Stmt            ::= IfStmt  | ForStmt   | WhileStmt  | MatchStmt
+                    VarDecl | ConstDecl | ReturnStmt | Exp
+IfStmt          ::= 'if' Exp '{' Block '}'
+                    ('else if' Exp '{' Block '}')* ('else' '{' Block '}' )?
+WhileStmt       ::= 'while' Exp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
 MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
 MatchPart       ::= '>>' Pattern ("::" Pattern)*
 Pattern         ::= Exp | Other
 Other           ::= "_" 
 ReturnStmt      ::= "return" Exp
-VarDecl         ::= ("let" | "set") id ("," id)* "=" Exp ("," Exp)*
-                    | ("let" | "set") id "=" "[" Exp? ("," Exp)* "]"
+ConstDecl       ::= "set" id ("," id)* "=" Exp ("," Exp)*
+ConstArrayDecl  ::= "set"  id "=" "[" Exp? ("," Exp)* "]"
+VarDecl         ::= "let" id ("," id)* "=" Exp ("," Exp)*
+VarArrayDecl    ::= "let" id "=" "[" Exp? ("," Exp)* "]"
 Exp             ::= Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            ::= Exp2 (relationalOp Exp2)?
 Exp2            ::= Exp3 (addOp Exp3)*

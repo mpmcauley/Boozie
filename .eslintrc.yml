@@ -1,0 +1,10 @@
+extends: airbnb-base
+env:
+  mocha: true
+plugins:
+  - import
+rules:
+  no-multi-assign:
+    off
+  linebreak-style:
+    off
