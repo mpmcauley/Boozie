@@ -11,4 +11,9 @@ class IfStatement extends Statement {
   }
 }
 
+IfStatement.prototype.analyze = (context) => {
+  this.condition.analyze(context);
+  return this.body.analyze(context);
+};
+
 module.exports = IfStatement;

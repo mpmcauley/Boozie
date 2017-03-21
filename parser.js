@@ -1,4 +1,4 @@
-const Program = require('./entities/Program.js');
+const Program = require('./entities/program.js');
 const Block = require('./entities/Block.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
