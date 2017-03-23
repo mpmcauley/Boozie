@@ -5,25 +5,25 @@ const AnalysisContext = (parent) => {
   this.symbolTable = {};
 };
 
-AnalysisContext.initialContext = () => {
+initialContext = () => {
   return new AnalysisContext(null);
 };
 
-AnalysisContext.prototype.createChildContext = () => {
+createChildContext = () => {
   return new AnalysisContext(this);
 };
 
-AnalysisContext.prototype.variableMustNotBeAlreadyDeclared = (name) => {
+variableMustNotBeAlreadyDeclared = (name) => {
   if (this.symbolTable[name]) {
     return error('Variable ' + name + ' already declared', name);
   }
 };
 
-AnalysisContext.prototype.addVariable = (name, entity) => {
+addVariable = (name, entity) => {
   this.symbolTable[name] = entity;
 };
 
-AnalysisContext.prototype.lookupVariable = (name) => {
+lookupVariable = (name) => {
   const variable = this.symbolTable[name];
   if (variable) {
     return variable;

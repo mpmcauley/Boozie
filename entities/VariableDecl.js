@@ -7,14 +7,12 @@ class VariableDecl extends Statement {
     this.type = type;
     this.value = value;
   }
+  analyze(context) {
+    context.declare(this.id, this);
+  }
   toString() {
     return (`let ${this.id.join(', ')} = ${this.value.join(', ')}`);
   }
 }
-
-VariableDecl.prototype.analyze = (context) => {
-  this.id.analyze(context);
-  return context.addVariable(this.id, this);
-};
 
 module.exports = VariableDecl;
