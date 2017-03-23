@@ -6,14 +6,17 @@ class ArrayConstDecl extends Statement {
     this.id = id;
     this.type = type;
     this.value = value;
-  };
-  ArrayConstDecl.prototype.analyze = (context) => {
+  }
+
+  ArrayConstDecl.prototype.analyze(context) {
     context.variableMustNotBeAlreadyDeclared(this.id);
     return context.addVariable(this.id, this);
-  };
+  }
+
   toString() {
     return (`set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
   }
+
 }
 
 module.exports = ArrayConstDecl;
