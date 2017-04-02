@@ -1,4 +1,4 @@
-const Literal = require('../entities/Literal.js');
+const Literal = require('../entities/literal.js');
 
 class BooleanLiteral extends Literal {
   constructor(bool) {
@@ -9,5 +9,9 @@ class BooleanLiteral extends Literal {
     return (this.value);
   }
 }
+
+BooleanLiteral.prototype.analyze = (context) => {
+  this.bool = Type.BOOL;
+};
 
 module.exports = BooleanLiteral;

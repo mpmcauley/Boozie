@@ -1,30 +1,34 @@
+const error = require('../error.js');
+
 class Type {
   constructor(type) {
     this.type = type;
-  };
+  }
 
-  mustBeInteger = (message, location) => {
+  mustBeInteger(message, location) {
     return this.mustBeCompatibleWith(Type.INT, message);
-  };
-  mustBeBoolean = (message, location) => {
+  }
+  mustBeBoolean(message, location) {
     return this.mustBeCompatibleWith(Type.BOOL, message);
-  };
-  mustBeCompatibleWith = (otherType, message, location) => {
+  }
+  mustBeCompatibleWith(otherType, message, location) {
     if (!this.isCompatibleWith(otherType)) {
       return error(message, location);
     }
-  };
-  mustBeMutuallyCompatibleWith = (otherType, message, location) => {
+  }
+  mustBeMutuallyCompatibleWith(otherType, message, location) {
     if (!(this.isCompatibleWith(otherType || otherType.isCompatibleWith(this)))) {
       return error(message, location);
     }
-  };
-  isCompatibleWith = (otherType) => {
+  }
+  isCompatibleWith(otherType) {
     return this === otherType || this === Type.ARBITRARY || otherType === Type.ARBITRARY;
-  };
+  }
   toString() {
     return (this.type);
-  };
+  }
 }
+
+// Type.NUMBER
 
 module.exports = Type;

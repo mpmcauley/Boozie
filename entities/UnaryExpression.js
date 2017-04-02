@@ -11,4 +11,10 @@ class UnaryExpression extends Expression {
   }
 }
 
+UnaryExpression.prototype.analyze = (context) => {
+  this.op.analyze(context);
+  return this.type = Type.
+  }
+};
+
 module.exports = UnaryExpression;
