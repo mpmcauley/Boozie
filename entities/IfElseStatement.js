@@ -7,6 +7,14 @@ class IfElseStatement extends Statement {
     this.body = body;
     this.else = elseStmt;
   }
+  analyze(context) {
+    this.condition.analyze(context);
+    this.condition.type.mustBeBoolean('Condition in "if else" statement must be boolean');
+    this.body.analyze(context);
+    if (this.else) {
+      return this.else.analyze(context);
+    }
+  }
   toString() {
     return (`if ${this.condition} { ${this.body} } else { ${this.else} }`);
   }

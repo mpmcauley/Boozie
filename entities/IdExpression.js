@@ -7,7 +7,7 @@ class IdExpression extends Expression {
     this.value = idValue;
   }
   analyze(context) {
-    if(!context.hasBeenDeclared(this.idValue)) {
+    if (!context.hasBeenDeclared(this.idValue)) {
       error(`${this.idValue} has not been declared`);
     }
   }
