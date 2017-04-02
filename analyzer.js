@@ -1,38 +1,39 @@
-let error = require('./error');
+const error = require('./error');
+const VariableDecl = require('./entities/VariableDecl');
 
 const AnalysisContext = (parent) => {
   this.parent = parent;
   this.symbolTable = {};
 };
 
-initialContext = () => {
+AnalysisContext.initialContext = function () {
   return new AnalysisContext(null);
 };
 
-createChildContext = () => {
+AnalysisContext.prototype.createChildContext = function () {
   return new AnalysisContext(this);
 };
 
-variableMustNotBeAlreadyDeclared = (name) => {
+AnalysisContext.prototype.variableMustNotBeAlreadyDeclared = function (name) {
   if (this.symbolTable[name]) {
-    return error('Variable ' + name + ' already declared', name);
+    return error(`Variable ${name} already declared`, name);
   }
 };
 
-addVariable = (name, entity) => {
+AnalysisContext.prototype.addVariable = function (name, entity) {
   this.symbolTable[name] = entity;
 };
 
-lookupVariable = (name) => {
+AnalysisContext.prototype.lookupVariable = function (name) {
   const variable = this.symbolTable[name];
   if (variable) {
     return variable;
   } else if (!this.parent) {
-    error('Variable ' + name + ' not found', name);
+    error(`Variable  + ${name} not found`, name);
     return VariableDecl.ARBITRARY;
   } else {
     return this.parent.lookupVariable(name);
   }
-}
+};
 
 exports.initialContext = AnalysisContext.initialContext;
