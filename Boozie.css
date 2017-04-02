@@ -1,0 +1,9 @@
+.console {
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: #222;
+    color: black;
+    font-size: 60%;
+    margin: 1em 0px;
+    padding: .75em .75em .75em 1em;
+    overflow-x: scroll;
+}

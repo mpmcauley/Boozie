@@ -1,10 +1,13 @@
 const Statement = require('../entities/Statement.js');
 
 class Print extends Statement {
-  constuctor(body) {
+  constuctor(argument) {
     super();
-    this.body = body;
+    this.argument = argument;
   }
+    // if(this.argument.type !== Type.STRING) {
+    //   error('You can only print strings')
+    // }
   toString() {
     return (`burp ${this.body}`);
   }

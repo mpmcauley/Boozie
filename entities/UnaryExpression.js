@@ -6,6 +6,11 @@ class UnaryExpression extends Expression {
     this.op = op;
     this.exp = e;
   }
+  analyze(context) {
+    this.op.analyze(context);
+    this.op.type.mustBeBoolean('Must be boolean', this.op);
+    return this.type = Type.BOOL;
+  }
   toString() {
     return (`${this.op} ${this.exp}`);
   }

@@ -1,10 +1,13 @@
 class Block {
-  constuctor(body) {
+  constuctor(statements) {
     super();
-    this.body = body;
+    this.statements = statements;
+  }
+  analyze() {
+    this.statements.forEach(s => s.analyze());
   }
   toString() {
-    return (this.body);
+    return (this.statements);
   }
 }
 
