@@ -122,98 +122,183 @@
           <p>const CAPACITY = 16.9;</p>
         </div>
       </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 panel-body">
-      <p>Arrays are declared and assigned in the same way, with the same static type inference.</p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>let pairsWellWithBeer = ["pizza", "burgers"]</p>
-        <p>set sixpack = [1, 2, 3, 4, 5, 6]</p>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Arrays are declared and assigned in the same way, with the same static type inference.</p>
       </div>
     </div>
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>let pairsWellWithBeer = ["pizza", "burgers"];</p>
-        <p>const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];</p>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let pairsWellWithBeer = ["pizza", "burgers"]</p>
+          <p>set sixpack = [1, 2, 3, 4, 5, 6]</p>
+        </div>
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let pairsWellWithBeer = ["pizza", "burgers"];</p>
+          <p>const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Similar to JavaScript and many other languages, variable names _must_ begin with a letter, and may not be one of the list of Boozie Reserved Words, but may include any alphanumeric characters or underscore after the initial character.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let brewery = "open"</p>
+          <p>//Okay!</p>
+          <br/>
+          <p>let 12ozBottle = 12</p>
+          <p>Syntax error</p>
+          <br/>
+          <p>let for = false</p>
+          <p>Syntax error</p>
+        </div>
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let brewery = "open";</p>
+          <p>//Okay!</p>
+          <br/>
+          <p>let 12ozBottle = 12.0;</p>
+          <p>Syntax error</p>
+          <br/>
+          <p>let for = false;</p>
+          <p>Syntax error</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`.</p>
+        <p>Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially forgetting) parens, because there aren't any!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>for brand in allBrands {</p>
+          <p>  burp(brand)</p>
+          <p>}</p>
+        </div>
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>for(let brand of allBrands) {</p>
+          <p>  console.log(brand);</p>
+          <p>  brand += 1;</p>
+          <p>};</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>while beer = -empty {</p>
+          <p>    drink(beer)</p>
+          <p>}</p>
+        </div>
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>while (beer = !empty) {</p>
+          <p>    drink(beer);</p>
+          <p>};</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Note that booleans are negated with the intuitive `-` rather than an arbitrary operator or keyword that requires multiple keystrokes. How many times have you forgotten whether the language you were using used `not` or `!` while drinking? ...  Or is that just me?</p>    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>if beer.volume == 0 {</p>
+          <p>    beer = pour(new beer)</p>
+          <p>} else if beer.volume >= 1 {</p>
+          <p>    drink(beer)</p>
+          <p>} else {</p>
+          <p>    chug(beer)</p>
+          <p>}</p>
+        </div>  
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>if (beer.volume == 0) {</p>
+          <p>    beer = pour(new beer);</p>
+          <p>} else if (beer.volume >= 1) {</p>
+          <p>    drink(beer);</p>
+          <p>} else {</p>
+          <p>    chug(beer);</p>
+          <p>};</p>
+        </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Functions in Boozie are basically.... well exactly the same as JavaScript 2015 (ES6). Why? Because we feel that is the optimal way to define functions... especially whilst drinking!</p>    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let stir = (ingredients) => {</p>
+          <p>    ingredients.mix()</p>
+          <p>}</p>
+          <p><br/></p>
+          <p>let pour = (beer, glass) => {</p>
+          <p>    beer.volume = 0</p>
+          <p>    glass.volume = 16</p>
+          <p>}</p>
+        </div>  
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>let stir = (ingredients) => {</p>
+          <p>    ingredients.mix();</p>
+          <p>}</p>
+          <p><br/></p>
+          <p>let pour = (beer, glass) => {</p>
+          <p>    beer.volume = 0;</p>
+          <p>    glass.volume = 16.0;</p>
+          <p>};</p>
+        </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <p>Comments begin with a double-backslash and end with a line terminator, as in most curly-brace languages. Multi-line comments, however, are explicitly disallowed. This is both to discourage excessively verbose comments (we've all run across those rambling, multiple-paragraph comments by someone who likely spent more time describing their code in prose than he or she did writing it - which is an especially big concern after one has had a few beers) and to maintain internal consistency with the rest of our line-terminated code structure. Thanks to word wrap, if someone _really_ wants to keep babbling, we won't explicitly stop them... but they should probably just go home, they're drunk.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>// This is a comment in Boozie</p>
+          <p>// This is too</p>
+          <p><br/></p>
+          <p>/* This is not legal</p>
+          <p>in Boozie */</p>
+          <p>Syntax error</p>
+        </div>
+      </div>
+      <div class="col-sm-6 panel-body">
+        <div class="console">
+          <p>// This is a comment</p>
+          <p>// This is too</p>
+          <p><br/></p>
+          <p>/* This is not legal</p>
+          <p>in Boozie */</p>
+          <p>// but valid in JavaScript!</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12 panel-body">
-      <p>Similar to JavaScript and many other languages, variable names _must_ begin with a letter, and may not be one of the list of Boozie Reserved Words, but may include any alphanumeric characters or underscore after the initial character.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>let brewery = "open"</p>
-        <p>//Okay!</p>
-        <br/>
-        <p>let 12ozBottle = 12</p>
-        <p>Syntax error</p>
-        <br/>
-        <p>let for = false</p>
-        <p>Syntax error</p>
-      </div>
-    </div>
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>let brewery = "open";</p>
-        <p>//Okay!</p>
-        <br/>
-        <p>let 12ozBottle = 12.0;</p>
-        <p>Syntax error</p>
-        <br/>
-        <p>let for = false;</p>
-        <p>Syntax error</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 panel-body">
-      <p>Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`.</p>
-      <p>Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially forgetting) parens, because there aren't any!</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>for brand in allBrands {</p>
-        <p>  burp(brand)</p>
-        <p>}</p>
-      </div>
-    </div>
-    <div class="col-sm-6 panel-body">
-      <div class="console">
-        <p>for(let brand of allBrands) {</p>
-        <p>  console.log(brand);</p>
-        <p>  brand += 1;</p>
-        <p>};</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-  <div class="col-sm-6 panel-body">
-    <div class="console">
-      <p>while beer = -empty {</p>
-      <p>    drink(beer)</p>
-      <p>}</p>
-    </div>
-  </div>
-  <div class="col-sm-6 panel-body">
-    <div class="console">
-      <p>while (beer = !empty) {</p>
-      <p>    drink(beer);</p>
-      <p>};</p>
-    </div>
-  </div>
-</div>
-  <div class="row"><div class="col-sm-6 panel-body"></div></div>
-  <div class="row"><div class="col-sm-6 panel-body"></div></div>
-  <div class="row"><div class="col-sm-6 panel-body"></div></div>
 </body>
 </html>
