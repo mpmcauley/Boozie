@@ -5,7 +5,7 @@ class Context {
     this.inFunction = inFunction;
     this.inLoop = inLoop;
     this.parent = parent;
-    this.localVariables = Object.create(null);
+    this.localVariables = Object.create(null); // TODO - distinguish between const and var
     // need a dictionary
   }
   declare(id, type) {

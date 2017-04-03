@@ -8,7 +8,7 @@ class ConstDecl extends Statement {
     this.value = value;
   }
   analyze(context) {
-    context.declare(this.id);
+    context.declare(this.id); // TODO -- doesn't account for the fact that constants can not be changed
   }
   toString() {
     return (`set ${this.id.join(', ')} = ${this.value.join(', ')}`);
