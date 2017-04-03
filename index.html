@@ -25,7 +25,7 @@
         <p>There's a relevant [xkcd](https://xkcd.com/) for this:</p>
 
         <p><img src='ballmer_peak.png'>Apple uses automated schnapps IVs.</p>
-
+        <br/>
         <p>Our language is designed with this phenomenon in mind, to help facilitate programmers who wish to pursue this unicorn, by making it easy for even the most inebriated of coders to work efficiently!</p>
       </div>
     </div>
@@ -50,11 +50,12 @@
       <div class="col-sm-6 panel-body">
         <h1>Example Programs</h1>
         <p>Here are some examples, Boozie on the left, JavaScript on the right.</p>
+        <br/>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 panel-body">
-        <p>No printing in Boozie.... no, no, no! You *belch!*</p>
+      <div class="col-sm-12 panel-body">
+        <p>No printing in Boozie.... no, no, no! You <em>belch!</em></p>
       </div>
     </div>
     <div class="row">
@@ -70,7 +71,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 panel-body">
+      <div class="col-sm-12 panel-body">
         <p>Equivalency (`==`) is defined as JavaScript's "strict," triple-equals (`===`) equivalence. Why should programmers have to worry about the subtle differences between the interpretation of the two in the first place when, 9 times out of 10, `===` is what they mean?</p>
       </div>
     </div>
@@ -87,7 +88,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 panel-body">
+      <div class="col-sm-12 panel-body">
         <p>For variable assignment, the types are inferred. Quick and easy! You can also perform multiple variable assignment without all the nasty brackets.</p>
       </div>
     </div>
@@ -103,7 +104,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 panel-body">
+      <div class="col-sm-12 panel-body">
         <p>Constants (with the same behavior as JavaScript) are supported with the `set` keyword, for terseness, muscle-memory convenience (all letters on one hand!), and consistency with `let`.
         </p>
       </div>
@@ -115,14 +116,104 @@
           </p><p>set capacity = 16.9</p>
         </div>
     </div>
-    <div class="row">
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>const CUP = "Stein";</p>
           <p>const CAPACITY = 16.9;</p>
         </div>
       </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 panel-body">
+      <p>Arrays are declared and assigned in the same way, with the same static type inference.</p>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>let pairsWellWithBeer = ["pizza", "burgers"]</p>
+        <p>set sixpack = [1, 2, 3, 4, 5, 6]</p>
+      </div>
+    </div>
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>let pairsWellWithBeer = ["pizza", "burgers"];</p>
+        <p>const SIXPACK = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 panel-body">
+      <p>Similar to JavaScript and many other languages, variable names _must_ begin with a letter, and may not be one of the list of Boozie Reserved Words, but may include any alphanumeric characters or underscore after the initial character.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>let brewery = "open"</p>
+        <p>//Okay!</p>
+        <br/>
+        <p>let 12ozBottle = 12</p>
+        <p>Syntax error</p>
+        <br/>
+        <p>let for = false</p>
+        <p>Syntax error</p>
+      </div>
+    </div>
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>let brewery = "open";</p>
+        <p>//Okay!</p>
+        <br/>
+        <p>let 12ozBottle = 12.0;</p>
+        <p>Syntax error</p>
+        <br/>
+        <p>let for = false;</p>
+        <p>Syntax error</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 panel-body">
+      <p>Boozie supports two types of control-flow loop statements: `for`, with a similar "for-each" syntax to Python (no messy loop arithmetic rooted in C!), and `while`.</p>
+      <p>Conditional control-flow statements are of the typical form 'if-then,' followed by any number of optional `else if` clauses and only one optional `else`. No need to worry about matching (and potentially forgetting) parens, because there aren't any!</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>for brand in allBrands {</p>
+        <p>  burp(brand)</p>
+        <p>}</p>
+      </div>
+    </div>
+    <div class="col-sm-6 panel-body">
+      <div class="console">
+        <p>for(let brand of allBrands) {</p>
+        <p>  console.log(brand);</p>
+        <p>  brand += 1;</p>
+        <p>};</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-6 panel-body">
+    <div class="console">
+      <p>while beer = -empty {</p>
+      <p>    drink(beer)</p>
+      <p>}</p>
+    </div>
+  </div>
+  <div class="col-sm-6 panel-body">
+    <div class="console">
+      <p>while (beer = !empty) {</p>
+      <p>    drink(beer);</p>
+      <p>};</p>
+    </div>
+  </div>
+</div>
+  <div class="row"><div class="col-sm-6 panel-body"></div></div>
+  <div class="row"><div class="col-sm-6 panel-body"></div></div>
+  <div class="row"><div class="col-sm-6 panel-body"></div></div>
 </body>
 </html>
