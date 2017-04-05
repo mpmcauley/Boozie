@@ -1,9 +1,12 @@
 class Literal {
-  constructor(body) {
-    this.body = body;
+  constructor(value) {
+    this.value = value;
   }
+
+  // analyze(){
+  // }
   toString() {
-    return (this.body);
+    return (this.value);
   }
 }
 
