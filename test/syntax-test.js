@@ -16,7 +16,7 @@ describe('Boozie', () => {
     const match = parse('hey');
     assert.ok(match.succeeded());
   });
-  // This is insanely interesting TODO
+
   it('burp("Hello World") test', () => {
     const match = parse('burp("HelloWorld")');
     assert.ok(match.succeeded());
