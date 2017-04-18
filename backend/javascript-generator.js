@@ -12,33 +12,49 @@
  *   program.gen();
  */
 
- const Context = require('../entities/Context');
- const program = require('../entities/program');
- const Block = require('../entities/Block');
- const Type = require('../entities/Type');
- const Statement = require('../entities/Statement');
- const IfStatement = require('../entities/IfStatement');
- const IfElseStatement = require('../entities/IfElseStatement');
- const ElseIfStatement = require('../entities/ElseIfStatement');
- const WhileStatement = require('../entities/WhileStatement');
- const ForStatement = require('../entities/ForStatement');
- const Print = require('../entities/Print');
- const MatchStatement = require('../entities/MatchStatement');
- const Pattern = require('../entities/Pattern');
- const MatchPattern = require('../entities/MatchPattern');
- const ReturnStatement = require('../entities/ReturnStatement');
- const VariableDecl = require('../entities/VariableDecl');
- const ConstDecl = require('../entities/ConstDecl');
- const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
  const ArrayConstDecl = require('../entities/ArrayConstDecl');
- const Expression = require('../entities/Expression');
- const IdExpression = require('../entities/IdExpression');
- const UnaryExpression = require('../entities/UnaryExpression');
+ const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
  const BinaryExpression = require('../entities/BinaryExpression');
+ const Block = require('../entities/Block');
+ const BooleanLiteral = require('../entities/BooleanLiteral');
+ const ConstDecl = require('../entities/ConstDecl');
+ const Context = require('../entities/Context');
+ const ElseIfStatement = require('../entities/ElseIfStatement');
+ const Expression = require('../entities/Expression');
+ const FloatLiteral = require('../entities/FloatLiteral');
+ const ForStatement = require('../entities/ForStatement');
  const FunDecl = require('../entities/FunDecl');
  const FunctionCall = require('../entities/FunctionCall');
+ const IdExpression = require('../entities/IdExpression');
+ const IfElseStatement = require('../entities/IfElseStatement');
+ const IfStatement = require('../entities/IfStatement');
  const literal = require('../entities/literal');
- const BooleanLiteral = require('../entities/BooleanLiteral');
- const FloatLiteral = require('../entities/FloatLiteral');
+ const MatchPattern = require('../entities/MatchPattern');
+ const MatchStatement = require('../entities/MatchStatement');
+ const Pattern = require('../entities/Pattern');
+ const Print = require('../entities/Print');
+ const program = require('../entities/program');
+ const ReturnStatement = require('../entities/ReturnStatement');
+ const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
+ const Type = require('../entities/Type');
+ const UnaryExpression = require('../entities/UnaryExpression');
+ const VariableDecl = require('../entities/VariableDecl');
+ const WhileStatement = require('../entities/WhileStatement');
 
+const indentPadding = 2;
+let indentLevel = 0;
+
+function emit(line) {
+  console.log(`${' '.repeat(indentPadding * indentLevel)}${line}`);
+}
+
+function genStatementList(statements) {
+  indentLevel += 1;
+  statements.forEach(statement => statement.gen());
+  indentLevel -= 1;
+}
+
+Object.assign(ArrayConstDecl.prototype, {
+  gen() { return this.expression.gen(); },
+});
