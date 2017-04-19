@@ -55,6 +55,26 @@ function genStatementList(statements) {
   indentLevel -= 1;
 }
 
-Object.assign(ArrayConstDecl.prototype, {
-  gen() { return this.expression.gen(); },
+Object.assign(BooleanLiteral.prototype, {
+  gen() { return `${this.value}`; },
 });
+
+Object.assign(FloatLiteral.prototype, {
+  gen() { return `${this.value}`; },
+});
+
+Object.assign(ReturnStatement.prototype, {
+  gen() {
+    if (this.returnValue) {
+      emit(`return ${this.returnValue.gen()};`);
+    } else {
+      emit('return;');
+    }
+  },
+});
+
+Object.assign(StringLiteral.prototype, {
+  gen() { return `${this.value}`; },
+});
+
+
