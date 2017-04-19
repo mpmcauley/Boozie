@@ -55,6 +55,15 @@ function genStatementList(statements) {
   indentLevel -= 1;
 }
 
+// TODO - unary negation operator could clash with binary subtract if implemented this way
+function makeOp(op) {
+  return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
+}
+
+Object.assign(BinaryExpression.prototype, {
+  gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
+});
+
 Object.assign(BooleanLiteral.prototype, {
   gen() { return `${this.value}`; },
 });
@@ -77,4 +86,7 @@ Object.assign(StringLiteral.prototype, {
   gen() { return `${this.value}`; },
 });
 
+Object.assign(UnaryExpression.prototype, {
+  gen() { return `(${makeOp(this.op)} ${this.operand.gen()})`; },
+});
 
