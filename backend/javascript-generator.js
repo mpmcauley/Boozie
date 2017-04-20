@@ -62,12 +62,40 @@
    return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
  }
 
+ Object.assign(ArrayVariableDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`let [${ids}] = [${values}];`);
+   },
+ });
+
+ Object.assign(ArrayConstDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`const [${ids}] = [${values}];`);
+   },
+ });
+
  Object.assign(BinaryExpression.prototype, {
    gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
  });
 
+ Object.assign(Block.prototype, {
+   gen() { this.statements.gen(); },
+ }); 
+
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
+ });
+
+ Object.assign(ConstDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`set [${ids}] = [${values}];`);
+   },
  });
 
  Object.assign(IfStatement.prototype, {
@@ -105,4 +133,12 @@
 
  Object.assign(UnaryExpression.prototype, {
    gen() { return `(${makeOp(this.op)} ${this.operand.gen()})`; },
+ });
+
+ Object.assign(VariableDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`let [${ids}] = [${values}];`);
+   },
  });
