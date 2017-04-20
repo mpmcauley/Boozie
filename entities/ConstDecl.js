@@ -11,7 +11,7 @@ class ConstDecl extends Statement {
     context.declare(this.id);
   }
   toString() {
-    return (`set ${this.id.join(', ')} = ${this.value.join(', ')}`);
+    return (`(ConstDecl set ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
 }
 

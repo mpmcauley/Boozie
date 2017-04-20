@@ -6,7 +6,7 @@ class Literal {
   // analyze(){
   // }
   toString() {
-    return (this.value);
+    return (`(Literal ${this.value})`);
   }
 }
 

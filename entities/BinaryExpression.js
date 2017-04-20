@@ -32,7 +32,7 @@ class BinaryExpression extends Expression {
     }
   }
   toString() {
-    return (`${this.e1} + ${this.op} + ${this.e2}`);
+    return (`(BinaryExpression ${this.e1} + ${this.op} + ${this.e2})`);
   }
 }
 

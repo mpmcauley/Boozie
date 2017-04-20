@@ -7,7 +7,7 @@ class MatchPattern extends Statement {
     this.p2 = p2;
   }
   toString() {
-    return (`>>  ${this.p1} :: ${this.p2}`);
+    return (`(MatchPattern >>  ${this.p1} :: ${this.p2})`);
   }
 }
 

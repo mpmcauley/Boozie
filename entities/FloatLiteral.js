@@ -11,7 +11,7 @@ class FloatLiteral extends Literal {
   }
 
   toString() {
-    return (`${this.value}.0`);
+    return (`(FloatLiteral ${this.value}.0)`);
   }
 }
 //

@@ -16,7 +16,7 @@ class IfElseStatement extends Statement {
     }
   }
   toString() {
-    return (`if ${this.condition} { ${this.body} } else { ${this.else} }`);
+    return (`(IfElseStatement if ${this.condition} { ${this.body} } else { ${this.else} })`);
   }
 }
 

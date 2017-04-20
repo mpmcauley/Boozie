@@ -13,7 +13,7 @@ class ReturnStatement extends Statement {
     // this.body.analyze();
   }
   toString() {
-    return (`return ${this.body}`);
+    return (`(ReturnStatement return ${this.body})`);
   }
 }
 

@@ -8,7 +8,7 @@ class ForStatement extends Statement {
     this.body = body;
   }
   toString() {
-    return (`for ${this.for} in ${this.in} { ${this.body} } `);
+    return (`(ForStatement for ${this.for} in ${this.in} { ${this.body} } )`);
   }
 }
 

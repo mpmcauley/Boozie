@@ -7,7 +7,7 @@ class MatchStatement extends Statement {
     this.e2 = e2;
   }
   toString() {
-    return (`match ${this.e1} with ${this.e2}`);
+    return (`(MatchStatement match ${this.e1} with ${this.e2})`);
   }
 }
 
