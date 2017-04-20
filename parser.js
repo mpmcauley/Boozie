@@ -17,6 +17,7 @@ const UnaryExpression = require('./entities/UnaryExpression.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
+const Print = require('./entities/Print.js');
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -32,9 +33,13 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt1, _1, stmt2) {
     return new Block(stmt1.ast(), stmt2.ast());
   },
+  Stmt(body) {
+    return new Statement(body.ast());
+  },
   IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
+
   // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
   //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
   // },
@@ -80,10 +85,12 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp4(op, e) {
     return new UnaryExpression('-', e.ast());
   },
+  Print(e) {
+    return new Print(e)
+  },
   Exp5_parens(left, e, right) {
     return e.ast();
   },
-  // little confused on these ones
   id(idValue) {
     return new IdExpression(this.sourceString);
   },

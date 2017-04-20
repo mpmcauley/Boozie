@@ -6,7 +6,7 @@ class Block {
     this.statements.forEach(s => s.analyze(context));
   }
   toString() {
-    return (this.statements);
+    return (`(Block ${this.statements})`);
   }
 }
 
