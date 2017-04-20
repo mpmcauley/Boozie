@@ -42,7 +42,8 @@
  const VariableDecl = require('../entities/VariableDecl');
  const WhileStatement = require('../entities/WhileStatement');
 
-<<<<<<< HEAD
+ const error = require('../error');
+
  const indentPadding = 2;
  let indentLevel = 0;
 
@@ -69,8 +70,23 @@
    gen() { return `${this.value}`; },
  });
 
+ Object.assign(IfStatement.prototype, {
+   gen() {
+     emit(`if (${condition.gen()}) {`);
+     genStatementList(body);
+     emit('}');
+   },
+ });
+
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
+ });
+
+ Object.assign(Program.prototype, {
+   gen() {
+     // generateLibraryFunctions();
+     this.statements.forEach(statement => statement.gen());
+   },
  });
 
  Object.assign(ReturnStatement.prototype, {
