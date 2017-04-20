@@ -12,7 +12,7 @@ class UnaryExpression extends Expression {
     return this.type = Type.BOOL;
   }
   toString() {
-    return (`${this.op} ${this.exp}`);
+    return (`(UnaryExpression${this.op} ${this.exp})`);
   }
 }
 

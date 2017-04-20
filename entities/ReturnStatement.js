@@ -13,7 +13,11 @@ class ReturnStatement extends Statement {
     // this.body.analyze();
   }
   toString() {
+<<<<<<< HEAD
+    return (`(ReturnStatement return ${this.body})`);
+=======
     return (`return ${this.returnValue}`);
+>>>>>>> master
   }
 }
 

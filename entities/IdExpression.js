@@ -12,7 +12,7 @@ class IdExpression extends Expression {
     }
   }
   toString() {
-    return (this.value);
+    return (`(IdExpression ${this.value})`);
   }
 }
 

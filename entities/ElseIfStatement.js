@@ -20,7 +20,7 @@ class ElseIfStatement extends Statement {
     }
   }
   toString() {
-    return (`if ${this.condition} { ${this.body} } else if ${this.elseCond} { ${this.elseIf} } else { ${this.else} }`);
+    return (`(ElseIfStatement if ${this.condition} { ${this.body} } else if ${this.elseCond} { ${this.elseIf} } else { ${this.else} })`);
   }
 }
 

@@ -6,7 +6,7 @@ class Pattern extends Expression {
     this.value = value;
   }
   toString() {
-    return (this.value);
+    return (`(Patter ${this.value})`);
   }
 }
 

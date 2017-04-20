@@ -10,7 +10,7 @@ class BooleanLiteral extends Literal {
     this.type = Type.BOOL;
   }
   toString() {
-    return (this.value);
+    return (`(BooleanLiteral ${this.value})`);
   }
 }
 

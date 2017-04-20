@@ -3,7 +3,7 @@ class Expression {
     this.e = e;
   }
   toString() {
-    return (this.e);
+    return (`(Expression ${this.e})`);
   }
 }
 module.exports = Expression;

@@ -25,7 +25,7 @@ class Type {
     return this === otherType || this === Type.ARBITRARY || otherType === Type.ARBITRARY;
   }
   toString() {
-    return (this.type);
+    return (`(Type ${this.type})`);
   }
 }
 

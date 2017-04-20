@@ -17,7 +17,7 @@ class FunctionCall {
     }
   }
   toString() {
-    return (`${this.id} (${this.args})`);
+    return (`(FunctionCall${this.id} (${this.args}))`);
   }
 }
 

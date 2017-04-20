@@ -16,7 +16,7 @@ class FuncDecl extends Statement {
     this.body.analyze(innerContext);
   }
   toString() {
-    return (`let ${this.id} = ${this.args}`);
+    return (`(FuncDecl let ${this.id} = ${this.args})`);
   }
 }
 
