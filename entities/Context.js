@@ -10,7 +10,7 @@ class Context {
   }
   declare(id, type) {
     if (id in this.localVariables) {
-      error(`${id} alread declared`);
+      error(`${id} already declared`);
     } else {
       this.localVariables[id] = type;
     }

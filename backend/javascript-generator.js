@@ -23,7 +23,7 @@
  const Expression = require('../entities/Expression');
  const FloatLiteral = require('../entities/FloatLiteral');
  const ForStatement = require('../entities/ForStatement');
- const FunDecl = require('../entities/FuncDecl');
+ const FuncDecl = require('../entities/FuncDecl');
  const FunctionCall = require('../entities/FunctionCall');
  const IdExpression = require('../entities/IdExpression');
  const IfElseStatement = require('../entities/IfElseStatement');
@@ -42,6 +42,7 @@
  const VariableDecl = require('../entities/VariableDecl');
  const WhileStatement = require('../entities/WhileStatement');
 
+<<<<<<< HEAD
  const indentPadding = 2;
  let indentLevel = 0;
 

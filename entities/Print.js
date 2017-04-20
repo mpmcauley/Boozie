@@ -9,7 +9,11 @@ class Print extends Statement {
     //   error('You can only print strings')
     // }
   toString() {
+<<<<<<< HEAD
     return (`(Print burp ${this.body})`);
+=======
+    return (`burp ${this.argument}`);
+>>>>>>> master
   }
 }
 
