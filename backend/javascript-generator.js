@@ -164,3 +164,11 @@
      emit(`let [${ids}] = [${values}];`);
    },
  });
+
+ Object.assign(WhileStatement.prototype, {
+   gen() {
+     emit(`while (${this.condition}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
+ });
