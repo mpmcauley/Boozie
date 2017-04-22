@@ -126,6 +126,12 @@
     },
  });
 
+ Object.assign(Print.prototype, {
+   gen() {
+     emit(`console.log(${this.argument});`);
+   },
+ });
+
  Object.assign(Program.prototype, {
    gen() {
      // generateLibraryFunctions();
