@@ -62,19 +62,19 @@
    return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
  }
 
+ Object.assign(ArrayConstDecl.prototype, {
+  gen() {
+    const ids = this.id.map(i => i.gen());
+    const values = this.value.map(v => v.gen());
+    emit(`const [${ids}] = [${values}];`);
+  },
+ });
+
  Object.assign(ArrayVariableDecl.prototype, {
    gen() {
      const ids = this.id.map(i => i.gen());
      const values = this.value.map(v => v.gen());
      emit(`let [${ids}] = [${values}];`);
-   },
- });
-
- Object.assign(ArrayConstDecl.prototype, {
-   gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.value.map(v => v.gen());
-     emit(`const [${ids}] = [${values}];`);
    },
  });
 
@@ -100,14 +100,22 @@
 
  Object.assign(IfStatement.prototype, {
    gen() {
-     emit(`if (${condition.gen()}) {`);
-     genStatementList(body);
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
      emit('}');
    },
  });
 
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
+ });
+
+ Object.assign(ForStatement.prototype, {
+   gen() {
+     emit(`for (${this.for} in ${this.in}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
  });
 
  Object.assign(Program.prototype, {
