@@ -22,7 +22,7 @@
         <h1>Our Story Begins...</h1>
         <p>There exists a legend in the world of programming known as the Ballmer Peak. This fabled phenomenon grants a significant "level-up" with respect to coding abilities at a particular range of blood alcohol content (BAC). Yet this territory of productivity is elusive, operating at a very narrow range of BAC values.</p>
 
-        <p>There's a relevant <a src="https://xkcd.com/">xkcd</a> for this:</p>
+        <p>There's a relevant <a src="https://xkcd.com/323">xkcd</a> for this:</p>
 
         <p><img src='ballmer_peak.png'>Apple uses automated schnapps IVs.</p>
         <br/>
@@ -144,7 +144,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 panel-body">
-        <p>Similar to JavaScript and many other languages, variable names _must_ begin with a letter, and may not be one of the list of Boozie Reserved Words, but may include any alphanumeric characters or underscore after the initial character.</p>
+        <p>Similar to JavaScript and many other languages, variable names <em>must</em> begin with a letter, and may not be one of the list of Boozie Reserved Words, but may include any alphanumeric characters or underscore after the initial character.</p>
       </div>
     </div>
     <div class="row">
@@ -183,15 +183,15 @@
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>for brand in allBrands {</p>
-          <p>  burp(brand)</p>
+          <p>&nbsp;&nbsp;burp(brand)</p>
           <p>}</p>
         </div>
       </div>
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>for(let brand of allBrands) {</p>
-          <p>  console.log(brand);</p>
-          <p>  brand += 1;</p>
+          <p>&nbsp;&nbsp;console.log(brand);</p>
+          <p>&nbsp;&nbsp;brand += 1;</p>
           <p>};</p>
         </div>
       </div>
@@ -200,14 +200,14 @@
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>while beer = -empty {</p>
-          <p>    drink(beer)</p>
+          <p>&nbsp;&nbsp;drink(beer)</p>
           <p>}</p>
         </div>
       </div>
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>while (beer = !empty) {</p>
-          <p>    drink(beer);</p>
+          <p>&nbsp;&nbsp;drink(beer);</p>
           <p>};</p>
         </div>
       </div>
@@ -221,22 +221,22 @@
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>if beer.volume == 0 {</p>
-          <p>    beer = pour(new beer)</p>
+          <p>&nbsp;&nbsp;beer = pour(new beer)</p>
           <p>} else if beer.volume >= 1 {</p>
-          <p>    drink(beer)</p>
+          <p>&nbsp;&nbsp;drink(beer)</p>
           <p>} else {</p>
-          <p>    chug(beer)</p>
+          <p>&nbsp;&nbsp;chug(beer)</p>
           <p>}</p>
         </div>  
       </div>
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>if (beer.volume == 0) {</p>
-          <p>    beer = pour(new beer);</p>
+          <p>&nbsp;&nbsp;beer = pour(new beer);</p>
           <p>} else if (beer.volume >= 1) {</p>
-          <p>    drink(beer);</p>
+          <p>&nbsp;&nbsp;drink(beer);</p>
           <p>} else {</p>
-          <p>    chug(beer);</p>
+          <p>&nbsp;&nbsp;chug(beer);</p>
           <p>};</p>
         </div>  
       </div>
@@ -250,24 +250,24 @@
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>let stir = (ingredients) => {</p>
-          <p>    ingredients.mix()</p>
+          <p>&nbsp;&nbsp;ingredients.mix()</p>
           <p>}</p>
           <p><br/></p>
           <p>let pour = (beer, glass) => {</p>
-          <p>    beer.volume = 0</p>
-          <p>    glass.volume = 16</p>
+          <p>&nbsp;&nbsp;beer.volume = 0</p>
+          <p>&nbsp;&nbsp;glass.volume = 16</p>
           <p>}</p>
         </div>  
       </div>
       <div class="col-sm-6 panel-body">
         <div class="console">
           <p>let stir = (ingredients) => {</p>
-          <p>    ingredients.mix();</p>
+          <p>&nbsp;&nbsp;ingredients.mix();</p>
           <p>}</p>
           <p><br/></p>
           <p>let pour = (beer, glass) => {</p>
-          <p>    beer.volume = 0;</p>
-          <p>    glass.volume = 16.0;</p>
+          <p>&nbsp;&nbsp;beer.volume = 0;</p>
+          <p>&nbsp;&nbsp;glass.volume = 16.0;</p>
           <p>};</p>
         </div>  
       </div>
@@ -299,6 +299,14 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-12 panel-body">
+        <h1>Code Style</h1>
+        <p>Since we're trying to make easier on inebriated programmers, we don't have many specific guidelines. Nevertheless, we do have a limited <a src="styleguide.html">style guide</a> - not only to set the tone, but also to clarify some ambiguities in our examples, and address points we find controversial in other languages.</p>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-sm-12 panel-body">
         <h1>Syntax Diagrams</h1>
