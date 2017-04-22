@@ -118,6 +118,14 @@
    },
  });
 
+ Object.assign(FuncDecl.prototype, {
+    gen() {
+      emit(`let ${this.id} = (${this.params}) => {`);
+      genStatementList(this.body);
+      emit('}');
+    },
+ });
+
  Object.assign(Program.prototype, {
    gen() {
      // generateLibraryFunctions();
