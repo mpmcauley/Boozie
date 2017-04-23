@@ -12,7 +12,7 @@ class ArrayVariableDecl extends Statement {
       // context.declare(this.id, this, this.value);
   }
   toString() {
-    return (`let ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
+    return (`(ArrayVariableDecl let ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }
 }
 

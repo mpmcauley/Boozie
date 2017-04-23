@@ -3,7 +3,7 @@ class Statement {
     this.body = body;
   }
   toString() {
-    return (this.body);
+    return (`(Statement ${this.body})`);
   }
 }
 

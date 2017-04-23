@@ -11,7 +11,7 @@ class ConstDecl extends Statement {
     context.declare(this.id); // TODO -- doesn't account for the fact that constants can not be changed
   }
   toString() {
-    return (`set ${this.id.join(', ')} = ${this.value.join(', ')}`);
+    return (`(ConstDecl set ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
 }
 

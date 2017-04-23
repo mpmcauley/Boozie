@@ -12,7 +12,7 @@ class ArrayConstDecl extends Statement {
     // context.declare(this.id, this, this.value);
   }
   toString() {
-    return (`set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
+    return (`(ArrayConstDecl set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }
 }
 

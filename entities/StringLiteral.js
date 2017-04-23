@@ -11,7 +11,7 @@ class StringLiteral extends Literal {
     this.type = Type.STRING;
   }
   toString() {
-    return (`" +  ${this.value} "`);
+    return (`(StringLiteral" +  ${this.value} ")`);
   }
 }
 

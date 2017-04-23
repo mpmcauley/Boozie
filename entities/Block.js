@@ -1,13 +1,12 @@
 class Block {
   constuctor(statements) {
-    super();
     this.statements = statements;
   }
-  analyze() {
-    this.statements.forEach(s => s.analyze());
+  analyze(context) {
+    this.statements.forEach(s => s.analyze(context));
   }
   toString() {
-    return (this.statements);
+    return (`(Block ${this.statements})`);
   }
 }
 

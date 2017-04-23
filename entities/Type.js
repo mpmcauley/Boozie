@@ -5,8 +5,8 @@ class Type {
     this.type = type;
   }
 
-  mustBeInteger(message, location) {
-    return this.mustBeCompatibleWith(Type.INT, message);
+  mustBeNumber(message, location) {
+    return this.mustBeCompatibleWith(Type.FLOAT, message);
   }
   mustBeBoolean(message, location) {
     return this.mustBeCompatibleWith(Type.BOOL, message);
@@ -25,7 +25,7 @@ class Type {
     return this === otherType || this === Type.ARBITRARY || otherType === Type.ARBITRARY;
   }
   toString() {
-    return (this.type);
+    return (`(Type ${this.type})`);
   }
 }
 
