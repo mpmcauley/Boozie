@@ -5,8 +5,8 @@ class Type {
     this.type = type;
   }
 
-  mustBeInteger(message, location) {
-    return this.mustBeCompatibleWith(Type.INT, message);
+  mustBeNumber(message, location) {
+    return this.mustBeCompatibleWith(Type.FLOAT, message);
   }
   mustBeBoolean(message, location) {
     return this.mustBeCompatibleWith(Type.BOOL, message);

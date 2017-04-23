@@ -16,7 +16,7 @@ class BinaryExpression extends Expression {
       case '<=':
       case '>=':
       case '>':
-        this.mustHaveIntegerOperands();
+        this.mustHaveNumberOperands();
         return this.type = Type.BOOL;
       case '==':
       case '!=':
@@ -27,8 +27,8 @@ class BinaryExpression extends Expression {
         this.mustHaveBooleanOperands();
         return this.type = Type.BOOL;
       default:
-        this.mustHaveIntegerOperands();
-        return this.type = Type.INT;
+        this.mustHaveNumberOperands();
+        return this.type = Type.FLOAT;
     }
   }
   toString() {
