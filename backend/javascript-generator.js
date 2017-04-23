@@ -98,6 +98,16 @@
    },
  });
 
+ Object.assign(IfElseStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');     
+   },
+ });
+
  Object.assign(IfStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
