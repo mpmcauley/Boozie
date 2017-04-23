@@ -33,11 +33,11 @@ Exp             = Exp1 "and" Exp                            -- and
                   | Exp1
 Exp1            = Exp2 relationalOp Exp2                    -- relop
                   | Exp2
-Exp2            = Exp3 (addOp Exp3)*                        -- addop
+Exp2            = Exp3 addOp Exp3                           -- addop
                   | Exp3
-Exp3            = Exp4 (mulOp Exp4)*                        -- mulop
+Exp3            = Exp4 mulOp Exp4                           -- mulop
                   | Exp4
-Exp4            = "-"? Exp5                                 -- negop
+Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
                   | id                                      -- id

@@ -89,7 +89,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp4_negop(op, e) {
-    return new UnaryExpression('-', e.ast());
+    return new UnaryExpression(op.sourceString, e.ast());
   },
   Exp5_parens(left, e, right) {
     return e.ast();
