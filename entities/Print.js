@@ -1,7 +1,7 @@
 const Statement = require('../entities/Statement.js');
 
 class Print extends Statement {
-  constuctor(argument) {
+  constructor(argument) {
     super();
     this.argument = argument;
   }
@@ -9,7 +9,7 @@ class Print extends Statement {
     //   error('You can only print strings')
     // }
   toString() {
-    return (`(Print burp ${this.body})`);
+    return (`(Print burp ${this.argument})`);
   }
 }
 

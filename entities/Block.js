@@ -1,5 +1,5 @@
 class Block {
-  constuctor(statements) {
+  constructor(statements) {
     this.statements = statements;
   }
   analyze(context) {
