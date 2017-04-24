@@ -104,7 +104,7 @@
      genStatementList(this.body);
      emit('} else {');
      genStatementList(this.else);
-     emit('}');     
+     emit('}');
    },
  });
 
