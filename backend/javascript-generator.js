@@ -98,6 +98,18 @@
    },
  });
 
+ Object.assign(ElseIfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit(`} else if (${this.elseCond}) {`);
+     genStatementList(this.elseIf);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');     
+   },
+ });
+
  Object.assign(IfElseStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
