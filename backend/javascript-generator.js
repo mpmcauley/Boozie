@@ -33,7 +33,7 @@
  const MatchStatement = require('../entities/MatchStatement');
  const Pattern = require('../entities/Pattern');
  const Print = require('../entities/Print');
- const program = require('../entities/program');
+ const Program = require('../entities/program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
@@ -63,11 +63,11 @@
  }
 
  Object.assign(ArrayConstDecl.prototype, {
-  gen() {
-    const ids = this.id.map(i => i.gen());
-    const values = this.value.map(v => v.gen());
-    emit(`const [${ids}] = [${values}];`);
-  },
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`const [${ids}] = [${values}];`);
+   },
  });
 
  Object.assign(ArrayVariableDecl.prototype, {
@@ -84,7 +84,7 @@
 
  Object.assign(Block.prototype, {
    gen() { this.statements.gen(); },
- }); 
+ });
 
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
@@ -104,7 +104,7 @@
      genStatementList(this.body);
      emit('} else {');
      genStatementList(this.else);
-     emit('}');     
+     emit('}');
    },
  });
 
@@ -129,11 +129,11 @@
  });
 
  Object.assign(FuncDecl.prototype, {
-    gen() {
-      emit(`let ${this.id} = (${this.params}) => {`);
-      genStatementList(this.body);
-      emit('}');
-    },
+   gen() {
+     emit(`let ${this.id} = (${this.params}) => {`);
+     genStatementList(this.body);
+     emit('}');
+   },
  });
 
  Object.assign(Print.prototype, {
