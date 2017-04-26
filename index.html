@@ -41,7 +41,6 @@
           <li>Static typing, static scoping</li>
           <li>String interpolation</li>
           <li>Curly braces for closure</li>
-          <li>Pattern-matching</li>
           <li>All numbers are floats 🍺</li>
         </ul>
       </p>
@@ -347,7 +346,6 @@
             <area shape="rect" coords="49,1,107,33" href="#IfStmt" title="IfStmt">
             <area shape="rect" coords="49,45,119,77" href="#ForStmt" title="ForStmt">
             <area shape="rect" coords="49,89,129,121" href="#WhileStmt" title="WhileStmt">
-            <area shape="rect" coords="49,133,135,165" href="#MatchStmt" title="MatchStmt">
             <area shape="rect" coords="49,177,137,209" href="#ReturnStmt" title="ReturnStmt">
             <area shape="rect" coords="49,221,113,253" href="#VarDecl" title="VarDecl">
             <area shape="rect" coords="49,265,95,297" href="#Print" title="Print">
@@ -358,7 +356,6 @@
             <div class="ebnf"><pre><a href="#Stmt" title="Stmt" shape="rect">Stmt</a>     ::= <a href="#IfStmt" title="IfStmt" shape="rect">IfStmt</a>
            | <a href="#ForStmt" title="ForStmt" shape="rect">ForStmt</a>
            | <a href="#WhileStmt" title="WhileStmt" shape="rect">WhileStmt</a>
-           | <a href="#MatchStmt" title="MatchStmt" shape="rect">MatchStmt</a>
            | <a href="#ReturnStmt" title="ReturnStmt" shape="rect">ReturnStmt</a>
            | <a href="#VarDecl" title="VarDecl" shape="rect">VarDecl</a>
            | <a href="#Print" title="Print" shape="rect">Print</a>
@@ -446,46 +443,6 @@
           <p>referenced by:
             <ul>
               <li><a href="#FunDecl" title="FunDecl">FunDecl</a></li>
-            </ul>
-          </p><br>
-
-          <p style="font-size: 14px; font-weight:bold"><a name="MatchStmt">MatchStmt:</a></p>
-          <img border="0" src="diagram/MatchStmt.png" height="36" width="404" usemap="#MatchStmt.map">
-          <map name="MatchStmt.map">
-            <area shape="rect" coords="109,1,151,33" href="#Exp" title="Exp">
-            <area shape="rect" coords="295,1,375,33" href="#MatchPart" title="MatchPart">
-          </map>
-          <p>
-            <div class="ebnf"><pre><a href="#MatchStmt" title="MatchStmt" shape="rect">MatchStmt</a>  ::= 'match' <a href="#Exp" title="Exp" shape="rect">Exp</a> 'with' '\n' <a href="#MatchPart" title="MatchPart" shape="rect">MatchPart</a></pre></div>
-          </p>
-          <p>referenced by:
-            <ul>
-              <li><a href="#Stmt" title="Stmt">Stmt</a></li>
-            </ul>
-          </p><br>
-
-          <p style="font-size: 14px; font-weight:bold"><a name="MatchPart">MatchPart:</a></p>
-          <img border="0" src="diagram/MatchPart.png" height="80" width="220" usemap="#MatchPart.map">
-          <map name="MatchPart.map"><area shape="rect" coords="109,45,171,77" href="#Pattern" title="Pattern"></map>
-          <p>
-            <div class="ebnf"><pre><a href="#MatchPart" title="MatchPart" shape="rect">MatchPart</a>  ::= '&gt;&gt;' <a href="#Pattern" title="Pattern" shape="rect">Pattern</a> ( '::' <a href="#Pattern" title="Pattern" shape="rect">Pattern</a> )*</pre></div>
-          </p>
-          <p>referenced by:
-            <ul>
-              <li><a href="#MatchStmt" title="MatchStmt">MatchStmt</a></li>
-            </ul>
-          </p><br>
-
-          <p style="font-size: 14px; font-weight:bold"><a name="Pattern">Pattern:</a></p>
-          <img border="0" src="diagram/Pattern.png" height="80" width="140" usemap="#Pattern.map">
-          <map name="Pattern.map"><area shape="rect" coords="49,1,91,33" href="#Exp" title="Exp"></map>
-          <p>
-            <div class="ebnf"><pre><a href="#Pattern" title="Pattern" shape="rect">Pattern</a>  ::= <a href="#Exp" title="Exp" shape="rect">Exp</a>
-           | '_'</pre></div>
-          </p>
-          <p>referenced by:
-            <ul>
-              <li><a href="#MatchPart" title="MatchPart">MatchPart</a></li>
             </ul>
           </p><br>
 
@@ -582,8 +539,6 @@
             <li><a href="#Exp" title="Exp">Exp</a></li>
             <li><a href="#Exp5" title="Exp5">Exp5</a></li>
             <li><a href="#IfStmt" title="IfStmt">IfStmt</a></li>
-            <li><a href="#MatchStmt" title="MatchStmt">MatchStmt</a></li>
-            <li><a href="#Pattern" title="Pattern">Pattern</a></li>
             <li><a href="#Print" title="Print">Print</a></li>
             <li><a href="#ReturnStmt" title="ReturnStmt">ReturnStmt</a></li>
             <li><a href="#Stmt" title="Stmt">Stmt</a></li>
@@ -790,7 +745,7 @@
           <p style="font-size: 14px; font-weight:bold"><a name="keyword">keyword:</a></p>
           <img border="0" src="diagram/keyword.png" height="564" width="158">
           <p>
-            <div class="ebnf"><pre><a href="#keyword" title="keyword" shape="rect">keyword</a>  ::= ( 'let' | 'set' | 'burp' | 'for' | 'in' | 'while' | 'match' | 'if' | 'else' | 'new' | 'true' | 'false' | 'return' ) - [_A-Za-z0-9]</pre></div>
+            <div class="ebnf"><pre><a href="#keyword" title="keyword" shape="rect">keyword</a>  ::= ( 'let' | 'set' | 'burp' | 'for' | 'in' | 'while' | 'if' | 'else' | 'new' | 'true' | 'false' | 'return' ) - [_A-Za-z0-9]</pre></div>
           </p>
           <p>no references</p><br>
 

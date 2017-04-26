@@ -5,7 +5,6 @@ Block           = (Stmt)*("\n" Stmt)*
 Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
-                  | MatchStmt                               -- match
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- declaration
                   | Print                                   -- print
@@ -17,10 +16,6 @@ WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
 FunDecl         = "let" id "=" Params "=>" "{" Block "}"
 Params          = "(" id* ("," id)* ")"
-MatchStmt       = "match" Exp "with" "\n" MatchPart
-MatchPart       = ">>" Pattern ("::" Pattern)*
-Pattern         = Exp                                     -- exp
-                  | Other
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*

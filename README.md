@@ -16,7 +16,6 @@ Our language is designed with this phenomenon in mind, to help facilitate progra
 
 ## List of Features
 
-- Pattern Matching (OCaml style)
 - First-class functions
 - Static typing, static scoping
 - String interpolation
@@ -143,8 +142,8 @@ burp(`Put the $fruit on the $cup full of $beer.`)                       console.
   - Like most programming languages, certain keywords are reserved for syntactic functions. The following list of keywords may not be used for variable identifiers.
 
 ```
-  "let"   | "set" | "burp"  | "for" | "in"   | "while"
-  "match" | "if"  | "else"  | "new" | "true" | "false"
+  "let"  | "set"  | "burp" | "for"  | "in"   | "while"
+  "if"   | "else" | "new"  | "true" | "false"
 ```
 
 ### Comments
@@ -162,15 +161,12 @@ Syntax error                                        // but valid in JavaScript!
 ```
 Program         ::= Block
 Block           ::= (Stmt "\n")*
-Stmt            ::= IfStmt  | ForStmt   | WhileStmt  | MatchStmt
+Stmt            ::= IfStmt  | ForStmt   | WhileStmt  |
                     VarDecl | ConstDecl | ReturnStmt | Exp
 IfStmt          ::= 'if' Exp '{' Block '}'
                     ('else if' Exp '{' Block '}')* ('else' '{' Block '}' )?
 WhileStmt       ::= 'while' Exp '{' Block '}'
 ForStmt         ::= 'for' id 'in' id '{' Block '}'
-MatchStmt       ::= 'match' Exp 'with' "\n" MatchPart
-MatchPart       ::= '>>' Pattern ("::" Pattern)*
-Pattern         ::= Exp | Other
 Other           ::= "_" 
 ReturnStmt      ::= "return" Exp
 ConstDecl       ::= "set" id ("," id)* "=" Exp ("," Exp)*
@@ -196,7 +192,7 @@ stringlit       ::= "\"" char* "\""
 char            ::= escape | ~escape any
 escape          ::= "\'" | "\"" | "\r" | "\n" | "\/"
 keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
-                  | "while" | "match" | "if"    | "else"  | "new"
+                  | "while" | "if"    | "else"  | "new"
                   | "true"  | "false" | "return") ~idrest
 id              ::= ~keyword letter idrest
 idrest          ::= "_" | alnum
