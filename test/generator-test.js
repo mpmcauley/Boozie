@@ -33,5 +33,38 @@ describe('Code Generator Test', () => {
       assert.equal(ast, expected);
     });
   });
-  // describe('', () => {});
+  describe('conditionals and loops', () => {
+    it('if statements', () => {
+      const compile = gen('if beerVolume == 0 { beerVolume = 16 };')
+      const expected = gen('if (beerVolume == 0) { beerVolume = 16; };')
+      assert.equal(ast, expected);
+    });
+    it('if-else statements', () => {
+      const compile = gen(`if beerVolume == 0 {
+        beerVolume = 16
+      } else if beerVolume >= 1 {
+        beerVolume = beerVolume - 1
+      } else {
+        beerVolume = beerVolume - 5
+      }`);
+      const expected = `if (beerVolume == 0) {
+        beerVolume = 16;
+      } else if (beerVolume >= 1) {
+        beerVolume = beerVolume - 1;
+      } else {
+        beerVolume = beerVolume - 5;
+      }`;
+      assert.equal(ast, expected);
+    });
+    it('for loops', () => {
+      const compile = gen('for brand in allBrands { burp(brand) }');
+      const expected = 'for (let brand of allBrands) { console.log(brand); brand += 1; };';
+      assert.equal(ast, expected);
+    });
+    it('while loops', () => {
+      const compile = gen('while beerVolume > 0 { beerVolume = beerVolume - 1 }');
+      const expected = 'while (beerVolume > 0) { beerVolume = beerVolume - 1; };';
+      assert.equal(ast, expected);
+    });
+  });
 });
