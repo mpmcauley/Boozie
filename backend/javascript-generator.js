@@ -29,9 +29,6 @@
  const IfElseStatement = require('../entities/IfElseStatement');
  const IfStatement = require('../entities/IfStatement');
  const literal = require('../entities/literal');
- const MatchPattern = require('../entities/MatchPattern');
- const MatchStatement = require('../entities/MatchStatement');
- const Pattern = require('../entities/Pattern');
  const Print = require('../entities/Print');
  const Program = require('../entities/program');
  const ReturnStatement = require('../entities/ReturnStatement');
