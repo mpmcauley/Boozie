@@ -1,13 +1,13 @@
 Boozie {
 
 Program         = Block
-Block           = (Stmt)*("\n" Stmt)*
+Block           = (Stmt)*
 Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
                   | MatchStmt                               -- match
                   | ReturnStmt                              -- return
-                  | VarDecl                                 -- declaration
+                  | VarDecl                                 -- decl
                   | Print                                   -- print
                   | FunDecl                                 -- fundecl
                   | Exp                                     -- exp
@@ -27,7 +27,7 @@ ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*
 ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"
 VarDecl         = "let" id ("," id)* assignOp Exp ("," Exp)*
 VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"
-Print           = "burp" "(" Exp ")"                      -- print
+Print           = "burp" "(" Exp ")"
 Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
 Exp1            = Exp2 (relationalOp Exp2)?
 Exp2            = Exp3 (addOp Exp3)*
@@ -58,7 +58,7 @@ keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "true"  | "false" | "return") ~idrest
 id              = ~keyword letter idrest*                   -- id
 idrest          = "_" | alnum
-comment         = "//" (~"\n" any)* "\n"
+comment         = "//" (~"\n" any)* "\n" 
 
 assignOp        = "="                                       -- equals
                   | "+="                                    -- plusEq

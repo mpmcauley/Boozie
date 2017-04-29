@@ -1,5 +1,6 @@
 const Program = require('./entities/Program.js');
 const Block = require('./entities/Block.js');
+const Statement = require('./entities/Statement.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
@@ -30,8 +31,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Program(body) {
     return new Program(body.ast());
   },
-  Block(stmt1, _1, stmt2) {
-    return new Block(stmt1.ast(), stmt2.ast());
+  Block(stmt1) {
+    return new Block(stmt1.ast());
   },
   Stmt(body) {
     return new Statement(body.ast());
@@ -70,6 +71,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayConstDecl(v.sourceString, nextv.sourceString);
   },
+  Stmt_print(exp) {
+    return new Print(exp.ast());
+  },
   Exp(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -84,9 +88,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   Exp4(op, e) {
     return new UnaryExpression('-', e.ast());
-  },
-  Print(e) {
-    return new Print(e)
   },
   Exp5_parens(left, e, right) {
     return e.ast();

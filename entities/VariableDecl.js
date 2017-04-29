@@ -11,7 +11,7 @@ class VariableDecl extends Statement {
     context.declare(this.id, this);
   }
   toString() {
-    return (`VarDecl (let ${this.id.join(', ')} = ${this.value.join(', ')})`);
+    return (`(VarDecl ${this.id} = ${this.value})`);
   }
 }
 

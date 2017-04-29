@@ -6,5 +6,4 @@ class Statement {
     return (`(Statement ${this.body})`);
   }
 }
-
 module.exports = Statement;
