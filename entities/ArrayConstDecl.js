@@ -17,11 +17,6 @@ class ArrayConstDecl extends Statement {
   toString() {
     return (`(ArrayConstDecl set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }
-  ArrayConstDecl.prototype.analyze = (context) => {
-    this.id.analyze(context);
-    this.type.analyze(context);
-    this.value.analyze(context); 
-  }
 }
 
 module.exports = ArrayConstDecl;
