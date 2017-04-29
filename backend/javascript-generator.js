@@ -29,11 +29,8 @@
  const IfElseStatement = require('../entities/IfElseStatement');
  const IfStatement = require('../entities/IfStatement');
  const literal = require('../entities/literal');
- const MatchPattern = require('../entities/MatchPattern');
- const MatchStatement = require('../entities/MatchStatement');
- const Pattern = require('../entities/Pattern');
  const Print = require('../entities/Print');
- const program = require('../entities/program');
+ const Program = require('../entities/program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
@@ -42,7 +39,8 @@
  const VariableDecl = require('../entities/VariableDecl');
  const WhileStatement = require('../entities/WhileStatement');
 
-<<<<<<< HEAD
+ const error = require('../error');
+
  const indentPadding = 2;
  let indentLevel = 0;
 
@@ -61,16 +59,108 @@
    return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
  }
 
+ Object.assign(ArrayConstDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`const [${ids}] = [${values}];`);
+   },
+ });
+
+ Object.assign(ArrayVariableDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`let [${ids}] = [${values}];`);
+   },
+ });
+
  Object.assign(BinaryExpression.prototype, {
    gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
+ });
+
+ Object.assign(Block.prototype, {
+   gen() { this.statements.gen(); },
  });
 
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
  });
 
+ Object.assign(ConstDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`set [${ids}] = [${values}];`);
+   },
+ });
+
+ Object.assign(ElseIfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit(`} else if (${this.elseCond}) {`);
+     genStatementList(this.elseIf);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');     
+   },
+ });
+
+
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
+ });
+
+ Object.assign(ForStatement.prototype, {
+   gen() {
+     emit(`for (${this.for} in ${this.in}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
+ });
+
+ Object.assign(FuncDecl.prototype, {
+   gen() {
+     emit(`let ${this.id} = (${this.params}) => {`);
+     genStatementList(this.body);
+     emit('}');
+   },
+ });
+
+  Object.assign(FunctionCall.prototype, {
+   gen() { emit(`${this.id}(${this.args});`); },
+  });
+
+  Object.assign(IfElseStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');
+   },
+ });
+
+ Object.assign(IfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
+ });
+
+ Object.assign(Print.prototype, {
+   gen() {
+     emit(`console.log(${this.argument});`);
+   },
+ });
+
+ Object.assign(Program.prototype, {
+   gen() {
+     // generateLibraryFunctions();
+     this.statements.forEach(statement => statement.gen());
+   },
  });
 
  Object.assign(ReturnStatement.prototype, {
@@ -89,4 +179,20 @@
 
  Object.assign(UnaryExpression.prototype, {
    gen() { return `(${makeOp(this.op)} ${this.operand.gen()})`; },
+ });
+
+ Object.assign(VariableDecl.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`let [${ids}] = [${values}];`);
+   },
+ });
+
+ Object.assign(WhileStatement.prototype, {
+   gen() {
+     emit(`while (${this.condition}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
  });

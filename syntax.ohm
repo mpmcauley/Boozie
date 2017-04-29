@@ -5,7 +5,6 @@ Block           = (Stmt)*
 Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
-                  | MatchStmt                               -- match
                   | ReturnStmt                              -- return
                   | VarDecl                                 -- decl
                   | Print                                   -- print
@@ -17,10 +16,6 @@ WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
 FunDecl         = "let" id "=" Params "=>" "{" Block "}"
 Params          = "(" id* ("," id)* ")"
-MatchStmt       = "match" Exp "with" "\n" MatchPart
-MatchPart       = ">>" Pattern ("::" Pattern)*
-Pattern         = Exp                                     -- exp
-                  | Other
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*
@@ -28,11 +23,17 @@ ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"
 VarDecl         = "let" id ("," id)* assignOp Exp ("," Exp)*
 VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"
 Print           = "burp" "(" Exp ")"
-Exp             = Exp1 ("and" Exp)* | Exp1 ("or" Exp)*
-Exp1            = Exp2 (relationalOp Exp2)?
-Exp2            = Exp3 (addOp Exp3)*
-Exp3            = Exp4 (mulOp Exp4)*
-Exp4            = "-"? Exp5
+Exp             = Exp1 "and" Exp                            -- and
+                  | Exp1 "or" Exp                           -- or
+                  | Exp1
+Exp1            = Exp2 relationalOp Exp2                    -- relop
+                  | Exp2
+Exp2            = Exp3 addOp Exp3                           -- addop
+                  | Exp3
+Exp3            = Exp4 mulOp Exp4                           -- mulop
+                  | Exp4
+Exp4            = "-" Exp5                                 -- negop
+                  | Exp5
 Exp5            = Literal
                   | id                                      -- id
                   | "(" Exp ")"                             -- parens
@@ -58,7 +59,7 @@ keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "true"  | "false" | "return") ~idrest
 id              = ~keyword letter idrest*                   -- id
 idrest          = "_" | alnum
-comment         = "//" (~"\n" any)* "\n" 
+comment         = "//" (~"\n" any)* "\n"
 
 assignOp        = "="                                       -- equals
                   | "+="                                    -- plusEq

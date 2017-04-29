@@ -10,6 +10,9 @@ class VariableDecl extends Statement {
   analyze(context) {
     context.declare(this.id, this);
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(VarDecl ${this.id} = ${this.value})`);
   }

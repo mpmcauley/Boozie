@@ -9,7 +9,9 @@ class FloatLiteral extends Literal {
   analyze() {
     this.type = Type.FLOAT;
   }
-
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(FloatLiteral ${this.value}.0)`);
   }
