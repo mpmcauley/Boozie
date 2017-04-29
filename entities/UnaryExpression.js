@@ -11,6 +11,9 @@ class UnaryExpression extends Expression {
     this.op.type.mustBeBoolean('Must be boolean', this.op);
     return this.type = Type.BOOL;
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(UnaryExpression${this.op} ${this.exp})`);
   }

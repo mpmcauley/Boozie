@@ -31,8 +31,11 @@ class BinaryExpression extends Expression {
         return this.type = Type.FLOAT;
     }
   }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`(BinaryExpression ${this.e1} + ${this.op} + ${this.e2})`);
+    return (`(BinaryExpression ${this.e1} ${this.op} ${this.e2})`);
   }
 }
 

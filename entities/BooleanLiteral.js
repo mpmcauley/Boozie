@@ -9,6 +9,9 @@ class BooleanLiteral extends Literal {
   analyze() {
     this.type = Type.BOOL;
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(BooleanLiteral ${this.value})`);
   }

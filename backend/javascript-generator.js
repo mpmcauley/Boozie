@@ -29,11 +29,8 @@
  const IfElseStatement = require('../entities/IfElseStatement');
  const IfStatement = require('../entities/IfStatement');
  const literal = require('../entities/literal');
- const MatchPattern = require('../entities/MatchPattern');
- const MatchStatement = require('../entities/MatchStatement');
- const Pattern = require('../entities/Pattern');
  const Print = require('../entities/Print');
- const program = require('../entities/program');
+ const Program = require('../entities/program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
@@ -63,11 +60,11 @@
  }
 
  Object.assign(ArrayConstDecl.prototype, {
-  gen() {
-    const ids = this.id.map(i => i.gen());
-    const values = this.value.map(v => v.gen());
-    emit(`const [${ids}] = [${values}];`);
-  },
+   gen() {
+     const ids = this.id.map(i => i.gen());
+     const values = this.value.map(v => v.gen());
+     emit(`const [${ids}] = [${values}];`);
+   },
  });
 
  Object.assign(ArrayVariableDecl.prototype, {
@@ -84,7 +81,7 @@
 
  Object.assign(Block.prototype, {
    gen() { this.statements.gen(); },
- }); 
+ });
 
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
@@ -98,13 +95,18 @@
    },
  });
 
- Object.assign(IfStatement.prototype, {
+ Object.assign(ElseIfStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
      genStatementList(this.body);
-     emit('}');
+     emit(`} else if (${this.elseCond}) {`);
+     genStatementList(this.elseIf);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');     
    },
  });
+
 
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
@@ -119,11 +121,33 @@
  });
 
  Object.assign(FuncDecl.prototype, {
-    gen() {
-      emit(`let ${this.id} = (${this.params}) => {`);
-      genStatementList(this.body);
-      emit('}');
-    },
+   gen() {
+     emit(`let ${this.id} = (${this.params}) => {`);
+     genStatementList(this.body);
+     emit('}');
+   },
+ });
+
+  Object.assign(FunctionCall.prototype, {
+   gen() { emit(`${this.id}(${this.args});`); },
+  });
+
+  Object.assign(IfElseStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit('} else {');
+     genStatementList(this.else);
+     emit('}');
+   },
+ });
+
+ Object.assign(IfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit('}');
+   },
  });
 
  Object.assign(Print.prototype, {

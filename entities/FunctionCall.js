@@ -16,6 +16,9 @@ class FunctionCall {
       error(`Function ${numArgs} was called with ${numArgs} args but we expected ${numParams}`);
     }
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(FunctionCall${this.id} (${this.args}))`);
   }

@@ -2,9 +2,11 @@ class Literal {
   constructor(value) {
     this.value = value;
   }
-
-  // analyze(){
+  // analyze() {
   // }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(Literal ${this.value})`);
   }

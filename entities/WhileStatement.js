@@ -14,7 +14,9 @@ class WhileStatement extends Statement {
     // }
     this.body.analyze();
   }
-
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(WhileStatement ${this.condition} { ${this.body} })`);
   }

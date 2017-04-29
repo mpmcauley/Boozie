@@ -6,12 +6,14 @@ class StringLiteral extends Literal {
     super();
     this.value = string;
   }
-
   analyze() {
     this.type = Type.STRING;
   }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`(StringLiteral" +  ${this.value} ")`);
+    return (`(StringLiteral ${this.value} )`);
   }
 }
 
