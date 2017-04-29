@@ -75,17 +75,10 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayConstDecl(v.sourceString, nextv.sourceString);
   },
-<<<<<<< HEAD
-  Stmt_print(exp) {
-    return new Print(exp.ast());
-  },
-  Exp(e1, op, e2) {
-=======
   Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp_and(e1, op, e2) {
->>>>>>> d6b93ba3c6c3e6e0d2b007f6602f517ad6f7ada1
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
   Exp1_relop(e1, op, e2) {

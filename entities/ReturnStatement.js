@@ -16,7 +16,7 @@ class ReturnStatement extends Statement {
     return this;
   }
   toString() {
-    return (`(ReturnStatement return ${this.body})`);
+    return (`(ReturnStatement return ${this.returnValue})`);
   }
 }
 
