@@ -15,6 +15,9 @@ class FuncDecl extends Statement {
     this.params.forEach((p) => { innerContext.declare(p.id, p); });
     this.body.analyze(innerContext);
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(FuncDecl let ${this.id} = ${this.args})`);
   }

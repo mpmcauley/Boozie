@@ -8,6 +8,9 @@ class Print extends Statement {
     // if(this.argument.type !== Type.STRING) {
     //   error('You can only print strings')
     // }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(Print burp ${this.argument})`);
   }

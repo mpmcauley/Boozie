@@ -11,6 +11,9 @@ class IdExpression extends Expression {
       error(`${this.idValue} has not been declared`);
     }
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(IdExpression ${this.value})`);
   }

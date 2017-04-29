@@ -10,6 +10,9 @@ class ConstDecl extends Statement {
   analyze(context) {
     context.declare(this.id);
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(ConstDecl set ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
