@@ -2,8 +2,11 @@ class Expression {
   constructor(e) {
     this.e = e;
   }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (this.e);
+    return (`(Expression ${this.e})`);
   }
 }
 module.exports = Expression;

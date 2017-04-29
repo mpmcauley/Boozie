@@ -7,8 +7,15 @@ class ArrayVariableDecl extends Statement {
     this.type = type;
     this.value = value;
   }
+  analyze(context) {
+    context.declare(this.id, this);
+      // context.declare(this.id, this, this.value);
+  }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`let ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
+    return (`(ArrayVariableDecl let ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }
 }
 
