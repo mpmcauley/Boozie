@@ -18,7 +18,7 @@ class IfStatement extends Statement {
     return this;
   }
   toString() {
-    return (`(IfStatement if ${this.condition} { + ${this.body} } )`);
+    return (`(IfStatement if ${this.condition} { ${this.body} } )`);
   }
 }
 
