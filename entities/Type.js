@@ -24,6 +24,9 @@ class Type {
   isCompatibleWith(otherType) {
     return this === otherType || this === Type.ARBITRARY || otherType === Type.ARBITRARY;
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(Type ${this.type})`);
   }

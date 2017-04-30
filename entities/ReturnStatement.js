@@ -12,8 +12,11 @@ class ReturnStatement extends Statement {
     }
     // this.body.analyze();
   }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`(ReturnStatement return ${this.body})`);
+    return (`(ReturnStatement return ${this.returnValue})`);
   }
 }
 

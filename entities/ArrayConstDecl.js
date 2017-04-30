@@ -11,6 +11,9 @@ class ArrayConstDecl extends Statement {
     context.declare(this.id, this);
     // context.declare(this.id, this, this.value);
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(ArrayConstDecl set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }

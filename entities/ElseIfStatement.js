@@ -19,6 +19,9 @@ class ElseIfStatement extends Statement {
       return this.elseIf.analyze(context);
     }
   }
+  optimize() {
+    return this;
+  }
   toString() {
     return (`(ElseIfStatement if ${this.condition} { ${this.body} } else if ${this.elseCond} { ${this.elseIf} } else { ${this.else} })`);
   }

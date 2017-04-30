@@ -14,8 +14,11 @@ class IfStatement extends Statement {
     //   return this.elseIf.analyze(context);
     // }
   }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`(IfStatement if ${this.condition} { + ${this.body} } )`);
+    return (`(IfStatement if ${this.condition} { ${this.body} } )`);
   }
 }
 
