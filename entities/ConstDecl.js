@@ -1,3 +1,4 @@
+// unused, using var decl for both
 const Statement = require('../entities/Statement.js');
 
 class ConstDecl extends Statement {

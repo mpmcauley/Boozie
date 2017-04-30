@@ -38,6 +38,13 @@ describe('Parser Test', () => {
         assert.equal(ast, expected);
       });
     });
+    describe('ArrayDecl', () => {
+      it('simple ArrayDecl', () => {
+        const ast = parse('let x = [7,8,9]').toString();
+        const expected = '(Program (Block (VariableDecl ((IdExpression x) = (FloatLiteral 7.0))))';
+        assert.equal(ast, expected);
+      });
+    });
   describe('if statement', () => {
     it('solo if statement', () => {
       const ast = parse('if x == y { burp("HelloWorld") }').toString();
