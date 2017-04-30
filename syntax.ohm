@@ -1,17 +1,21 @@
 Boozie {
 
 Program         = Block
-Block           = (Stmt)*("\n" Stmt)*
+Block           = (Stmt)*
 Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
                   | ReturnStmt                              -- return
-                  | VarDecl                                 -- declaration
+                  | VarDecl                                 -- decl
                   | Print                                   -- print
                   | FunDecl                                 -- fundecl
                   | Exp                                     -- exp
 
-IfStmt          = "if" Exp "{" Block "}" ("else if" Exp "{" Block "}")* ("else" "{" Block "}" )?
+IfStmt          = "if" Exp "{" Block "}" "else if" Exp "{" Block "}" "else" "{" Block "}"                   -- ifelsifelse
+                  | "if" Exp "{" Block "}" "else if" Exp "{" Block "}"  -- ifelsif
+                  | "if" Exp "{" Block "}" "else" "{" Block "}"     -- ifelse
+                  | "if" Exp "{" Block "}"                  -- simpleif
+
 WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
 FunDecl         = "let" id "=" Params "=>" "{" Block "}"
@@ -20,7 +24,7 @@ Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*
 ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"
-VarDecl         = "let" id ("," id)* assignOp Exp ("," Exp)*
+VarDecl         = "let" Ids "=" Exps                        -- vardecl
 VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"
 Print           = "burp" "(" Exp ")"
 Exp             = Exp1 "and" Exp                            -- and
@@ -39,6 +43,9 @@ Exp5            = Literal
                   | "(" Exp ")"                             -- parens
                   | id "(" Args ")"                         -- funcall
 Args            = Exp ("," Exp)*
+Exps            = NonemptyListOf<Exp,",">
+Ids             = NonemptyListOf<id,",">
+
 Literal         = floatlit                                  -- float
                   | boollit                                 -- bool
                   | stringlit                               -- string
