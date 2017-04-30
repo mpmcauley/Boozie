@@ -6,8 +6,8 @@ class VariableDecl extends Statement {
     super();
     Object.assign(this, { ids, initializers });
     this.variables = [];
-    for (let i = 0; i < ids.length; i++) {
-        this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
+    for(let i = 0; i<this.ids.length; i++) {
+      this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
     }
   }
   analyze(context) {
@@ -15,17 +15,18 @@ class VariableDecl extends Statement {
       throw new Error('Number of variables does not equal number of initializers');
     }
 
-    // We don't want the declared variables to come into scope until after the
-    // declaration line, so we will analyze all the initializing expressions
-    // first.
     this.initializers.forEach(e => e.analyze(context));
-    this.ids.forEach(e => e.analyze(context));
+
+    this.initializers.forEach(e =>
+      this.variables.push(this.ids.map(id => new Variable(id, e))));
+    this.variables.forEach(variable => context.add(variable));
+    console.log(this.variables);
   }
   optimize() {
     return this;
   }
   toString() {
-      return (`(VarDecl (${this.variables})`);
+    return (`(VariableDecl ${this.variables}`)
   }
 
 }

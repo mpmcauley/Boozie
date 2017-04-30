@@ -1,6 +1,5 @@
 class Expression {
   constructor() {
-
   }
   optimize() {
     return this;

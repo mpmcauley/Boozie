@@ -12,7 +12,7 @@ class Variable {
     return this;
   }
   toString() {
-      return (`(Variable ${this.id} = ${this.value})`);
+      return (`(${this.id} = ${this.value})`);
   }
 };
 

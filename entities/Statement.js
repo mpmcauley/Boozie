@@ -6,8 +6,7 @@ class Statement {
     return this;
   }
   toString() {
-    return (`(Statement ${this.body})`);
+    return (`${this.body}`);
   }
 }
-
 module.exports = Statement;
