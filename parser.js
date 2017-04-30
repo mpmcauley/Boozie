@@ -73,8 +73,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  VarDecl(l, id, comma, nextId, eq, v, comma2, nextv) {
-    return new VariableDecl(v.sourceString, nextv.sourceString);
+  VarDecl_vardecl(l, ids, eq, values) {
+    return new VariableDecl(ids.ast(), values.ast());
   },
   VarArrayDecl(l, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayVariableDecl(v.sourceString, nextv.sourceString);
@@ -106,6 +106,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_parens(left, e, right) {
     return e.ast();
   },
+  NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
 
   // little confused on these ones
   id(idValue) {
@@ -135,3 +136,4 @@ module.exports = (text) => {
 //   return semantics(match).ast();
 // };
 // module.exports = parse;
+// "let" id ("," id)* assignOp Exp ("," Exp)*
