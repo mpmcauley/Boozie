@@ -23,7 +23,6 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
-
   describe('return statement', () => {
     it('return statement', () => {
       const ast = parse('return 6').toString();
@@ -31,7 +30,6 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
-
   describe('for statement', () => {
     it('for statement', () => {
       const ast = parse('for beer in beers { burp("Khiem likes ping pong") }').toString();
@@ -39,14 +37,11 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
-
-
   describe('if else statement', () => {
     it(' if else statement', () => {
       const ast = parse('if x == y { burp("HelloWorld") } else { burp("Justin") }').toString();
-      const expected = '()';
+      const expected = '(Program  (Block (IfElseStatement if (BinaryExpression (IdExpression x) == (IdExpression y)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } else { (Block (Print burp (StringLiteral "Justin" ))) })))';
       assert.equal(ast, expected);
     });
   });
-
 });

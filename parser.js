@@ -2,6 +2,7 @@ const Program = require('./entities/program.js');
 const Block = require('./entities/Block.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
+const IfElseIfStatement = require('./entities/IfElseIfStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
 const ForStatement = require('./entities/ForStatement.js');
 const WhileStatement = require('./entities/WhileStatement.js');
@@ -36,8 +37,17 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   // IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
   //   return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   // },
-  IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
-    return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
+  IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
+    return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
+  },
+  IfStmt_ifelsif(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4) {
+    return new IfElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast());
+  },
+  IfStmt_ifelse(i, con1, brac1, block1, brac2, els, brac3, block2, brac4) {
+    return new IfElseStatement(con1.ast(), block1.ast(), block2.ast());
+  },
+  IfStmt_simpleif(i, con, brac1, block, brac2) {
+    return new IfStatement(con.ast(), block.ast());
   },
   // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
   //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
