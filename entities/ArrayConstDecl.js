@@ -7,14 +7,19 @@ class ArrayConstDecl extends Statement {
     this.type = type;
     this.value = value;
   }
-
   ArrayConstDecl.prototype.analyze(context) {
     context.variableMustNotBeAlreadyDeclared(this.id);
     return context.addVariable(this.id, this);
   }
-
+  analyze(context) {
+    context.declare(this.id, this);
+    // context.declare(this.id, this, this.value);
+  }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] `);
+    return (`(ArrayConstDecl set ${this.id.join(', ')} = [ ${this.value.join(', ')} ] )`);
   }
 
 }

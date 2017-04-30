@@ -8,17 +8,17 @@ class BinaryExpression extends Expression {
     this.op = op;
     this.e2 = e2;
   }
-
   BinaryExpression.prototype.analyze(context) {
     this.e1.analyze(context);
     this.e2.analyze(context);
     let op = this.op;
-    switch (op) {
+    switch(op) {
       case '<':
       case '<=':
       case '>=':
       case '>':
         this.mustHaveFloatOperands();
+        this.mustHaveNumberOperands();
         return this.type = Type.BOOL;
       case '==':
       case '!=':
@@ -33,7 +33,6 @@ class BinaryExpression extends Expression {
         return this.type = Type.FLOAT;
     }
   }
-
   mustHaveFloatOperands() {
     let error = this.op + " must have integer operands";
     this.e1.type.mustBeCompatibleWith(Type.FLOAT, error, this.op);
@@ -50,9 +49,15 @@ class BinaryExpression extends Expression {
     let error = this.op + " must have mutually compatible operands";
     return this.e1.type.mustBeMutuallyCompatibleWith(this.e2.type, error, this.op);
   }
-
+        this.mustHaveNumberOperands();
+        return this.type = Type.FLOAT;
+    }
+  }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`${this.e1} + ${this.op} + ${this.e2}`);
+    return (`(BinaryExpression ${this.e1} ${this.op} ${this.e2})`);
   }
 
 }

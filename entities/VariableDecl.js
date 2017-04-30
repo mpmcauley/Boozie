@@ -7,8 +7,14 @@ class VariableDecl extends Statement {
     this.type = type;
     this.value = value;
   }
+  analyze(context) {
+    context.declare(this.id, this);
+  }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`let ${this.id.join(', ')} = ${this.value.join(', ')}`);
+    return (`VariableDecl ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
 }
 

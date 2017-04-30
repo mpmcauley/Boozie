@@ -7,8 +7,14 @@ class ConstDecl extends Statement {
     this.type = type;
     this.value = value;
   }
+  analyze(context) {
+    context.declare(this.id);
+  }
+  optimize() {
+    return this;
+  }
   toString() {
-    return (`set ${this.id.join(', ')} = ${this.value.join(', ')}`);
+    return (`(ConstDecl set ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
 }
 
