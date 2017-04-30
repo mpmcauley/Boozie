@@ -5,7 +5,6 @@ const IfElseStatement = require('./entities/IfElseStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
 const ForStatement = require('./entities/ForStatement.js');
 const WhileStatement = require('./entities/WhileStatement.js');
-const MatchStatement = require('./entities/MatchStatement.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
 const ConstDecl = require('./entities/ConstDecl.js');
@@ -47,9 +46,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   WhileStmt(w, e, l, b, r) {
     return new WhileStatement(e.ast(), b.ast());
   },
-  MatchStmt(m, e1, w, _nl, matchpart) {
-    return new MatchStatement(e1.ast(), matchpart.ast());
-  }, 
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
