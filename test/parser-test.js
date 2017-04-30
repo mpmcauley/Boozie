@@ -73,7 +73,7 @@ describe('Parser Test', () => {
     describe('While loop', () => {
       it('simple while', () => {
         const ast = parse('while x == 5 { let y = 1 }').toString();
-        const expected = '(Program (Block (WhileStatement (BinaryExpression (IDExpression x) == (FloatLiteral 5)) { (Block (VariableDecl ((IDExpression y) = (FloatLiteral 1.0))) })))';
+        const expected = '(Program (Block (WhileStatement (BinaryExpression (IdExpression x) == (FloatLiteral 5.0)) { (Block (VariableDecl ((IdExpression y) = (FloatLiteral 1.0))) })))';
         assert.equal(ast, expected);
       });
       it(' boolean while statement', () => {
