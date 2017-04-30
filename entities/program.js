@@ -11,7 +11,7 @@ class Program {
     return this;
   }
   toString() {
-    return (`(Program  ${this.body})`);
+    return (`(Program ${this.body})`);
   }
   Program.prototype.analyze = (context) => {
     this.body.analyze(context);

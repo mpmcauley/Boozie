@@ -1,7 +1,9 @@
 const Program = require('./entities/program.js');
 const Block = require('./entities/Block.js');
+const Statement = require('./entities/Statement.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
+const IfElseIfStatement = require('./entities/IfElseIfStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
 const ForStatement = require('./entities/ForStatement.js');
 const WhileStatement = require('./entities/WhileStatement.js');
@@ -18,6 +20,7 @@ const Literal = require('./entities/literal.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
+const Print = require('./entities/Print.js');
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -30,15 +33,28 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Program(body) {
     return new Program(body.ast());
   },
-  Block(stmt1, _1, stmt2) {
-    return new Block(stmt1.ast(), stmt2.ast());
+  Block(stmt1) {
+    return new Block(stmt1.ast());
+  },
+  Stmt(body) {
+    return new Statement(body.ast());
   },
   // IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
   //   return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   // },
-  IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
-    return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
+  IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
+    return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
+  IfStmt_ifelsif(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4) {
+    return new IfElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast());
+  },
+  IfStmt_ifelse(i, con1, brac1, block1, brac2, els, brac3, block2, brac4) {
+    return new IfElseStatement(con1.ast(), block1.ast(), block2.ast());
+  },
+  IfStmt_simpleif(i, con, brac1, block, brac2) {
+    return new IfStatement(con.ast(), block.ast());
+  },
+
   // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
   //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
   // },
@@ -57,8 +73,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  VarDecl(l, id, comma, nextId, eq, v, comma2, nextv) {
-    return new VariableDecl(v.sourceString, nextv.sourceString);
+  VarDecl_vardecl(l, ids, eq, values) {
+    return new VariableDecl(ids.ast(), values.ast());
   },
   VarArrayDecl(l, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayVariableDecl(v.sourceString, nextv.sourceString);
@@ -90,6 +106,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_parens(left, e, right) {
     return e.ast();
   },
+  NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
 
   // little confused on these ones
   id(idValue) {
@@ -119,3 +136,4 @@ module.exports = (text) => {
 //   return semantics(match).ast();
 // };
 // module.exports = parse;
+// "let" id ("," id)* assignOp Exp ("," Exp)*

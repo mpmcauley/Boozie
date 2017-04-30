@@ -1,9 +1,9 @@
 const Statement = require('../entities/Statement.js');
 
 class Print extends Statement {
-  constructor(argument) {
+  constructor(body) {
     super();
-    this.argument = argument;
+     this.body = body;
   }
     // if(this.argument.type !== Type.STRING) {
     //   error('You can only print strings')
@@ -12,7 +12,7 @@ class Print extends Statement {
     return this;
   }
   toString() {
-    return (`(Print burp ${this.argument})`);
+    return (`(Print burp ${this.body})`);
   }
   Print.prototype.analyze = (context) => {
     this.body.analyze(context);

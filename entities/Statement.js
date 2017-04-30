@@ -6,7 +6,7 @@ class Statement {
     return this;
   }
   toString() {
-    return (`(Statement ${this.body})`);
+    return (`${this.body}`);
   }
   Statement.prototype.analyze = (context) => {
     this.body.analyze(context);
