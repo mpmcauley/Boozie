@@ -49,7 +49,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   MatchStmt(m, e1, w, _nl, matchpart) {
     return new MatchStatement(e1.ast(), matchpart.ast());
-  },
+  }, 
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
