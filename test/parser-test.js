@@ -62,4 +62,12 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
+
+  describe('constants declaration', () => {
+    it('constants declaration', () => {
+      const ast = parse('set x = 5').toString();
+      const expected = '()';
+      assert.equal(ast, expected);
+    });
+  });
 });
