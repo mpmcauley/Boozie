@@ -1,10 +1,11 @@
-const Program = require('./entities/Program.js');
+const Program = require('./entities/program.js');
 const Block = require('./entities/Block.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
 const ForStatement = require('./entities/ForStatement.js');
 const WhileStatement = require('./entities/WhileStatement.js');
+const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
 const ConstDecl = require('./entities/ConstDecl.js');
@@ -13,6 +14,7 @@ const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
+const Literal = require('./entities/literal.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
@@ -31,6 +33,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt1, _1, stmt2) {
     return new Block(stmt1.ast(), stmt2.ast());
   },
+  // IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
+  //   return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
+  // },
   IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
@@ -46,11 +51,16 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   WhileStmt(w, e, l, b, r) {
     return new WhileStatement(e.ast(), b.ast());
   },
+  Print(b, lp, arg, rp) {
+    return new PrintStatement(arg.ast());
+  },
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  VarDecl(l, id, comma, nextId, eq, v, comma2, nextv) {
-    return new VariableDecl(v.sourceString, nextv.sourceString);
+  VarDecl_vardecl(l, ids, eq, values) {
+    // let parsedIds = ids.ast();
+    // let parsedValue
+    return new VariableDecl(ids.ast(), values.ast());
   },
   VarArrayDecl(l, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayVariableDecl(v.sourceString, nextv.sourceString);
@@ -61,24 +71,29 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
     return new ArrayConstDecl(v.sourceString, nextv.sourceString);
   },
-  Exp(e1, op, e2) {
+  Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp1(e1, op, e2) {
+  Exp_and(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp2(e1, op, e2) {
+  Exp1_relop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp3(e1, op, e2) {
+  Exp2_addop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp4(op, e) {
-    return new UnaryExpression('-', e.ast());
+  Exp3_mulop(e1, op, e2) {
+    return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
+  },
+  Exp4_negop(op, e) {
+    return new UnaryExpression(op.sourceString, e.ast());
   },
   Exp5_parens(left, e, right) {
     return e.ast();
   },
+  NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
+
   // little confused on these ones
   id(idValue) {
     return new IdExpression(this.sourceString);
@@ -107,3 +122,4 @@ module.exports = (text) => {
 //   return semantics(match).ast();
 // };
 // module.exports = parse;
+// "let" id ("," id)* assignOp Exp ("," Exp)*
