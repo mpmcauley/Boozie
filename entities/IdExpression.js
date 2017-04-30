@@ -4,7 +4,7 @@ const error = require('../error.js');
 class IdExpression extends Expression {
   constructor(idValue) {
     super();
-    this.value = idValue;
+    this.idValue = idValue;
   }
   analyze(context) {
     if (!context.hasBeenDeclared(this.idValue)) {
@@ -15,7 +15,7 @@ class IdExpression extends Expression {
     return this;
   }
   toString() {
-    return (`(IdExpression ${this.value})`);
+    return (`(IdExpression ${this.idValue})`);
   }
 }
 
