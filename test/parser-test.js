@@ -16,4 +16,37 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
+  describe('if statement', () => {
+    it('if statement', () => {
+      const ast = parse('if x == y { burp("HelloWorld") }').toString();
+      const expected = '(Program  (Block (IfStatement if (BinaryExpression (IdExpression x) == (IdExpression y)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )))';
+      assert.equal(ast, expected);
+    });
+  });
+
+  describe('return statement', () => {
+    it('return statement', () => {
+      const ast = parse('return 6').toString();
+      const expected = '(Program  (Block (ReturnStatement return (FloatLiteral 6.0))))';
+      assert.equal(ast, expected);
+    });
+  });
+
+  describe('for statement', () => {
+    it('for statement', () => {
+      const ast = parse('for beer in beers { burp("Khiem likes ping pong") }').toString();
+      const expected = '(Program  (Block (ForStatement for (IdExpression beer) in (IdExpression beers) { (Block (Print burp (StringLiteral "Khiem likes ping pong" ))) } )))';
+      assert.equal(ast, expected);
+    });
+  });
+
+
+  describe('if else statement', () => {
+    it(' if else statement', () => {
+      const ast = parse('if x == y { burp("HelloWorld") } else { burp("Justin") }').toString();
+      const expected = '()';
+      assert.equal(ast, expected);
+    });
+  });
+
 });
