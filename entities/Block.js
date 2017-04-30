@@ -11,12 +11,12 @@ class Block {
   toString() {
     return (`(Block ${this.statements})`);
   }
-  Block.prototype.analyze = (context) => {
-    localContext = context.createChildContext();
-    for statements in this.body {
-      this.body.analyze(localContext);
-    }
-  }
+  // Block.prototype.analyze = (context) => {
+  //   localContext = context.createChildContext();
+  //   for statements in this.body {
+  //     this.body.analyze(localContext);
+  //   }
+  // }
 }
 
 module.exports = Block;
