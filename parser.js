@@ -1,4 +1,4 @@
-const Program = require('./entities/program.js');
+const Program = require('./entities/Program.js');
 const Block = require('./entities/Block.js');
 const Statement = require('./entities/Statement.js');
 const IfStatement = require('./entities/IfStatement.js');
@@ -22,6 +22,8 @@ const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const Print = require('./entities/Print.js');
+
+require('./backend/javascript-generator');
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -127,6 +129,40 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
 });
 /* eslint-enable */
+
+let read = fs.readFileSync(process.argv[2], 'utf-8', (err, text) => {
+  console.log(text);
+  if (err) {
+    console.error(err);
+    return;
+  }
+  let program = parse(text);
+  if (argv.a) {
+    console.log(util.inspect(program, { depth: null }));
+    return;
+  }
+  program.analyze();
+  if (argv.o) {
+    program = program.optimize();
+  }
+  if (argv.i) {
+    console.log(util.inspect(program, { depth: null }));
+    return;
+  }
+  console.log(text);
+  program.gen();
+});
+
+console.log(read);
+
+const match = grammar.match(read);
+const program = semantics(match).ast();
+console.log(match.succeeded());
+console.log(program.toString());
+console.log(program.analyze());
+console.log(program.toString());
+// program.gen();
+// console.log(program.gen);
 
 module.exports = (text) => {
   const match = grammar.match(text);
