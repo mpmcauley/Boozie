@@ -157,10 +157,10 @@ console.log(read);
 
 const match = grammar.match(read);
 const program = semantics(match).ast();
-console.log(match.succeeded());
-console.log(program.toString());
-console.log(program.analyze());
-console.log(program.toString());
+console.log('match succeded: ', match.succeeded());
+console.log('pre: ', program.toString());
+console.log('analyze: ', program.analyze());
+console.log('post: ', program.toString());
 // program.gen();
 // console.log(program.gen);
 
