@@ -113,8 +113,16 @@ describe('Syntax Test', () => {
       const match = parse('let x = () => {}');
       assert.ok(match.succeeded());
     });
-    it('params', () => {
+    it('single param', () => {
       const match = parse('let x = (param) => {}');
+      assert.ok(match.succeeded());
+    });
+    it('multiple params', () => {
+      const match = parse('let x = (start, end) => {}');
+      assert.ok(match.succeeded());
+    });
+    it('multiple params and block', () => {
+      const match = parse('let x = (param1, param2) => {burp("HelloWorld")}');
       assert.ok(match.succeeded());
     });
   });

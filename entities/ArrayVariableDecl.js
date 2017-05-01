@@ -4,12 +4,14 @@ const Variable = require('../entities/Variable.js');
 class ArrayVariableDecl extends Statement {
   constructor(id, initializer) {
     super();
-    Object.assign(this, { id, initializer });
-    this.variable = new Variable(this.id, this.initializer);
-    // this.id = id;
-    // this.type = type;
-    // this.initializer = initializer;
+    this.id = id;
+    this.type = type;
+    this.value = value;
   }
+  // ArrayVariableDecl.prototype.analyze(context) {
+  //   context.variableMustNotBeAlreadyDeclared(this.id);
+  //   return context.addVariable(this.id, this);
+  // }
   analyze(context) {
     this.initializer.analyze(context);
     this.initializer.forEach(e =>

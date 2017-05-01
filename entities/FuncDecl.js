@@ -1,14 +1,15 @@
-// const Statement = require('../entities/Statement.js');
+const Statement = require('../entities/Statement.js');
+const Context = require('../entities/Context.js');
 const FunctionObject = require('../entities/FunctionObject');
-// const Context = require('../entities/Context.js');
-class FuncDecl {
-// class FuncDecl extends Statement {
-  constructor(id, params, body) {
-    // super();
+
+class FuncDecl extends Statement {
+  constructor(sig, id, params, body) {
+    super();
+    this.sig = sig;
     this.id = id;
-    // this.params = params;
-    // this.body = body;
+    this.params = params;
     // this.returnType = returnType;
+    this.body = body;
     this.function = new FunctionObject(id, params, body);
   }
   analyze(context) {
@@ -22,7 +23,11 @@ class FuncDecl {
     // this.function.analyze(context.createChildContextForFunctionBody(this));
   }
   toString() {
-    return (`(FuncDecl ${this.id} (${this.params}) => ${this.body}`);
+    if (this.sig == "set") {
+      return (`(ConstFuncDecl ${this.id} = ${this.params} => ${this.body})`);
+    } else {
+      return (`(FuncDecl ${this.id} = ${this.params} => ${this.body})`);
+    }
   }
 }
 

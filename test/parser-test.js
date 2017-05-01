@@ -101,22 +101,45 @@ describe('Parser Test', () => {
 
 
   describe('ConstDecl', () => {
-      it('simple ConstDecl', () => {
-        const ast = parse('set x = 5').toString();
-        const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0))))';
-        assert.equal(ast, expected);
-      });
-      it('multiple constants decl', () => {
-      const ast = parse('set x,y = 5,6').toString();
-      const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0) (IdExpression y) = (FloatLiteral 6.0)))))'
-      })
+    it('simple ConstDecl', () => {
+      const ast = parse('set x = 5').toString();
+      const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0))))';
+      assert.equal(ast, expected);
     });
-    describe('Drunken ConstDecl', () => {
-        it('types do not matter in declaration', () => {
-          const ast = parse('set beer, yup, fuzz = ["hi",[1,2],"you"], 15, "hey"').toString();
-          const expected = '(Program (Block (ConstDecl ((IdExpression beer) = (BoozieArray (StringLiteral "hi"),(BoozieArray (FloatLiteral 1.0),(FloatLiteral 2.0)),(StringLiteral "you"))),((IdExpression yup) = (FloatLiteral 15.0)),((IdExpression fuzz) = (StringLiteral "hey"))))';
-          assert.equal(ast, expected);
-        });
-      });
-
+    it('multiple constants decl', () => {
+    const ast = parse('set x,y = 5,6').toString();
+    const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0) (IdExpression y) = (FloatLiteral 6.0)))))'
+  });
+  });
+  describe('Drunken ConstDecl', () => {
+    it('types do not matter in declaration', () => {
+      const ast = parse('set beer, yup, fuzz = ["hi",[1,2],"you"], 15, "hey"').toString();
+      const expected = '(Program (Block (ConstDecl ((IdExpression beer) = (BoozieArray (StringLiteral "hi"),(BoozieArray (FloatLiteral 1.0),(FloatLiteral 2.0)),(StringLiteral "you"))),((IdExpression yup) = (FloatLiteral 15.0)),((IdExpression fuzz) = (StringLiteral "hey"))))';
+      assert.equal(ast, expected);
+    });
+  });
+  describe('FuncDecl', () => {
+    it('simple function', () => {
+      const ast = parse('let x = () => { burp("hey") }').toString();
+      const expected = '(Program (Block (FuncDecl (IdExpression x) = (Parameters ) => (Block (Print burp (StringLiteral "hey"))))))';
+      assert.equal(ast, expected);
+    });
+    it('multiple params', () => {
+      const ast = parse('let x = (dog, cat) => { burp(dog) }').toString();
+      const expected = '(Program (Block (FuncDecl (IdExpression x) = (Parameters (IdExpression dog),(IdExpression cat)) => (Block (Print burp (IdExpression dog))))))';
+      assert.equal(ast, expected);
+    });
+    it('Const FuncDecl', () => {
+      const ast = parse('set x = (dog, cat, jim) => { let x = 45 }').toString();
+      const expected = '(Program (Block (ConstFuncDecl (IdExpression x) = (Parameters (IdExpression dog),(IdExpression cat),(IdExpression jim)) => (Block (VariableDecl ((IdExpression x) = (FloatLiteral 45.0))))))';
+      assert.equal(ast, expected);
+    });
+  });
+  describe('Drunken ConstDecl', () => {
+    it('types do not matter in declaration', () => {
+      const ast = parse('set beer, yup, fuzz = ["hi",[1,2],"you"], 15, "hey"').toString();
+      const expected = '(Program (Block (ConstDecl ((IdExpression beer) = (BoozieArray (StringLiteral "hi"),(BoozieArray (FloatLiteral 1.0),(FloatLiteral 2.0)),(StringLiteral "you"))),((IdExpression yup) = (FloatLiteral 15.0)),((IdExpression fuzz) = (StringLiteral "hey"))))';
+      assert.equal(ast, expected);
+    });
+  });
 });
