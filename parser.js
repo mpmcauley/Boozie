@@ -1,4 +1,4 @@
-const Program = require('./entities/program.js');
+const Program = require('./entities/Program.js');
 const Block = require('./entities/Block.js');
 const Statement = require('./entities/Statement.js');
 const IfStatement = require('./entities/IfStatement.js');
@@ -25,6 +25,7 @@ const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const Print = require('./entities/Print.js');
+
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -122,6 +123,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_array(left, array, right) {
     return new BoozieArray(array.ast());
   },
+  Exp5_funcall(id, l, args, r) {
+    return new FunctionCall(id.ast(), args.ast());
+  }
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
@@ -151,4 +155,3 @@ module.exports = (text) => {
 //   return semantics(match).ast();
 // };
 // module.exports = parse;
-// "let" id ("," id)* assignOp Exp ("," Exp)*
