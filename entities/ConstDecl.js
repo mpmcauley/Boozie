@@ -1,3 +1,4 @@
+// unused, using var decl for both
 const Statement = require('../entities/Statement.js');
 
 class ConstDecl extends Statement {
@@ -8,7 +9,7 @@ class ConstDecl extends Statement {
     this.value = value;
   }
   analyze(context) {
-    context.declare(this.id);
+    context.declare(this.id); // TODO -- doesn't account for the fact that constants can not be changed
   }
   optimize() {
     return this;

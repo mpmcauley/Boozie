@@ -10,9 +10,10 @@ const WhileStatement = require('./entities/WhileStatement.js');
 const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
-const ConstDecl = require('./entities/ConstDecl.js');
-const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
+const BoozieArray = require('./entities/BoozieArray.js');
+// const ConstDecl = require('./entities/ConstDecl.js');
+// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
+// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
@@ -73,18 +74,18 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  VarDecl_vardecl(l, ids, eq, values) {
-    return new VariableDecl(ids.ast(), values.ast());
+  VarDecl_decl(l, ids, eq, values) {
+    return new VariableDecl(l.sourceString, ids.ast(), values.ast());
   },
-  VarArrayDecl(l, id, eq, brac1, v, comma1, nextv, brac2) {
-    return new ArrayVariableDecl(v.sourceString, nextv.sourceString);
-  },
-  ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
-    return new ConstDecl(v.sourceString, nextv.sourceString);
-  },
-  ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
-    return new ArrayConstDecl(v.sourceString, nextv.sourceString);
-  },
+  // VarArrayDecl_arrdecl(l, id, eq, arr) {
+  //   return new VariableDecl(id.ast(), arr.ast());
+  // },
+  // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
+  //   return new ConstDecl(v.sourceString, nextv.sourceString);
+  // },
+  // ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
+  //   return new ArrayConstDecl(v.sourceString, nextv.sourceString);
+  // },
   Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -105,6 +106,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   Exp5_parens(left, e, right) {
     return e.ast();
+  },
+  Exp5_array(left, array, right) {
+    return new BoozieArray(array.ast());
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
 

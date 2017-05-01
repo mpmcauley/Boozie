@@ -14,6 +14,10 @@ class Print extends Statement {
   toString() {
     return (`(Print burp ${this.body})`);
   }
+  // Print.prototype.analyze = (context) => {
+  //   this.body.analyze(context);
+  // }
+
 }
 
 module.exports = Print;

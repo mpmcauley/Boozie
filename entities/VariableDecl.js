@@ -2,8 +2,9 @@ const Statement = require('../entities/Statement.js');
 const Variable = require('../entities/Variable.js');
 
 class VariableDecl extends Statement {
-  constructor(ids, initializers) {
+  constructor(signifier, ids, initializers) {
     super();
+    this.signifier = signifier;
     Object.assign(this, { ids, initializers });
     this.variables = [];
     for(let i = 0; i<this.ids.length; i++) {
@@ -26,7 +27,11 @@ class VariableDecl extends Statement {
     return this;
   }
   toString() {
-    return (`(VariableDecl ${this.variables}`)
+    if (this.signifier == "let") {
+      return (`(VariableDecl ${this.variables}`);
+    } else {
+      return (`(ConstDecl ${this.variables}`);
+    }
   }
 
 }

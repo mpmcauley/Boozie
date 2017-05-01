@@ -22,10 +22,7 @@ FunDecl         = "let" id "=" Params "=>" "{" Block "}"
 Params          = "(" id* ("," id)* ")"
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
-ConstDecl       = "set" id ("," id)* "=" Exp ("," Exp)*
-ConstArrayDecl  = "set"  id "=" "[" Exp? ("," Exp)* "]"
-VarDecl         = "let" Ids "=" Exps                        -- vardecl
-VarArrayDecl    = "let" id "=" "[" Exp? ("," Exp)* "]"
+VarDecl         = ("let" | "set") Ids "=" Exps              -- decl
 Print           = "burp" "(" Exp ")"
 Exp             = Exp1 "and" Exp                            -- and
                   | Exp1 "or" Exp                           -- or
@@ -40,6 +37,7 @@ Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
                   | id                                      -- id
+                  | "[" Exps "]"                             -- array
                   | "(" Exp ")"                             -- parens
                   | id "(" Args ")"                         -- funcall
 Args            = Exp ("," Exp)*
