@@ -1,9 +1,7 @@
-const Statement = require('../entities/Statement.js');
 const Variable = require('../entities/Variable.js');
 
-class VariableDecl extends Statement {
+class VariableDecl {
   constructor(signifier, ids, initializers) {
-    super();
     this.signifier = signifier;
     Object.assign(this, { ids, initializers });
     this.variables = [];
@@ -21,7 +19,6 @@ class VariableDecl extends Statement {
     // this.initializers.forEach(e =>
       // this.variables.push(this.ids.map(id => new Variable(id, e))));
     this.variables.forEach(variable => context.add(variable));
-    // console.log(this.variables);
     // return this.initializers;
   }
   optimize() {
