@@ -8,7 +8,7 @@ class BinaryExpression extends Expression {
     this.op = op;
     this.e2 = e2;
   }
-  BinaryExpression.prototype.analyze(context) {
+  analyze(context) {
     this.e1.analyze(context);
     this.e2.analyze(context);
     let op = this.op;
@@ -48,10 +48,6 @@ class BinaryExpression extends Expression {
   mustHaveCompatibleOperands() {
     let error = this.op + " must have mutually compatible operands";
     return this.e1.type.mustBeMutuallyCompatibleWith(this.e2.type, error, this.op);
-  }
-        this.mustHaveNumberOperands();
-        return this.type = Type.FLOAT;
-    }
   }
   optimize() {
     return this;

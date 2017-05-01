@@ -13,7 +13,7 @@ class StringLiteral extends Literal {
     return this;
   }
   toString() {
-    return (`(StringLiteral ${this.value} )`);
+    return (`(StringLiteral ${this.value})`);
   }
 }
 

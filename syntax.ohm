@@ -37,7 +37,7 @@ Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
                   | id                                      -- id
-                  | "[" Exp "]"                             -- array
+                  | "[" Exps "]"                             -- array
                   | "(" Exp ")"                             -- parens
                   | id "(" Args ")"                         -- funcall
 Args            = Exp ("," Exp)*
