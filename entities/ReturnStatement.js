@@ -1,5 +1,4 @@
 const Statement = require('../entities/Statement.js');
-const error = require('../error.js');
 
 class ReturnStatement extends Statement {
   constructor(returnValue) {
@@ -8,7 +7,7 @@ class ReturnStatement extends Statement {
   }
   analyze(context) {
     if (context.inFunction) {
-      error('Return statement not in function');
+      throw new Error('Return statement not in function');
     }
     // this.body.analyze();
   }

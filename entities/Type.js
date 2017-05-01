@@ -1,4 +1,3 @@
-const error = require('../error.js');
 
 class Type {
   constructor(type) {
@@ -13,12 +12,12 @@ class Type {
   }
   mustBeCompatibleWith(otherType, message, location) {
     if (!this.isCompatibleWith(otherType)) {
-      return error(message, location);
+      throw new Error(message, location);
     }
   }
   mustBeMutuallyCompatibleWith(otherType, message, location) {
     if (!(this.isCompatibleWith(otherType || otherType.isCompatibleWith(this)))) {
-      return error(message, location);
+      throw new Error(message, location);
     }
   }
   isCompatibleWith(otherType) {

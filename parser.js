@@ -20,7 +20,7 @@ const Param = require('./entities/Param.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
-const Literal = require('./entities/literal.js');
+const Literal = require('./entities/Literal.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
@@ -44,9 +44,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Stmt(body) {
     return new Statement(body.ast());
   },
-  // IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
-  //   return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
-  // },
   IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },

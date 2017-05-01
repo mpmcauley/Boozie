@@ -28,9 +28,9 @@
  const IdExpression = require('../entities/IdExpression');
  const IfElseStatement = require('../entities/IfElseStatement');
  const IfStatement = require('../entities/IfStatement');
- const literal = require('../entities/literal');
+ const Literal = require('../entities/Literal');
  const Print = require('../entities/Print');
- const Program = require('../entities/program');
+ const Program = require('../entities/Program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
@@ -38,8 +38,6 @@
  const UnaryExpression = require('../entities/UnaryExpression');
  const VariableDecl = require('../entities/VariableDecl');
  const WhileStatement = require('../entities/WhileStatement');
-
- const error = require('../error');
 
  const indentPadding = 2;
  let indentLevel = 0;
@@ -128,11 +126,11 @@
    },
  });
 
-  Object.assign(FunctionCall.prototype, {
+ Object.assign(FunctionCall.prototype, {
    gen() { emit(`${this.id}(${this.args});`); },
-  });
+ });
 
-  Object.assign(IfElseStatement.prototype, {
+ Object.assign(IfElseStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
      genStatementList(this.body);
