@@ -22,7 +22,7 @@ class Context {
     if (entity.id in this.localVariables) {
       throw new Error(`Identitier ${entity.id} already declared in this scope`);
     }
-    this.localVariables[entity.id] = entity;
+    this.localVariables[entity.id] = entity.value;
   }
 
 
