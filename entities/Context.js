@@ -8,6 +8,7 @@ class Context {
     this.localVariables = Object.create(null); // TODO - distinguish between const and var
     // need a dictionary
   }
+
   declare(id, type) {
     if (id in this.localVariables) {
       error(`${id} already declared`);
