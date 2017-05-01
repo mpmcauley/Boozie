@@ -7,10 +7,10 @@ class ArrayVariableDecl extends Statement {
     this.type = type;
     this.value = value;
   }
-  ArrayVariableDecl.prototype.analyze(context) {
-    context.variableMustNotBeAlreadyDeclared(this.id);
-    return context.addVariable(this.id, this);
-  }
+  // ArrayVariableDecl.prototype.analyze(context) {
+  //   context.variableMustNotBeAlreadyDeclared(this.id);
+  //   return context.addVariable(this.id, this);
+  // }
   analyze(context) {
     context.declare(this.id, this);
       // context.declare(this.id, this, this.value);

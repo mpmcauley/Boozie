@@ -2,11 +2,12 @@ const Statement = require('../entities/Statement.js');
 const Context = require('../entities/Context.js');
 
 class FuncDecl extends Statement {
-  constructor(id, params, returnType, body) {
+  constructor(sig, id, params, body) {
     super();
+    this.sig = sig;
     this.id = id;
     this.params = params;
-    this.returnType = returnType;
+    // this.returnType = returnType;
     this.body = body;
   }
   analyze(context) {
@@ -19,7 +20,12 @@ class FuncDecl extends Statement {
     return this;
   }
   toString() {
-    return (`(FuncDecl let ${this.id} = ${this.args})`);
+    if (this.sig == "set") {
+      return (`(ConstFuncDecl ${this.id} = ${this.params} => ${this.body})`);
+
+    } else {
+      return (`(FuncDecl ${this.id} = ${this.params} => ${this.body})`);
+    }
   }
 }
 
