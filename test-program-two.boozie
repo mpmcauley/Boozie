@@ -1,0 +1,23 @@
+set x = 13.6
+set y = 2
+
+while y != 4 {
+  y += 1
+  burp("y is incremented by 1")
+}
+
+let j = 5 * 8 / 2
+
+let randomFunc = (num) => {
+  if num < 10 {
+    burp("num is less than 10")
+  } else if num > 10 {
+    burp("num is greater than 10")
+  } else if num = 10 {
+    burp("num is equal to 10")
+  } else {
+    burp("num ain't a number")
+  }
+}
+
+set someArr = [ -15.8, "hi", [ 13, true], y ]

@@ -38,6 +38,13 @@ describe('Parser Test', () => {
         assert.equal(ast, expected);
       });
     });
+    describe('ArrayDecl', () => {
+      it('simple ArrayDecl', () => {
+        const ast = parse('let x = [7,8,9]').toString();
+        const expected = '(Program (Block (VariableDecl ((IdExpression x) = (FloatLiteral 7.0))))';
+        assert.equal(ast, expected);
+      });
+    });
   describe('if statement', () => {
     it('solo if statement', () => {
       const ast = parse('if x == y { burp("HelloWorld") }').toString();
@@ -78,15 +85,27 @@ describe('Parser Test', () => {
     });
     it(' boolean while statement', () => {
       const ast = parse('while true { if x == 5.0 { burp("HelloWorld") } }').toString();
-      const expected = '(Program  (Block (WhileStatement (BooleanLiteral true) { (Block (IfStatement if (BinaryExpression (IdExpression x) == (FloatLiteral 5.0.0)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )) })))';
+      const expected = '(Program (Block (WhileStatement (BooleanLiteral true) { (Block (IfStatement if (BinaryExpression (IdExpression x) == (FloatLiteral 5.0.0)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )) })))';
       assert.equal(ast, expected);
     });
   });
 
   describe('Constant Declaration', () => {
-    it('constant decl', () => {
+    it('single constant decl', () => {
       const ast = parse('set x = 5').toString();
       const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0))))';
+      assert.equal(ast, expected);
+    });
+    it('multiple constants decl', () => {
+      const ast = parse('set x,y = 5,6').toString();
+      const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0) (IdExpression y) = (FloatLiteral 6.0)))))'
+    })
+  });
+
+  describe('Function Declaration', () => {
+    it('simple function declaration', () => {
+      const ast = parse('let someFunc = x = { burp(x) }').toString();
+      const expected = '(Program (Block (FunDecl)))';
       assert.equal(ast, expected);
     });
   });

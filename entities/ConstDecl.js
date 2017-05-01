@@ -1,32 +1,21 @@
+// unused, using var decl for both
 const Statement = require('../entities/Statement.js');
-const Variable = require('../entities/Variable.js');
 
 class ConstDecl extends Statement {
-  constructor(ids, initializers) {
+  constructor(id, type, value) {
     super();
-    Object.assign(this, { ids, initializers });
-    this.variables = [];
-    for (let i = 0; i < this.ids.length; i++) {
-      this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
-    }
+    this.id = id;
+    this.type = type;
+    this.value = value;
   }
   analyze(context) {
-    if (this.ids.length !== this.initializers.length) {
-      throw new Error('Number of variables does not equal number of initializers');
-    }
-
-    this.initializers.forEach(e => e.analyze(context));
-
-    this.initializers.forEach(e =>
-      this.variables.push(this.ids.map(id => new Variable(id, e))));
-    this.variables.forEach(variable => context.add(variable));
-    console.log(this.variables);
+    context.declare(this.id); // TODO -- doesn't account for the fact that constants can not be changed
   }
   optimize() {
     return this;
   }
   toString() {
-    return (`(ConstDecl ${this.variables})`);
+    return (`(ConstDecl set ${this.id.join(', ')} = ${this.value.join(', ')})`);
   }
 }
 

@@ -10,9 +10,9 @@ const WhileStatement = require('./entities/WhileStatement.js');
 const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
-const ConstDecl = require('./entities/ConstDecl.js');
+// const ConstDecl = require('./entities/ConstDecl.js');
 const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
+// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
@@ -21,11 +21,15 @@ const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const Print = require('./entities/Print.js');
+
 const ohm = require('ohm-js');
 const fs = require('fs');
+
 const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
+
 /* eslint-disable no-unused-vars */
 const semantics = grammar.createSemantics().addOperation('ast', {
+
   Program(body) {
     return new Program(body.ast());
   },
@@ -50,6 +54,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   IfStmt_simpleif(i, con, brac1, block, brac2) {
     return new IfStatement(con.ast(), block.ast());
   },
+
   // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
   //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
   // },
@@ -68,18 +73,18 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  VarDecl_vardecl(l, ids, eq, values) {
-    return new VariableDecl(ids.ast(), values.ast());
+  VarDecl_decl(l, ids, eq, values) {
+    return new VariableDecl(l.sourceString, ids.ast(), values.ast());
   },
-  VarArrayDecl(l, id, eq, brac1, v, comma1, nextv, brac2) {
-    return new ArrayVariableDecl(v.sourceString, nextv.sourceString);
+  VarArrayDecl_arrdecl(l, id, eq, arr) {
+    return new VariableDecl(id.ast(), arr.ast());
   },
-  ConstDecl_const(s, ids, eq, values) {
-    return new ConstDecl(ids.ast(), values.ast());
-  },
-  ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
-    return new ArrayConstDecl(v.sourceString, nextv.sourceString);
-  },
+  // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
+  //   return new ConstDecl(v.sourceString, nextv.sourceString);
+  // },
+  // ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
+  //   return new ArrayConstDecl(v.sourceString, nextv.sourceString);
+  // },
   Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -102,6 +107,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return e.ast();
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
+
   // little confused on these ones
   id(idValue) {
     return new IdExpression(this.sourceString);
@@ -117,6 +123,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
 });
 /* eslint-enable */
+
 module.exports = (text) => {
   const match = grammar.match(text);
   if (!match.succeeded()) {

@@ -1,0 +1,15 @@
+set x = 5
+let randomArr = [ "hi", "hello", "hey", "howdy" ]
+for num in randomArr { burp(num) }
+
+set b,o,a,z,i,e = 0,1,2,3,4,6
+
+let y = [ 5, "hi", ["test", 7], true ]
+
+let bool = true
+
+if bool == true {
+  return true
+} else {
+  return false
+}
