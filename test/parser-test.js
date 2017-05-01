@@ -40,7 +40,7 @@ describe('Parser Test', () => {
     });
     describe('ArrayDecl', () => {
       it('simple ArrayDecl', () => {
-        const ast = parse('let x = [7,8,9]').toString();
+        const ast = parse('let x = 7').toString();
         const expected = '(Program (Block (VariableDecl ((IdExpression x) = (FloatLiteral 7.0))))';
         assert.equal(ast, expected);
       });
@@ -64,29 +64,42 @@ describe('Parser Test', () => {
   describe('if else statement', () => {
     it(' if else statement', () => {
       const ast = parse('if x == y { burp("HelloWorld") } else { burp("Justin") }').toString();
-      const expected = '-(Program  (Block (IfStatement if (BinaryExpression (IdExpression x) == (IdExpression y)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )))';
+      const expected = '-(Program (Block (IfStatement if (BinaryExpression (IdExpression x) == (IdExpression y)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )))';
       assert.equal(ast, expected);
     });
   });
 
-    describe('for statement', () => {
-      it('for statement', () => {
-        const ast = parse('for beer in beers { burp("Khiem likes ping pong") }').toString();
-        const expected = '(Program (Block (ForStatement for (IdExpression beer) in (IdExpression beers) { (Block (Print burp (StringLiteral "Khiem likes ping pong" ))) } )))';
+  describe('for statement', () => {
+    it('for statement', () => {
+      const ast = parse('for beer in beers { burp("Khiem likes ping pong") }').toString();
+      const expected = '(Program (Block (ForStatement for (IdExpression beer) in (IdExpression beers) { (Block (Print burp (StringLiteral "Khiem likes ping pong" ))) } )))';
+      assert.equal(ast, expected);
+    });
+  });
+
+  describe('While loop', () => {
+    it('simple while', () => {
+      const ast = parse('while x == 5 { let y = 1 }').toString();
+      const expected = '(Program (Block (WhileStatement (BinaryExpression (IdExpression x) == (FloatLiteral 5.0)) { (Block (VariableDecl ((IdExpression y) = (FloatLiteral 1.0))) })))';
+      assert.equal(ast, expected);
+    });
+    it(' boolean while statement', () => {
+      const ast = parse('while true { if x == 5.0 { burp("HelloWorld") } }').toString();
+      const expected = '(Program (Block (WhileStatement (BooleanLiteral true) { (Block (IfStatement if (BinaryExpression (IdExpression x) == (FloatLiteral 5.0.0)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )) })))';
+      assert.equal(ast, expected);
+    });
+  });
+
+  describe('ConstDecl', () => {
+      it('simple ConstDecl', () => {
+        const ast = parse('set x = 5').toString();
+        const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0))))';
         assert.equal(ast, expected);
       });
+      it('multiple constants decl', () => {
+      const ast = parse('set x,y = 5,6').toString();
+      const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0) (IdExpression y) = (FloatLiteral 6.0)))))'
+      })
     });
 
-    describe('While loop', () => {
-      it('simple while', () => {
-        const ast = parse('while x == 5 { let y = 1 }').toString();
-        const expected = '(Program (Block (WhileStatement (BinaryExpression (IdExpression x) == (FloatLiteral 5.0)) { (Block (VariableDecl ((IdExpression y) = (FloatLiteral 1.0))) })))';
-        assert.equal(ast, expected);
-      });
-      it(' boolean while statement', () => {
-        const ast = parse('while true { if x == 5.0 { burp("HelloWorld") } }').toString();
-        const expected = '(Program  (Block (WhileStatement (BooleanLiteral true) { (Block (IfStatement if (BinaryExpression (IdExpression x) == (FloatLiteral 5.0.0)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )) })))';
-        assert.equal(ast, expected);
-      });
-    });
 });
