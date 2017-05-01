@@ -20,7 +20,7 @@ class VariableDecl extends Statement {
 
     // this.initializers.forEach(e =>
       // this.variables.push(this.ids.map(id => new Variable(id, e))));
-    this.variables.forEach(variable => context.declare(variable));
+    this.variables.forEach(variable => context.add(variable));
     // console.log(this.variables);
     // return this.initializers;
   }

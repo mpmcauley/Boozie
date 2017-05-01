@@ -35,17 +35,10 @@ const argv = require('yargs')
 const fs = require('fs');
 const util = require('util');
 const parse = require('./parser');
-const ohm = require('ohm-js');
-
-const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
-// const program = 
 
 require('./backend/javascript-generator');
 
-console.log("hi");
-
-let read = fs.readFileSync(process.argv[2], 'utf-8', (err, text) => {
-  console.log(text);
+fs.readFile(process.argv[2], 'utf-8', (err, text) => {
   if (err) {
     console.error(err);
     return;
@@ -63,15 +56,6 @@ let read = fs.readFileSync(process.argv[2], 'utf-8', (err, text) => {
     console.log(util.inspect(program, { depth: null }));
     return;
   }
-  console.log(text);
+  console.log('gen' in program.constructor.prototype);
   program.gen();
 });
-
-console.log(read);
-
-const match = grammar.match(read);
-const program = semantics(match).ast();
-console.log(match.succeeded());
-console.log(program.toString());
-// console.log(program.analyze());
-program.gen();

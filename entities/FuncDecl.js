@@ -1,25 +1,28 @@
-const Statement = require('../entities/Statement.js');
-const Context = require('../entities/Context.js');
-
-class FuncDecl extends Statement {
-  constructor(id, params, returnType, body) {
-    super();
+// const Statement = require('../entities/Statement.js');
+const FunctionObject = require('../entities/FunctionObject');
+// const Context = require('../entities/Context.js');
+class FuncDecl {
+// class FuncDecl extends Statement {
+  constructor(id, params, body) {
+    // super();
     this.id = id;
-    this.params = params;
-    this.returnType = returnType;
-    this.body = body;
+    // this.params = params;
+    // this.body = body;
+    // this.returnType = returnType;
+    this.function = new FunctionObject(id, params, body);
   }
   analyze(context) {
-    context.declare(this.id, this);
-    const innerContext = new Context({ parent: context, inFunction: true });
-    this.params.forEach((p) => { innerContext.declare(p.id, p); });
-    this.body.analyze(innerContext);
-  }
-  optimize() {
-    return this;
+    context.add(this.function);
+    this.function.analyze(context.createChildContextForFunctionBody(this));
+    // context.declare(this.id, this);
+    // const innerContext = new Context({ parent: context, inFunction: true });
+    // this.params.forEach((p) => { innerContext.declare(p.id, p); });
+    // this.body.analyze(innerContext);
+    // context.add(this.function);
+    // this.function.analyze(context.createChildContextForFunctionBody(this));
   }
   toString() {
-    return (`(FuncDecl let ${this.id} = ${this.args})`);
+    return (`(FuncDecl ${this.id} (${this.params}) ${this.body}`);
   }
 }
 
