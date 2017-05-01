@@ -1,25 +1,34 @@
 const Statement = require('../entities/Statement.js');
 const Context = require('../entities/Context.js');
+const FunctionObject = require('../entities/FunctionObject');
 
 class FuncDecl extends Statement {
-  constructor(id, params, returnType, body) {
+  constructor(sig, id, params, body) {
     super();
+    this.sig = sig;
     this.id = id;
     this.params = params;
-    this.returnType = returnType;
+    // this.returnType = returnType;
     this.body = body;
+    this.function = new FunctionObject(id, params, body);
   }
   analyze(context) {
-    context.declare(this.id, this);
-    const innerContext = new Context({ parent: context, inFunction: true });
-    this.params.forEach((p) => { innerContext.declare(p.id, p); });
-    this.body.analyze(innerContext);
-  }
-  optimize() {
-    return this;
+    context.add(this.function);
+    this.function.analyze(context.createChildContextForFunctionBody(this));
+    // context.declare(this.id, this);
+    // const innerContext = new Context({ parent: context, inFunction: true });
+    // this.params.forEach((p) => { innerContext.declare(p.id, p); });
+    // this.body.analyze(innerContext);
+    // context.add(this.function);
+    // this.function.analyze(context.createChildContextForFunctionBody(this));
   }
   toString() {
-    return (`(FuncDecl let ${this.id} = ${this.args})`);
+    if (this.sig == "set") {
+      return (`(ConstFuncDecl ${this.id} = ${this.params} => ${this.body})`);
+
+    } else {
+      return (`(FuncDecl ${this.id} = ${this.params} => ${this.body})`);
+    }
   }
 }
 

@@ -37,7 +37,7 @@ const util = require('util');
 const parse = require('./parser');
 require('./backend/javascript-generator');
 
-fs.readFile(argv._[0], 'utf-8', (err, text) => {
+fs.readFile(process.argv[2], 'utf-8', (err, text) => {
   if (err) {
     console.error(err);
     return;
@@ -55,5 +55,6 @@ fs.readFile(argv._[0], 'utf-8', (err, text) => {
     console.log(util.inspect(program, { depth: null }));
     return;
   }
+  console.log('gen' in program.constructor.prototype);
   program.gen();
 });

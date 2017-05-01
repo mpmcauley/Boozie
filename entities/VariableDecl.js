@@ -7,7 +7,7 @@ class VariableDecl extends Statement {
     this.signifier = signifier;
     Object.assign(this, { ids, initializers });
     this.variables = [];
-    for(let i = 0; i<this.ids.length; i++) {
+    for (let i = 0; i < this.ids.length; i++) {
       this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
     }
   }
@@ -18,10 +18,11 @@ class VariableDecl extends Statement {
 
     this.initializers.forEach(e => e.analyze(context));
 
-    this.initializers.forEach(e =>
-      this.variables.push(this.ids.map(id => new Variable(id, e))));
+    // this.initializers.forEach(e =>
+      // this.variables.push(this.ids.map(id => new Variable(id, e))));
     this.variables.forEach(variable => context.add(variable));
-    console.log(this.variables);
+    // console.log(this.variables);
+    // return this.initializers;
   }
   optimize() {
     return this;
