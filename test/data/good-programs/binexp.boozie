@@ -1,0 +1,2 @@
+const sixpackVolume = 6 * 12
+burp(sixpackVolume)
