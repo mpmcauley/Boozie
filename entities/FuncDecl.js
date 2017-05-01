@@ -1,5 +1,6 @@
 const Statement = require('../entities/Statement.js');
 const Context = require('../entities/Context.js');
+const FunctionObject = require('../entities/FunctionObject');
 
 class FuncDecl extends Statement {
   constructor(sig, id, params, body) {
@@ -9,15 +10,17 @@ class FuncDecl extends Statement {
     this.params = params;
     // this.returnType = returnType;
     this.body = body;
+    this.function = new FunctionObject(id, params, body);
   }
   analyze(context) {
-    context.declare(this.id, this);
-    const innerContext = new Context({ parent: context, inFunction: true });
-    this.params.forEach((p) => { innerContext.declare(p.id, p); });
-    this.body.analyze(innerContext);
-  }
-  optimize() {
-    return this;
+    context.add(this.function);
+    this.function.analyze(context.createChildContextForFunctionBody(this));
+    // context.declare(this.id, this);
+    // const innerContext = new Context({ parent: context, inFunction: true });
+    // this.params.forEach((p) => { innerContext.declare(p.id, p); });
+    // this.body.analyze(innerContext);
+    // context.add(this.function);
+    // this.function.analyze(context.createChildContextForFunctionBody(this));
   }
   toString() {
     if (this.sig == "set") {

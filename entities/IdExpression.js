@@ -1,5 +1,4 @@
 const Expression = require('../entities/Expression.js');
-const error = require('../error.js');
 
 class IdExpression extends Expression {
   constructor(idValue) {
@@ -7,8 +6,9 @@ class IdExpression extends Expression {
     this.idValue = idValue;
   }
   analyze(context) {
-    if (!context.hasBeenDeclared(this.idValue)) {
-      error(`${this.idValue} has not been declared`);
+    // this.referent = context.lookup(this.id);
+    if (!context.lookup(this.idValue)) {
+      throw new Error(`${this.idValue} has not been declared`);
     }
   }
   optimize() {

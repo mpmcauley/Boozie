@@ -20,13 +20,12 @@ const Param = require('./entities/Param.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
-const Literal = require('./entities/literal.js');
+const Literal = require('./entities/Literal.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const Print = require('./entities/Print.js');
 
-require('./backend/javascript-generator');
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -45,9 +44,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Stmt(body) {
     return new Statement(body.ast());
   },
-  // IfStmt(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
-  //   return new IfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
-  // },
   IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
@@ -124,6 +120,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_array(left, array, right) {
     return new BoozieArray(array.ast());
   },
+  Exp5_funcall(id, l, args, r) {
+    return new FunctionCall(id.ast(), args.ast());
+  },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
@@ -141,40 +140,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
 });
 /* eslint-enable */
 
-let read = fs.readFileSync(process.argv[2], 'utf-8', (err, text) => {
-  console.log(text);
-  if (err) {
-    console.error(err);
-    return;
-  }
-  let program = parse(text);
-  if (argv.a) {
-    console.log(util.inspect(program, { depth: null }));
-    return;
-  }
-  program.analyze();
-  if (argv.o) {
-    program = program.optimize();
-  }
-  if (argv.i) {
-    console.log(util.inspect(program, { depth: null }));
-    return;
-  }
-  console.log(text);
-  program.gen();
-});
-
-console.log(read);
-
-const match = grammar.match(read);
-const program = semantics(match).ast();
-console.log('match succeded: ', match.succeeded());
-console.log('pre: ', program.toString());
-console.log('analyze: ', program.analyze());
-console.log('post: ', program.toString());
-// program.gen();
-// console.log(program.gen);
-
 module.exports = (text) => {
   const match = grammar.match(text);
   if (!match.succeeded()) {
@@ -187,4 +152,3 @@ module.exports = (text) => {
 //   return semantics(match).ast();
 // };
 // module.exports = parse;
-// "let" id ("," id)* assignOp Exp ("," Exp)*
