@@ -1,2 +1,2 @@
-const sixpackVolume = 6 * 12
+let sixpackVolume = 6 * 12
 burp(sixpackVolume)
