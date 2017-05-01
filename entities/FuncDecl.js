@@ -22,7 +22,7 @@ class FuncDecl {
     // this.function.analyze(context.createChildContextForFunctionBody(this));
   }
   toString() {
-    return (`(FuncDecl ${this.id} (${this.params}) ${this.body}`);
+    return (`(FuncDecl ${this.id} (${this.params}) => ${this.body}`);
   }
 }
 

@@ -126,42 +126,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
 });
 /* eslint-enable */
 
-// let read = fs.readFileSync(process.argv[1], 'utf-8', (err, text) => {
-//   console.log(text);
-//   if (err) {
-//     console.error(err);
-//     return;
-//   }
-//   let program = parse(text);
-//   if (argv.a) {
-//     console.log(util.inspect(program, { depth: null }));
-//     return;
-//   }
-//   program.analyze();
-//   if (argv.o) {
-//     program = program.optimize();
-//   }
-//   if (argv.i) {
-//     console.log(util.inspect(program, { depth: null }));
-//     return;
-//   }
-//   console.log(text);
-//   program.gen();
-// });
-//
-// console.log(read);
-//
-// const match = grammar.match(read);
-// const program = semantics(match).ast();
-// console.log('match succeded: ', match.succeeded());
-// console.log('pre: ', program.toString());
-// console.log('analyze: ', program.analyze());
-// console.log('post: ', program.toString());
-// console.log('context: ', program.context);
-
-// program.gen();
-// console.log(program);
-
 module.exports = (text) => {
   const match = grammar.match(text);
   if (!match.succeeded()) {
