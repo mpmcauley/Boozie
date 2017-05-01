@@ -87,6 +87,13 @@ describe('Parser Test', () => {
       const ast = parse('while true { if x == 5.0 { burp("HelloWorld") } }').toString();
       const expected = '(Program (Block (WhileStatement (BooleanLiteral true) { (Block (IfStatement if (BinaryExpression (IdExpression x) == (FloatLiteral 5.0.0)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } )) })))';
       assert.equal(ast, expected);
+
+    describe('if else statement', () => {
+      it(' if else statement', () => {
+        const ast = parse('if x == y { burp("HelloWorld") } else { burp("Justin") }').toString();
+        const expected = '(Program (Block (IfElseStatement if (BinaryExpression (IdExpression x) == (IdExpression y)) { (Block (Print burp (StringLiteral "HelloWorld" ))) } else { (Block (Print burp (StringLiteral "Justin" ))) })))';
+        assert.equal(ast, expected);
+      });
     });
   });
 
