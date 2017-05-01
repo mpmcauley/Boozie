@@ -10,8 +10,9 @@ const WhileStatement = require('./entities/WhileStatement.js');
 const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
+const BoozieArray = require('./entities/BoozieArray.js');
 // const ConstDecl = require('./entities/ConstDecl.js');
-const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
+// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
 // const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
@@ -76,9 +77,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   VarDecl_decl(l, ids, eq, values) {
     return new VariableDecl(l.sourceString, ids.ast(), values.ast());
   },
-  VarArrayDecl_arrdecl(l, id, eq, arr) {
-    return new VariableDecl(id.ast(), arr.ast());
-  },
+  // VarArrayDecl_arrdecl(l, id, eq, arr) {
+  //   return new VariableDecl(id.ast(), arr.ast());
+  // },
   // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
   //   return new ConstDecl(v.sourceString, nextv.sourceString);
   // },
@@ -105,6 +106,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   Exp5_parens(left, e, right) {
     return e.ast();
+  },
+  Exp5_array(left, array, right) {
+    return new BoozieArray(array.ast());
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
 

@@ -40,8 +40,8 @@ describe('Parser Test', () => {
     });
     describe('ArrayDecl', () => {
       it('simple ArrayDecl', () => {
-        const ast = parse('let x = [7,8,9]').toString();
-        const expected = '(Program (Block (VariableDecl ((IdExpression x) = (FloatLiteral 7.0))))';
+        const ast = parse('let x = [7]').toString();
+        const expected = '(Program (Block (VariableDecl ((IdExpression x) = (BoozieArray (FloatLiteral 7.0)))))';
         assert.equal(ast, expected);
       });
     });

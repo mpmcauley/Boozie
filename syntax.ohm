@@ -23,7 +23,6 @@ Params          = "(" id* ("," id)* ")"
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 VarDecl         = ("let" | "set") Ids "=" Exps              -- decl
-VarArrayDecl    = "let" id "=" Array                        -- arrdecl
 Print           = "burp" "(" Exp ")"
 Exp             = Exp1 "and" Exp                            -- and
                   | Exp1 "or" Exp                           -- or
@@ -38,10 +37,10 @@ Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
                   | id                                      -- id
+                  | "[" Exp "]"                             -- array
                   | "(" Exp ")"                             -- parens
                   | id "(" Args ")"                         -- funcall
 Args            = Exp ("," Exp)*
-Array             = "[" NonemptyListOf<Exp,","> "]"
 Exps            = NonemptyListOf<Exp,",">
 Ids             = NonemptyListOf<id,",">
 
