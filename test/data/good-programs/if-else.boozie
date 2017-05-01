@@ -1,0 +1,7 @@
+let beer = "Ballast Point"
+
+if beer == "Ballast Point" {
+    burp("true")
+} else {
+    burp("false")
+}

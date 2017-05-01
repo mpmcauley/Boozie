@@ -161,8 +161,10 @@ console.log('match succeded: ', match.succeeded());
 console.log('pre: ', program.toString());
 console.log('analyze: ', program.analyze());
 console.log('post: ', program.toString());
+// console.log('context: ', program.context);
+
 // program.gen();
-// console.log(program.gen);
+// console.log(program);
 
 module.exports = (text) => {
   const match = grammar.match(text);
