@@ -126,4 +126,27 @@ describe('Syntax Test', () => {
       assert.ok(match.succeeded());
     });
   });
+  describe('Function call', () => {
+    it('simple func call no param', () => {
+      const match = parse(`fun()`);
+      assert.ok(match.succeeded());
+    });
+    it('func call from array no param', () => {
+      const match = parse(`fun[1]()`);
+      assert.ok(match.succeeded());
+    });
+    it('simple func call one param', () => {
+      const match = parse(`fun(hey)`);
+      assert.ok(match.succeeded());
+    });
+    it('func call from array one param', () => {
+      const match = parse(`fun[0](hey)`);
+      assert.ok(match.succeeded());
+    });
+    it('funcDecl accepts functions and arrays', () => {
+      const match = parse(`let booze = [beerFinder]
+      burp(booze[0])`);
+      assert.ok(match.succeeded());
+    });
+  });
 });

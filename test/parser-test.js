@@ -134,5 +134,20 @@ describe('Parser Test', () => {
       const expected = '(Program (Block (ConstFuncDecl x = (Parameters dog,cat,jim) => (Block (VariableDecl (Variable x = (FloatLiteral 45.0))))))';
       assert.equal(ast, expected);
     });
+    it('simple func call no param', () => {
+      const match = parse(`fun()`);
+      const expected = '(Program )'
+      assert.equal(ast, expected);
+    });
+    it('funcDecl accepts functions and arrays', () => {
+      const ast = parse(`let beerFinder = (location) => {
+          let beer = "beer"
+          return beer
+      }
+      let booze = [beerFinder]
+      burp(booze[0](7))`);
+      const expected = '(Program )'
+      assert.equal(ast, expected);
+    });
   });
 });

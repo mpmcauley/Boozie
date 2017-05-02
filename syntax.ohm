@@ -16,11 +16,12 @@ IfStmt          = "if" Exp "{" Block "}" "else if" Exp "{" Block "}" "else" "{" 
                   | "if" Exp "{" Block "}"                  -- simpleif
 
 WhileStmt       = "while" Exp "{" Block "}"
-ForStmt         = "for" id "in" id "{" Block "}"
+ForStmt         = "for" id "in" Exp "{" Block "}"
 Decl            = FunDecl | VarDecl
 FunDecl         = ("let" | "set") id "=" Params "=>" "{" Block "}" -- func
 Params          = "(" (Param ("," Param)*)* ")"
 Param           = id
+
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 VarDecl         = ("let" | "set") Ids "=" Exps              -- decl
@@ -38,11 +39,14 @@ Exp3            = Exp4 mulOp Exp4                           -- mulop
 Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
-                  | id                                      -- id
+                  | VarExp  Args                          -- funcall
+                  | VarExp
+                  | "(" Exp ")"                            -- parens
                   | "[" Exps "]"                            -- array
-                  | "(" Exp ")"                             -- parens
-                  | id "(" Args ")"                         -- funcall
-Args            = Exp ("," Exp)*
+VarExp          = VarExp "[" Exp "]"                        -- subscript
+                  | id
+Args            = "()"
+                  | "(" Ids ")"                             -- ids
 Exps            = NonemptyListOf<Exp,",">
 Ids             = NonemptyListOf<id,",">
 

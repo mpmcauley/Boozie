@@ -10,8 +10,7 @@ class BinaryExpression extends Expression {
     // Object.assign(this, { e1, op, e2 });
   }
   analyze(context) {
-    console.log("Left: ", this.left);
-    console.log("Right: ", this.right);
+    console.log(this.left);
     this.left.analyze(context);
     this.right.analyze(context);
     // this.e1.analyze(context);

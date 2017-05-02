@@ -8,7 +8,7 @@ class Literal {
     return this;
   }
   toString() {
-    return (`(Literal ${this.value})`);
+    return (`(${this.value})`);
   }
 }
 

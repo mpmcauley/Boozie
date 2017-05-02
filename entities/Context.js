@@ -11,13 +11,12 @@ class Context {
     // need a dictionary
   }
 
-  add(entity) {
-    if (entity.id in this.localVariables) {
-      throw new Error(`Identitier ${entity.id} already declared in this scope`);
+  add(variable) {
+    console.log("Added variable");
+    if (variable.id in this.localVariables) {
+      throw new Error(`Identitier ${variable.id} already declared in this scope`);
     }
-
-    this.localVariables[entity.id] = entity.value;
-    console.log(entity.value);
+    this.localVariables[variable.id] = variable.value;
   }
   // replace(id, value) {
   //   if (id in! this.localVariables) {
@@ -28,8 +27,9 @@ class Context {
 
 
   lookup(id) {
+    console.log('Lookup function called');
     if (id in this.localVariables) {
-      return this.localVariables[id];
+      return this.localVariables[value];
     }
     if (this.parent === null) {
       throw new Error(`Identitier ${id} has not been declared`);

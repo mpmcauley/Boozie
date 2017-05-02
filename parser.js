@@ -123,8 +123,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_array(left, array, right) {
     return new BoozieArray(array.ast());
   },
-  Exp5_funcall(id, l, args, r) {
-    return new FunctionCall(id.ast(), args.ast());
+  Exp5_funcall(id, exp, l, args, r) {
+    return new FunctionCall(id.ast(), exp.ast(), args.ast());
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
