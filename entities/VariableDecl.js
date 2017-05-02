@@ -1,13 +1,11 @@
-const Statement = require('../entities/Statement.js');
 const Variable = require('../entities/Variable.js');
 
-class VariableDecl extends Statement {
+class VariableDecl {
   constructor(signifier, ids, initializers) {
-    super();
     this.signifier = signifier;
     Object.assign(this, { ids, initializers });
     this.variables = [];
-    for(let i = 0; i<this.ids.length; i++) {
+    for (let i = 0; i < this.ids.length; i++) {
       this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
     }
   }
@@ -16,10 +14,10 @@ class VariableDecl extends Statement {
       throw new Error('Number of variables does not equal number of initializers');
     }
     this.initializers.forEach(e => e.analyze(context));
-    this.initializers.forEach(e =>
-      this.variables.push(this.ids.map(id => new Variable(id, e))));
+    // this.initializers.forEach(e =>
+      // this.variables.push(this.ids.map(id => new Variable(id, e))));
     this.variables.forEach(variable => context.add(variable));
-    console.log(this.variables);
+    // return this.initializers;
   }
   optimize() {
     return this;

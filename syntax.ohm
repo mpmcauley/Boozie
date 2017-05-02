@@ -6,9 +6,8 @@ Stmt            = IfStmt                                    -- if
                   | ForStmt                                 -- for
                   | WhileStmt                               -- while
                   | ReturnStmt                              -- return
-                  | VarDecl                                 -- decl
+                  | Decl                                    -- decl
                   | Print                                   -- print
-                  | FunDecl                                 -- fundecl
                   | Exp                                     -- exp
 
 IfStmt          = "if" Exp "{" Block "}" "else if" Exp "{" Block "}" "else" "{" Block "}"                   -- ifelsifelse
@@ -18,8 +17,10 @@ IfStmt          = "if" Exp "{" Block "}" "else if" Exp "{" Block "}" "else" "{" 
 
 WhileStmt       = "while" Exp "{" Block "}"
 ForStmt         = "for" id "in" id "{" Block "}"
-FunDecl         = "let" id "=" Params "=>" "{" Block "}"
-Params          = "(" id* ("," id)* ")"
+Decl            = FunDecl | VarDecl
+FunDecl         = ("let" | "set") id "=" Params "=>" "{" Block "}" -- func
+Params          = "(" (Param ("," Param)*)* ")"
+Param           = id
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 VarDecl         = ("let" | "set") Ids "=" Exps              -- decl
