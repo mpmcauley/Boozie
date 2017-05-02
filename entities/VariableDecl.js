@@ -18,15 +18,7 @@ class VariableDecl {
     if (this.ids.length !== this.initializers.length) {
       throw new Error('Number of variables does not equal number of initializers');
     }
-
-    // for (let e = 0; e < this.initializers.length; e++) {
-    //   e.analyze(context);
-    // }
     this.initializers.forEach(e => e.analyze(context));
-    // console.log(this.id);
-
-    // console.log(this.initializers);
-    //
     // this.initializers.forEach(e =>
     //   this.variables.push(this.ids.map(id => new Variable(id, e))));
     // this.variables = this.ids.map(id => new Variable(id));
@@ -48,7 +40,6 @@ class VariableDecl {
     //   return (`(ConstDecl ${this.variables}`);
     // }
   }
-
 }
 
 module.exports = VariableDecl;

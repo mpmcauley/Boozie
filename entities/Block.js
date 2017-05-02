@@ -6,6 +6,7 @@ class Block {
     this.statements.forEach(s => s.analyze(context));
   }
   optimize() {
+    this.statements.forEach(s => s.optimize());
     return this;
   }
   toString() {

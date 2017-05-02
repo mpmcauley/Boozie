@@ -58,11 +58,11 @@ class BinaryExpression extends Expression {
     this.left = this.left.optimize();
     this.right = this.right.optimize();
     return this;
+
   }
   toString() {
     return (`(BinaryExpression ${this.left} ${this.op} ${this.right})`);
   }
-
 }
 
 module.exports = BinaryExpression;

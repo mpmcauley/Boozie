@@ -9,7 +9,9 @@ class Program {
     this.block.analyze(context);
   }
   optimize() {
-    this.block.map(s => s.optimize()).filter(s => s !== null);
+    // this.block.map(s => s.optimize()).filter(s => s !== null);
+    this.block = this.block.optimize();
+
     return this;
   }
   toString() {
