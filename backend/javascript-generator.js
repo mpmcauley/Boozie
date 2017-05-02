@@ -38,7 +38,7 @@
  const VariableDecl = require('../entities/VariableDecl');
  const Variable= require('../entities/Variable');
  const WhileStatement = require('../entities/WhileStatement');
- const VarReassign = require('./entities/VarReassign.js');
+ const VarReassign = require('../entities/VarReassign.js');
 
  const indentPadding = 2;
  let indentLevel = 0;
