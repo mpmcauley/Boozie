@@ -2,9 +2,13 @@ class Variable {
   constructor(id, value) {
     this.id = id;
     this.value = value;
+    // console.log(this.value);
   }
 
-  analyze(/* context */) { // eslint-disable-line class-methods-use-this
+  analyze(context) { // eslint-disable-line class-methods-use-this
+    this.id = context.lookup(this.id);
+    // this.value = context.lookup(this.)
+    // console.log(this.id.value);
     // Someday we'll have types and we can do something here...
   }
 
@@ -12,8 +16,8 @@ class Variable {
     return this;
   }
   toString() {
-      return (`(${this.id} = ${this.value})`);
+    return (`(Variable ${this.id} = ${this.value})`);
   }
-};
+}
 
 module.exports = Variable;

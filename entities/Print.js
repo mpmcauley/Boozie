@@ -8,11 +8,14 @@ class Print extends Statement {
     // if(this.argument.type !== Type.STRING) {
     //   error('You can only print strings')
     // }
-  analyze(context) {
-    this.body.analyze(context);
-    // console.log(this.body);
-  }
+  // analyze(){
+  //   // this.body.analyze(context);
+  //   // console.log(this.body);
+  // }
   optimize() {
+    if (this.body) {
+      this.body = this.body.optimize();
+    }
     return this;
   }
   toString() {

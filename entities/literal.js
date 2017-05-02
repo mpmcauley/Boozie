@@ -2,8 +2,8 @@ class Literal {
   constructor(value) {
     this.value = value;
   }
-  // analyze() {
-  // }
+  analyze() {
+  }
   optimize() {
     return this;
   }

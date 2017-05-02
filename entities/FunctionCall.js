@@ -70,6 +70,7 @@ class FunctionCall {
     this.args.forEach(arg => arg.optimize());
     return this;
   }
+
   // optimize() {
   //   this.parameters.forEach(p => p.optimize());
   //   this.body.forEach(s => s.optimize());

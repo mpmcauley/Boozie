@@ -24,11 +24,12 @@
  */
 
 const argv = require('yargs')
-  .usage('$0 [-a] [-o] [-i] filename')
-  .boolean(['a', 'o', 'i'])
+  .usage('$0 [-a] [-o] [-i] [-s] filename')
+  .boolean(['a', 'o', 'i', 's'])
   .describe('a', 'show abstract syntax tree after parsing then stop')
   .describe('o', 'do optimizations')
   .describe('i', 'generate and show the decorated abstract syntax tree then stop')
+  .describe('s', 'analyze semantics')
   .demand(1)
   .argv;
 
@@ -47,12 +48,16 @@ fs.readFile(process.argv[2], 'utf-8', (err, text) => {
     console.log(util.inspect(program, { depth: null }));
     return;
   }
-  program.analyze();
+  // program.analyze();
   if (argv.o) {
     program = program.optimize();
   }
   if (argv.i) {
     console.log(util.inspect(program, { depth: null }));
+    return;
+  }
+  if (argv.s) {
+    program.analyze();
     return;
   }
   console.log('gen' in program.constructor.prototype);

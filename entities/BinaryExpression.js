@@ -1,17 +1,19 @@
 const Expression = require('../entities/Expression.js');
-const Type = require('../entities/Type.js');
+// const Type = require('../entities/Type.js');
 
 class BinaryExpression extends Expression {
-  constructor(e1, op, e2) {
+  constructor(left, op, right) {
     super();
-    this.e1 = e1;
+    this.left = left;
     this.op = op;
-    this.e2 = e2;
-    Object.assign(this, { e1, op, e2 });
+    this.right = right;
+    // Object.assign(this, { e1, op, e2 });
   }
   analyze(context) {
-    this.e1.analyze(context);
-    this.e2.analyze(context);
+    console.log("Left: ", this.left);
+    console.log("Right: ", this.right);
+    this.left.analyze(context);
+    this.right.analyze(context);
     // this.e1.analyze(context);
     // this.e2.analyze(context);
     // const op = this.op;
@@ -53,6 +55,8 @@ class BinaryExpression extends Expression {
   //   return this.e1.type.mustBeMutuallyCompatibleWith(this.e2.type, error, this.op);
   // }
   optimize() {
+    this.left = this.left.optimize();
+    this.right = this.right.optimize();
     return this;
   }
   toString() {

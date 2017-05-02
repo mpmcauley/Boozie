@@ -29,6 +29,7 @@ Exp             = Exp1 "and" Exp                            -- and
                   | Exp1 "or" Exp                           -- or
                   | Exp1
 Exp1            = Exp2 relationalOp Exp2                    -- relop
+                  | id assignOp Exp                         --reassign
                   | Exp2
 Exp2            = Exp3 addOp Exp3                           -- addop
                   | Exp3
@@ -37,7 +38,7 @@ Exp3            = Exp4 mulOp Exp4                           -- mulop
 Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
-                  | id                                      -- id
+                  | id
                   | "[" Exps "]"                             -- array
                   | "(" Exp ")"                             -- parens
                   | id "(" Args ")"                         -- funcall
