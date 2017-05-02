@@ -8,6 +8,7 @@ class Program {
     this.body.analyze(Context.INITIAL_CONTEXT);
   }
   optimize() {
+    this.body = this.body.optimize();
     return this;
   }
   toString() {

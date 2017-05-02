@@ -18,6 +18,12 @@ class WhileStatement extends Statement {
     this.body.forEach(s => s.analyze(bodyContext));
   }
   optimize() {
+    this.condition = this.condition.optimize();
+    if (this.condition instanceof BooleanLiteral && this.condition.value === false) {
+      return null;
+    }
+    this.body.map(s => s.optimize()).filter(s => s !== null);
+    // Suggested: Look for returns/breaks in the middle of the body
     return this;
   }
   toString() {

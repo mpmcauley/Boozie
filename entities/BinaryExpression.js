@@ -53,7 +53,8 @@ class BinaryExpression extends Expression {
   //   return this.e1.type.mustBeMutuallyCompatibleWith(this.e2.type, error, this.op);
   // }
   optimize() {
-    return this;
+    this.left = this.left.optimize();
+    this.right = this.right.optimize();
   }
   toString() {
     return (`(BinaryExpression ${this.e1} ${this.op} ${this.e2})`);
