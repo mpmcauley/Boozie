@@ -25,7 +25,6 @@ class FuncDecl extends Statement {
   toString() {
     if (this.sig == "set") {
       return (`(ConstFuncDecl ${this.id} = ${this.params} => ${this.body})`);
-
     } else {
       return (`(FuncDecl ${this.id} = ${this.params} => ${this.body})`);
     }

@@ -13,6 +13,9 @@ class Print extends Statement {
     // console.log(this.body);
   }
   optimize() {
+    if (this.body) {
+      this.body = this.body.optimize();
+    }
     return this;
   }
   toString() {

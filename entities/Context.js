@@ -1,5 +1,5 @@
 const FuncDecl = require('../entities/FuncDecl.js');
-const FunctionObject = require('../entities/FunctionObject');
+// const FunctionObject = require('../entities/FunctionObject');
 // const error = require('../error.js');
 
 class Context {
@@ -10,13 +10,6 @@ class Context {
     this.localVariables = Object.create(null); // TODO - distinguish between const and var
     // need a dictionary
   }
-  // declare(id, type) {
-  //   if (id in this.localVariables) {
-  //     error(`${id} already declared`);
-  //   } else {
-  //     this.localVariables[id] = type;
-  //   }
-  // }
 
   add(entity) {
     if (entity.id in this.localVariables) {
