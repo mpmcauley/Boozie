@@ -1,9 +1,10 @@
 class Expression {
-  constructor(e) {
-    this.e = e;
+  constructor() {
   }
-  toString() {
-    return (this.e);
+  analyze(){
+  }
+  optimize() {
+    return this;
   }
 }
 module.exports = Expression;

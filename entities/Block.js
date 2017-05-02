@@ -1,11 +1,22 @@
 class Block {
-  constuctor(body) {
-    super();
-    this.body = body;
+  constructor(statements) {
+    this.statements = statements;
+  }
+  analyze(context) {
+    this.statements.forEach(s => s.analyze(context));
+  }
+  optimize() {
+    return this;
   }
   toString() {
-    return (this.body);
+    return (`(Block ${this.statements})`);
   }
+  // Block.prototype.analyze = (context) => {
+  //   localContext = context.createChildContext();
+  //   for statements in this.body {
+  //     this.body.analyze(localContext);
+  //   }
+  // }
 }
 
 module.exports = Block;

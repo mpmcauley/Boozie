@@ -1,22 +1,31 @@
 const Program = require('./entities/Program.js');
 const Block = require('./entities/Block.js');
+const Statement = require('./entities/Statement.js');
 const IfStatement = require('./entities/IfStatement.js');
 const IfElseStatement = require('./entities/IfElseStatement.js');
+const IfElseIfStatement = require('./entities/IfElseIfStatement.js');
 const ElseIfStatement = require('./entities/ElseIfStatement.js');
 const ForStatement = require('./entities/ForStatement.js');
 const WhileStatement = require('./entities/WhileStatement.js');
-const MatchStatement = require('./entities/MatchStatement.js');
+const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
-const ConstDecl = require('./entities/ConstDecl.js');
-const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
+const BoozieArray = require('./entities/BoozieArray.js');
+const FuncDecl = require('./entities/FuncDecl.js');
+const Params = require('./entities/Params.js');
+const Param = require('./entities/Param.js');
+// const ConstDecl = require('./entities/ConstDecl.js');
+// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
+// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
+const Literal = require('./entities/Literal.js');
 const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
+const Print = require('./entities/Print.js');
+
 
 const ohm = require('ohm-js');
 const fs = require('fs');
@@ -27,64 +36,97 @@ const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
 const semantics = grammar.createSemantics().addOperation('ast', {
 
   Program(body) {
-    return new Program(body.ast);
+    return new Program(body.ast());
   },
-  Block(stmt, _) {
-    return new Block(stmt.ast());
+  Block(stmt1) {
+    return new Block(stmt1.ast());
   },
-  Stmt_if(f, con, l, b, r) {
-    return new IfStatement(con.ast(), b.ast());
+  Stmt(body) {
+    return new Statement(body.ast());
   },
-  Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
-    return new IfElseStatement(con.ast(), b.ast(), els.ast());
+  IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
+    return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
-  Stmt_elseif(f, con, fl, b, fr, elif, elifcon, sl, elsifst, sr, els, l, el, r) {
-    return new ElseIfStatement(con.ast(), b.ast(), elifcon.ast(), elsifst.ast(), el.ast());
+  IfStmt_ifelsif(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4) {
+    return new IfElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast());
   },
-  Stmt_for(fr, e, i, struct, l, b, r) {
+  IfStmt_ifelse(i, con1, brac1, block1, brac2, els, brac3, block2, brac4) {
+    return new IfElseStatement(con1.ast(), block1.ast(), block2.ast());
+  },
+  IfStmt_simpleif(i, con, brac1, block, brac2) {
+    return new IfStatement(con.ast(), block.ast());
+  },
+
+  // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
+  //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
+  // },
+  // Stmt_elseif(f, con, fl, b, fr, elif, elifcon, sl, elsifst, sr, els, l, el, r) {
+  //   return new ElseIfStatement(con.ast(), b.ast(), elifcon.ast(), elsifst.ast(), el.ast());
+  // },
+  FunDecl_func(sig, id, eq, params, arrow, br1, block, br2) {
+    return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast())
+  },
+  Params(l, param, comma, rest, r) {
+    return new Params(param.ast(), rest.ast());
+  },
+  Param(param) {
+    return new Param(param.ast());
+  },
+  ForStmt(fr, e, i, struct, l, b, r) {
     return new ForStatement(e.ast(), struct.ast(), b.ast());
   },
-  Stmt_while(w, e, l, b, r) {
+  WhileStmt(w, e, l, b, r) {
     return new WhileStatement(e.ast(), b.ast());
   },
-  Stmt_match(m, e1, w, e2) {
-    return new MatchStatement(e1.ast(), e2.ast());
+  Print(b, lp, arg, rp) {
+    return new PrintStatement(arg.ast());
   },
-  Stmt_return(r, b) {
+  ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
   },
-  Var_Decl(l, id, _, eq, v, x) {
-    return new VariableDecl(v.sourceString);
+  VarDecl_decl(sig, ids, eq, values) {
+    return new VariableDecl(sig.sourceString, ids.ast(), values.ast());
   },
-  Array_Decl(l, arr, _, eq, le, v, x, r) {
-    return new ArrayVariableDecl(v.sourceString);
-  },
-  Const_Decl(s, id, _, eq, v, x) {
-    return new ConstDecl(v.sourceString);
-  },
-  Array_ConstDecl(s, id, _, eq, l, v, x, r) {
-    return new ArrayConstDecl(v.sourceString);
-  },
-  Exp_binary(e1, op, e2) {
+  // VarArrayDecl_arrdecl(l, id, eq, arr) {
+  //   return new VariableDecl(id.ast(), arr.ast());
+  // },
+  // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
+  //   return new ConstDecl(v.sourceString, nextv.sourceString);
+  // },
+  // ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
+  //   return new ArrayConstDecl(v.sourceString, nextv.sourceString);
+  // },
+  Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp1_binary(e1, op, e2) {
+  Exp_and(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp2_binary(e1, op, e2) {
+  Exp1_relop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp3_binary(e1, op, e2) {
+  Exp2_addop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
-  Exp4_unary(op, e) {
-    return new UnaryExpression('-', e.ast());
+  Exp3_mulop(e1, op, e2) {
+    return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
+  },
+  Exp4_negop(op, e) {
+    return new UnaryExpression(op.sourceString, e.ast());
   },
   Exp5_parens(left, e, right) {
     return e.ast();
   },
+  Exp5_array(left, array, right) {
+    return new BoozieArray(array.ast());
+  },
+  Exp5_funcall(id, l, args, r) {
+    return new FunctionCall(id.ast(), args.ast());
+  },
+  NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
+  // little confused on these ones
   id(idValue) {
-    return new IdExpression(this.sourceString);
+    return (this.sourceString);
   },
   floatlit(float) {
     return new FloatLiteral(this.sourceString);
@@ -105,3 +147,8 @@ module.exports = (text) => {
   }
   return semantics(match).ast();
 };
+// function parse(text) {
+//   const match = grammar.match(text);
+//   return semantics(match).ast();
+// };
+// module.exports = parse;

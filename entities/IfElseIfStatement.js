@@ -2,13 +2,12 @@
 
 const Statement = require('../entities/Statement.js');
 
-class ElseIfStatement extends Statement {
-  constructor(condition, body, elseCond, elseIfStmt, elseStmt) {
+class IfElseIfStatement extends Statement {
+  constructor(condition, body, elseCond, elseStmt) {
     super();
     this.condition = condition;
     this.body = body;
     this.elseCond = elseCond;
-    this.elseIf = elseIfStmt;
     this.else = elseStmt;
   }
   analyze(context) {
@@ -23,8 +22,8 @@ class ElseIfStatement extends Statement {
     return this;
   }
   toString() {
-    return (`(ElseIfStatement if ${this.condition} { ${this.body} } else if ${this.elseCond} { ${this.elseIf} } else { ${this.else} })`);
+    return (`(IfElseIfStatement if ${this.condition} { ${this.body} } else if ${this.elseCond} { ${this.else} } )`);
   }
 }
 
-module.exports = ElseIfStatement;
+module.exports = IfElseIfStatement;
