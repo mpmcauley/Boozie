@@ -14,9 +14,7 @@ const BoozieArray = require('./entities/BoozieArray.js');
 const FuncDecl = require('./entities/FuncDecl.js');
 const Params = require('./entities/Params.js');
 const Param = require('./entities/Param.js');
-// const ConstDecl = require('./entities/ConstDecl.js');
-// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
+const VarReassign = require('./entities/VarReassign.js');
 const IdExpression = require('./entities/IdExpression.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
@@ -101,6 +99,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   Exp_and(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
+  },
+  Exp1_reassign(old, eq, _new) {
+    return new VarReassign(old.sourceString, _new.ast());
   },
   Exp1_relop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());

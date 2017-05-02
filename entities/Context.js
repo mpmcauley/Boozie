@@ -22,8 +22,16 @@ class Context {
     if (entity.id in this.localVariables) {
       throw new Error(`Identitier ${entity.id} already declared in this scope`);
     }
+
     this.localVariables[entity.id] = entity.value;
+    console.log(entity.value);
   }
+  // replace(id, value) {
+  //   if (id in! this.localVariables) {
+  //     throw new Error(`Identitier ${id} is not declared in this scope`);
+  //   }
+  //   this.localVariables[id] = value;
+  // }
 
 
   lookup(id) {
