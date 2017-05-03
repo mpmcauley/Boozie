@@ -53,7 +53,6 @@ Ids             = NonemptyListOf<id,",">
 Literal         = floatlit                                  -- float
                   | boollit                                 -- bool
                   | stringlit                               -- string
-
 type            = "float"                                   -- float
                   | "bool"                                  -- bool
                   | "string"                                -- string

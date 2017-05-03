@@ -118,7 +118,7 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
-  describe('FuncDecl', () => {
+  describe('FuncDecl/Call', () => {
     it('simple function', () => {
       const ast = parse('let x = () => { burp("hey") }').toString();
       const expected = '(Program (Block (FuncDecl x = (Parameters ) => (Block (Print (StringLiteral "hey"))))))';
@@ -135,17 +135,17 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
     it('simple func call no param', () => {
-      const match = parse(`fun()`);
+      const ast = parse(`fun()`);
       const expected = '(Program )'
       assert.equal(ast, expected);
     });
-    it('funcDecl accepts functions and arrays', () => {
-      const ast = parse(`let beerFinder = (location) => {
-          let beer = "beer"
-          return beer
-      }
-      let booze = [beerFinder]
-      burp(booze[0](7))`);
+    it('funCall array no params', () => {
+      const ast = parse(`fun[4]()`);
+      const expected = '(Program )'
+      assert.equal(ast, expected);
+    });
+    it('funCall array one params', () => {
+      const ast = parse(`fun[4](yup)`);
       const expected = '(Program )'
       assert.equal(ast, expected);
     });

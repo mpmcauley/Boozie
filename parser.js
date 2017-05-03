@@ -16,6 +16,8 @@ const Params = require('./entities/Params.js');
 const Param = require('./entities/Param.js');
 const VarReassign = require('./entities/VarReassign.js');
 const FunctionCall = require('./entities/FunctionCall');
+const Args = require('./entities/Args.js');
+const VarSubscript = require('./entities/VarSubscript.js');
 // const ConstDecl = require('./entities/ConstDecl.js');
 // const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
 // const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
@@ -123,8 +125,14 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_array(left, array, right) {
     return new BoozieArray(array.ast());
   },
-  Exp5_funcall(id, exp, l, args, r) {
-    return new FunctionCall(id.ast(), exp.ast(), args.ast());
+  Exp5_funcall(varExp, args) {
+    return new FunctionCall(varExp.ast(), args.ast());
+  },
+  VarExp_subscript(varExp, l, exp, r) {
+    return new VarSubscript(varExp.ast(), exp.ast());
+  },
+  Args_ids(l, ids, r) {
+    return new Args(ids.ast());
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
@@ -142,6 +150,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   stringlit(string) {
     return new StringLiteral(this.sourceString);
+  },
+  _terminal() {
+    return (this.sourceString);
   },
 });
 /* eslint-enable */
