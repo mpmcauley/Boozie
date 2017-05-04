@@ -1,10 +1,9 @@
-const Statement = require('../entities/Statement.js');
-const Context = require('../entities/Context.js');
+
 const FunctionObject = require('../entities/FunctionObject');
 
-class FuncDecl extends Statement {
+class FuncDecl {
   constructor(sig, id, params, body) {
-    super();
+    // super();
     this.sig = sig;
     this.id = id;
     this.params = params;
@@ -13,7 +12,7 @@ class FuncDecl extends Statement {
     this.function = new FunctionObject(id, params, body);
   }
   analyze(context) {
-    context.add(this.function);
+    context.addFunc(this.function);
     this.function.analyze(context.createChildContextForFunctionBody(this));
     // context.declare(this.id, this);
     // const innerContext = new Context({ parent: context, inFunction: true });

@@ -107,9 +107,10 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
     it('multiple constants decl', () => {
-    const ast = parse('set x,y = 5,6').toString();
-    const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)) (Variable y = (FloatLiteral 6.0)))))'
-  });
+      const ast = parse('set x,y = 5,6').toString();
+      const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)),(Variable y = (FloatLiteral 6.0))))';
+      assert.equal(ast, expected);
+    });
   });
   describe('Drunken ConstDecl', () => {
     it('types do not matter in declaration', () => {
@@ -135,18 +136,18 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
     it('simple func call no param', () => {
-      const ast = parse(`fun()`);
-      const expected = '(Program )'
+      const ast = parse('fun()').toString();
+      const expected = '(Program (Block (FunCall fun())))';
       assert.equal(ast, expected);
     });
     it('funCall array no params', () => {
-      const ast = parse(`fun[4]()`);
-      const expected = '(Program )'
+      const ast = parse('fun[4]()').toString();
+      const expected = '(Program (Block (FunCall fun[4]())))';
       assert.equal(ast, expected);
     });
     it('funCall array one params', () => {
-      const ast = parse(`fun[4](yup)`);
-      const expected = '(Program )'
+      const ast = parse('fun[4](yup)').toString();
+      const expected = '(Program (Block (FunCall fun[4](yup))))';
       assert.equal(ast, expected);
     });
   });

@@ -10,7 +10,7 @@ class Args {
     return this;
   }
   toString() {
-    console.log(this.args)
+    // console.log(this.args)
     return (`(Args ${this.args})`);
   }
   // Block.prototype.analyze = (context) => {

@@ -36,7 +36,7 @@
  const Type = require('../entities/Type');
  const UnaryExpression = require('../entities/UnaryExpression');
  const VariableDecl = require('../entities/VariableDecl');
- const Variable= require('../entities/Variable');
+ const Variable = require('../entities/Variable');
  const WhileStatement = require('../entities/WhileStatement');
  const VarReassign = require('../entities/VarReassign.js');
 
