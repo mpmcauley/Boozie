@@ -1,8 +1,8 @@
 class FunctionCall {
   constructor(exp, args) {
     // super();
-    // this.exp = exp;
-    // this.args = args;
+    this.exp = exp;
+    this.args = args;
     // console.log(this.args);
     // console.log("funcall");
     Object.assign(this, { exp, args });
