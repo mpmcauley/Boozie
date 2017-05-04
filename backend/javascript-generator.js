@@ -11,12 +11,15 @@
  *   require('./backend/javascript-generator');
  *   program.gen();
  */
- const ArrayConstDecl = require('../entities/ArrayConstDecl');
- const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
+ // const ArrayConstDecl = require('../entities/ArrayConstDecl');
+ // const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
+ const Args = require('../entities/Args');
+ const AssignmentStatement = require('../entities/AssignmentStatement');
  const BinaryExpression = require('../entities/BinaryExpression');
  const Block = require('../entities/Block');
  const BooleanLiteral = require('../entities/BooleanLiteral');
- const ConstDecl = require('../entities/ConstDecl');
+ const BoozieArray = require('../entities/BoozieArray');
+ // const ConstDecl = require('../entities/ConstDecl');
  const Context = require('../entities/Context');
  const ElseIfStatement = require('../entities/ElseIfStatement');
  const Expression = require('../entities/Expression');
@@ -24,21 +27,26 @@
  const ForStatement = require('../entities/ForStatement');
  const FuncDecl = require('../entities/FuncDecl');
  const FunctionCall = require('../entities/FunctionCall');
+ const FunctionObject = require('../entities/FunctionObject');
  const IdExpression = require('../entities/IdExpression');
  const IfElseStatement = require('../entities/IfElseStatement');
+ const IfElseIfStatement = require('../entities/IfElseIfStatement');
  const IfStatement = require('../entities/IfStatement');
  const Literal = require('../entities/Literal');
  const Print = require('../entities/Print');
+ const Param = require('../entities/Param');
+ const Params = require('../entities/Params');
  const Program = require('../entities/Program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
- const Type = require('../entities/Type');
+ // const Type = require('../entities/Type');
  const UnaryExpression = require('../entities/UnaryExpression');
  const VariableDecl = require('../entities/VariableDecl');
+ const VarSubscript = require('../entities/VarSubscript');
  const Variable = require('../entities/Variable');
  const WhileStatement = require('../entities/WhileStatement');
- const VarReassign = require('../entities/VarReassign.js');
+ const VarReassign = require('../entities/VarReassign');
 
  const indentPadding = 2;
  let indentLevel = 0;
@@ -50,8 +58,27 @@
 
  function genStatementList(statements) {
    indentLevel += 1;
+   console.log("Statement: ", statements);
    statements.forEach(statement => statement.gen());
    indentLevel -= 1;
+ }
+
+ const jsName = (() => {
+   let lastId = 0;
+   const map = new Map();
+   return (v) => {
+     if (!(map.has(v))) {
+       map.set(v, ++lastId); // eslint-disable-line no-plusplus
+     }
+     return `${v.id}_${map.get(v)}`;
+   };
+ })();
+
+ function generateLibraryFunctions() {
+   function generateLibraryStub(name, params, body) {
+     const entity = Context.INITIAL.localVariables[name];
+     emit(`function ${jsName(entity)}(${params}) {${body}}`);
+   }
  }
 
 // TODO - unary negation operator could clash with binary subtract if implemented this way
@@ -80,7 +107,12 @@
  });
 
  Object.assign(Block.prototype, {
-   gen() { this.statements.forEach(s => s.gen()); },
+   gen() {
+     console.log(this.statements.toString());
+     genStatementList(this.statements);
+    //  this.statements.gen();
+    //  this.statements.forEach(s => s.gen());
+   },
  });
 
  Object.assign(BooleanLiteral.prototype, {
@@ -121,14 +153,23 @@
 
  Object.assign(FuncDecl.prototype, {
    gen() {
-     emit(`let ${this.id} = (${this.params}) => {`);
-     genStatementList(this.body);
-     emit('}');
+     return this.function.gen();
+    //  emit(`let ${this.id} = (${this.params}) => {`);
+    //  genStatementList(this.body);
+    //  emit('}');
    },
  });
 
  Object.assign(FunctionCall.prototype, {
-   gen() { emit(`${this.id}(${this.args});`); },
+   gen() {
+     const fun = this.exp.referent;
+     const args = {};
+     const params = Array(this.params.length).fill(undefined);
+     fun.args.forEach((a, i) => { args[a.id] = i; });
+     this.params.forEach((p,i) => { params[p.isPositionalArgument ? i : args[p.id]] = p; });
+     return `${jsName(fun)}(${params.map(p => (p ? p.gen() : 'undefined')).join(', ')})`;
+    //  emit(`${this.id}(${this.args});`);
+   },
  });
 
  Object.assign(IfElseStatement.prototype, {
@@ -153,14 +194,6 @@
    gen() { return `${this.id}`; },
  });
 
- // FunctionCall
-
- // Id Expression
-
- // If Else
-
- // if
-
  Object.assign(Print.prototype, {
    gen() {
      emit(`console.log(${this.argument});`);
@@ -169,7 +202,7 @@
 
  Object.assign(Program.prototype, {
    gen() {
-     // generateLibraryFunctions();
+     generateLibraryFunctions();
     //  for (let e = 0; e < this.statements.length; e++) {
     //    e.gen();
     //   }

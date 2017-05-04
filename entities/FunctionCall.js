@@ -82,7 +82,7 @@ class FunctionCall {
   //   return this;
   // }
   toString() {
-    return (`(FunctionCall ${this.exp}(${this.args}))`);
+    return (`(FunctionCall ${this.exp}${this.args})`);
   }
 }
 

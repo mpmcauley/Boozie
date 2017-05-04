@@ -1,36 +1,39 @@
-const Program = require('./entities/Program.js');
-const Block = require('./entities/Block.js');
-const Statement = require('./entities/Statement.js');
-const IfStatement = require('./entities/IfStatement.js');
-const IfElseStatement = require('./entities/IfElseStatement.js');
-const IfElseIfStatement = require('./entities/IfElseIfStatement.js');
-const ElseIfStatement = require('./entities/ElseIfStatement.js');
-const ForStatement = require('./entities/ForStatement.js');
-const WhileStatement = require('./entities/WhileStatement.js');
-const PrintStatement = require('./entities/Print.js');
-const ReturnStatement = require('./entities/ReturnStatement.js');
-const VariableDecl = require('./entities/VariableDecl.js');
-const BoozieArray = require('./entities/BoozieArray.js');
-const FuncDecl = require('./entities/FuncDecl.js');
-const Params = require('./entities/Params.js');
-const Param = require('./entities/Param.js');
-const VarReassign = require('./entities/VarReassign.js');
+const Args = require('./entities/Args');
+// const ArrayConstDecl = require('./entities/ArrayConstDecl');
+// const ArrayVariableDecl = require('./entities/ArrayVariableDecl');
+const AssignmentStatement = require('./entities/AssignmentStatement');
+const BinaryExpression = require('./entities/BinaryExpression');
+const Block = require('./entities/Block');
+const BooleanLiteral = require('./entities/BooleanLiteral');
+const BoozieArray = require('./entities/BoozieArray');
+const ConstDecl = require('./entities/ConstDecl');
+const Context = require('./entities/Context');
+const ElseIfStatement = require('./entities/ElseIfStatement');
+const Expression = require('./entities/Expression');
+const FloatLiteral = require('./entities/FloatLiteral');
+const ForStatement = require('./entities/ForStatement');
+const FuncDecl = require('./entities/FuncDecl');
 const FunctionCall = require('./entities/FunctionCall');
-const Args = require('./entities/Args.js');
-const VarSubscript = require('./entities/VarSubscript.js');
-// const ConstDecl = require('./entities/ConstDecl.js');
-// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
-const IdExpression = require('./entities/IdExpression.js');
-const AssignmentStatement = require('./entities/AssignmentStatement.js');
-const BinaryExpression = require('./entities/BinaryExpression.js');
-const UnaryExpression = require('./entities/UnaryExpression.js');
-const Literal = require('./entities/Literal.js');
-const FloatLiteral = require('./entities/FloatLiteral.js');
-const StringLiteral = require('./entities/StringLiteral.js');
-const BooleanLiteral = require('./entities/BooleanLiteral.js');
-const Print = require('./entities/Print.js');
-const Var = require('./entities/Variable.js');
+const FunctionObject = require('./entities/FunctionObject');
+const IdExpression = require('./entities/IdExpression');
+const IfElseStatement = require('./entities/IfElseStatement');
+const IfElseIfStatement = require('./entities/IfElseIfStatement');
+const IfStatement = require('./entities/IfStatement');
+const Literal = require('./entities/Literal');
+const Print = require('./entities/Print');
+const Param = require('./entities/Param');
+const Params = require('./entities/Params');
+const Program = require('./entities/Program');
+const ReturnStatement = require('./entities/ReturnStatement');
+const Statement = require('./entities/Statement');
+const StringLiteral = require('./entities/StringLiteral');
+// const Type = require('../entities/Type');
+const UnaryExpression = require('./entities/UnaryExpression');
+const VariableDecl = require('./entities/VariableDecl');
+const VarSubscript = require('./entities/VarSubscript');
+const Variable = require('./entities/Variable');
+const WhileStatement = require('./entities/WhileStatement');
+const VarReassign = require('./entities/VarReassign.js');
 
 
 const ohm = require('ohm-js');
@@ -81,7 +84,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new WhileStatement(e.ast(), b.ast());
   },
   Print(b, lp, arg, rp) {
-    return new PrintStatement(arg.ast());
+    return new Print(arg.ast());
   },
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());

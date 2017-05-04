@@ -1,11 +1,13 @@
 const Variable = require('../entities/Variable.js');
+// const Statement = require('../entities/Statement.js');
 
 class VariableDecl {
   constructor(signifier, ids, initializers) {
+    // super();
     this.signifier = signifier;
-    // this.id = ids;
-    // this.initializer = initializers;
-    Object.assign(this, { ids, initializers });
+    this.ids = ids;
+    this.initializers = initializers;
+    // Object.assign(this, { ids, initializers });
     this.variables = [];
     for (let i = 0; i < this.ids.length; i++) {
       this.variables[i] = new Variable(this.ids[i], this.initializers[i]);
