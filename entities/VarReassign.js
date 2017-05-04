@@ -1,10 +1,10 @@
 class VarReassign {
   constructor(id, value) {
-     this.id = id;
-     this.value = value;
+    this.id = id;
+    this.value = value;
   }
   analyze(context) {
-    context.replace(this.id, this.value);
+    // context.replace(this.id, this.value);
   }
   optimize() {
     return this;

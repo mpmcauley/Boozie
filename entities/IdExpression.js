@@ -15,7 +15,7 @@ class IdExpression extends Expression {
     return this;
   }
   toString() {
-    return (`(IdExpression ${this.id})`);
+    return (`${this.id}`);
   }
 }
 

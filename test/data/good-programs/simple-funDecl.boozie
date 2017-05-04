@@ -3,4 +3,4 @@ let beerFinder = (location) => {
     return beer
 }
 let booze = [beerFinder]
-burp(booze[0](7))
+burp(booze[0]())

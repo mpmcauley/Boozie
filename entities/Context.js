@@ -18,12 +18,12 @@ class Context {
     }
     this.localVariables[variable.id] = variable.value;
   }
-  // replace(id, value) {
-  //   if (id in! this.localVariables) {
-  //     throw new Error(`Identitier ${id} is not declared in this scope`);
-  //   }
-  //   this.localVariables[id] = value;
-  // }
+  replace(id, value) {
+    if (id in! this.localVariables) {
+      throw new Error(`Identitier ${id} is not declared in this scope`);
+    }
+    this.localVariables[id] = value;
+  }
 
   addFunc(entity) {
     if (entity.id in this.localVariables) {
@@ -34,7 +34,7 @@ class Context {
 
   lookup(id) {
     if (id in this.localVariables) {
-      return this.localVariables[value];
+      return this.localVariables[id];
     }
     if (this.parent === null) {
       throw new Error(`Identitier ${id} has not been declared`);

@@ -9,6 +9,7 @@ class FunctionObject {
     return !this.function.body;
   }
   analyze(context) {
+    console.log(this.params);
     this.params.forEach(p => p.analyze(context));
     this.requiredParameterNames = new Set();
     this.allParameterNames = new Set();

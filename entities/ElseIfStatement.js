@@ -13,7 +13,7 @@ class ElseIfStatement extends Statement {
   }
   analyze(context) {
     this.condition.analyze(context);
-    this.condition.type.mustBeBoolean('Condition in "else if" statement must be boolean');
+    // this.condition.type.mustBeBoolean('Condition in "else if" statement must be boolean');
     this.body.analyze(context);
     if (this.elseIf) {
       return this.elseIf.analyze(context);
