@@ -42,10 +42,10 @@
  const StringLiteral = require('../entities/StringLiteral');
  const Type = require('../entities/Type');
  const UnaryExpression = require('../entities/UnaryExpression');
- const Variable= require('../entities/Variable');
+ const Variable = require('../entities/Variable');
  const VariableDecl = require('../entities/VariableDecl');
- const VarReassign= require('../entities/VarReassign');
- const VarSubscript= require('../entities/VarSubscript');
+ const VarReassign = require('../entities/VarReassign');
+ const VarSubscript = require('../entities/VarSubscript');
  const WhileStatement = require('../entities/WhileStatement');
 
  const indentPadding = 2;
@@ -167,6 +167,10 @@
    },
  });
 
+ Object.assign(IdExpression.prototype, {
+   gen() { return `${this.id}`; },
+ });
+
  // FunctionCall
 
  // Id Expression
@@ -183,13 +187,14 @@
 
  Object.assign(Program.prototype, {
    gen() {
-     // generateLibraryFunctions();
-     for (let e = 0; e < this.statements.length; e++) {
-       e.gen();
-      }
-    //  this.statements.forEach(statement => statement.gen());
-    },
-  });
+     generateLibraryFunctions();
+    //  for (let e = 0; e < this.statements.length; e++) {
+    //    e.gen();
+    //   }
+    // console.log(this.statements);
+     this.block.gen();
+   },
+ });
 
  Object.assign(ReturnStatement.prototype, {
    gen() {
@@ -212,17 +217,17 @@
 
  Object.assign(VariableDecl.prototype, {
    gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.initializer.map(v => v.gen());
-     if (this.signifier == "let") {
+     const ids = this.ids.map(i => i.gen());
+     const values = this.initializers.map(v => v.gen());
+     if (this.signifier === "let") {
        emit(`let [${ids}] = [${values}];`);
      }
    },
  });
  Object.assign(Variable.prototype, {
    gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.value.map(v => v.gen());
+     const ids = this.id.gen();
+     const values = this.value.gen();
      emit(`${ids} = ${values}`);
    },
  });

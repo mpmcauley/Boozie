@@ -1,10 +1,15 @@
 class FunctionObject {
   constructor(id, params, body) {
-    this.id = id;
-    this.params = params;
-    this.body = body;
+    // this.id = id;
+    // this.params = params;
+    // this.body = body;
+    Object.assign(this, { id, params, body });
+  }
+  get isExternal() {
+    return !this.function.body;
   }
   analyze(context) {
+    console.log(this.params);
     this.params.forEach(p => p.analyze(context));
     this.requiredParameterNames = new Set();
     this.allParameterNames = new Set();
@@ -33,6 +38,10 @@ class FunctionObject {
     this.body.forEach(s => s.optimize());
     this.body = this.body.filter(s => s !== null);
     return this;
+  }
+
+  toString() {
+    return (`(Funcall ${this.id} ${this.params} ${this.body})`);
   }
 }
 

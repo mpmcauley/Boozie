@@ -1,5 +1,6 @@
 const FuncDecl = require('../entities/FuncDecl.js');
-// const FunctionObject = require('../entities/FunctionObject');
+const FunctionObject = require('../entities/FunctionObject');
+const Args = require('../entities/Args');
 // const error = require('../error.js');
 
 class Context {
@@ -17,17 +18,23 @@ class Context {
     }
     this.localVariables[variable.id] = variable.value;
   }
-  // replace(id, value) {
-  //   if (id in! this.localVariables) {
-  //     throw new Error(`Identitier ${id} is not declared in this scope`);
-  //   }
-  //   this.localVariables[id] = value;
-  // }
+  replace(id, value) {
+    if (id in! this.localVariables) {
+      throw new Error(`Identitier ${id} is not declared in this scope`);
+    }
+    this.localVariables[id] = value;
+  }
 
+  addFunc(entity) {
+    if (entity.id in this.localVariables) {
+      throw new Error(`Identitier ${entity.id} already declared in this scope`);
+    }
+    this.localVariables[entity.id] = entity;
+  }
 
   lookup(id) {
     if (id in this.localVariables) {
-      return this.localVariables[value];
+      return this.localVariables[id];
     }
     if (this.parent === null) {
       throw new Error(`Identitier ${id} has not been declared`);
@@ -59,7 +66,7 @@ class Context {
     }
   }
   assertIsFunction(entity) { // eslint-disable-line class-methods-use-this
-    if (entity.constructor !== FuncDecl) {
+    if (entity.constructor !== FunctionObject) {
       throw new Error(`${entity.id} is not a function`);
     }
   }
@@ -71,8 +78,9 @@ Context.INITIAL_CONTEXT = new Context({
   currentFunction: null,
   inLoop: false,
 });
-// new FuncDecl('print', [new Parameter('_', null)], null).analyze(Context.INITIAL);
-// new FuncDecl('sqrt', [new Parameter('_', null)], null).analyze(Context.INITIAL);
+
+// new FuncDecl('print', [new Args('_', null)], null).analyze(Context.INITIAL);
+// new FuncDecl('sqrt', [new Args('_', null)], null).analyze(Context.INITIAL);
 
 
 module.exports = Context;

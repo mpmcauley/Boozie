@@ -66,7 +66,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   //   return new AssignmentStatement(idExp.ast(), assignOp.sourceString, exp.ast());
   // },
   FunDecl_func(sig, id, eq, params, arrow, br1, block, br2) {
-    return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast())
+    return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast());
   },
   Params(l, param, comma, rest, r) {
     return new Params(param.ast(), rest.ast());
@@ -137,7 +137,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
-    return (this.sourceString);
+    return new IdExpression(this.sourceString);
   },
   // IdExp(id) {
   //   return new IdExpression(this.sourceString);

@@ -7,10 +7,13 @@ class BinaryExpression extends Expression {
     this.left = left;
     this.op = op;
     this.right = right;
-    // Object.assign(this, { e1, op, e2 });
+    Object.assign(this, { left, op, right });
+    // console.log(this.left, this.right);
   }
   analyze(context) {
-    console.log(this.left);
+    // console.log(this.left);
+    // console.log(context);
+    // console.log(this.left);
     this.left.analyze(context);
     this.right.analyze(context);
     // this.e1.analyze(context);
@@ -57,7 +60,6 @@ class BinaryExpression extends Expression {
     this.left = this.left.optimize();
     this.right = this.right.optimize();
     return this;
-
   }
   toString() {
     return (`(BinaryExpression ${this.left} ${this.op} ${this.right})`);

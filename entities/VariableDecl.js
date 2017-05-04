@@ -23,13 +23,12 @@ class VariableDecl {
     //   this.variables.push(this.ids.map(id => new Variable(id, e))));
     // this.variables = this.ids.map(id => new Variable(id));
     this.variables.forEach(variable => context.add(variable));
-
   }
   optimize() {
     return this;
   }
   toString() {
-    if (this.signifier == "let") {
+    if (this.signifier === "let") {
       return (`(VariableDecl ${this.variables}`);
     } else {
       return (`(ConstDecl ${this.variables}`);
