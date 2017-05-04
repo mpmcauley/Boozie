@@ -1,16 +1,17 @@
-class Block {
-  constructor(statements) {
-    this.statements = statements;
+class Args {
+  constructor(args) {
+    this.args = args;
   }
   analyze(context) {
-    this.statements.forEach(s => s.analyze(context));
+    // this.args.analyze(context);
   }
   optimize() {
-    this.statements.forEach(s => s.optimize());
+    this.args.optimize();
     return this;
   }
   toString() {
-    return (`(Block ${this.statements})`);
+    console.log(this.args)
+    return (`(Args ${this.args})`);
   }
   // Block.prototype.analyze = (context) => {
   //   localContext = context.createChildContext();
@@ -20,4 +21,4 @@ class Block {
   // }
 }
 
-module.exports = Block;
+module.exports = Args;

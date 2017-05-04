@@ -2,16 +2,20 @@ const Context = require('../entities/Context.js');
 
 class Program {
   constructor(block) {
-    this.body = block;
+    this.block = block;
   }
   analyze() {
-    this.body.analyze(Context.INITIAL_CONTEXT);
+    const context = new Context({ parent: Context.INITIAL_CONTEXT });
+    this.block.analyze(context);
   }
   optimize() {
+    // this.block.map(s => s.optimize()).filter(s => s !== null);
+    this.block = this.block.optimize();
+
     return this;
   }
   toString() {
-    return (`(Program ${this.body})`);
+    return (`(Program ${this.block})`);
   }
   // Program.prototype.analyze = (context) => {
   //   this.body.analyze(context);

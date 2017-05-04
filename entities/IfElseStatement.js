@@ -8,7 +8,9 @@ class IfElseStatement extends Statement {
     this.else = elseStmt;
   }
   analyze(context) {
+    console.log("pre condition analyzed");
     this.condition.analyze(context);
+    console.log('condition analyzed');
     this.condition.type.mustBeBoolean('Condition in "if else" statement must be boolean');
     this.body.analyze(context);
     if (this.else) {

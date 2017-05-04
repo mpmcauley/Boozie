@@ -6,8 +6,10 @@ class StringLiteral extends Literal {
     super();
     this.value = string;
   }
-  analyze() {
-    this.type = Type.STRING;
+  analyze(context) {
+    console.log("stringlit analyze");
+    this.value = context.lookup(this.value);
+    // this.type = Type.STRING;
   }
   optimize() {
     return this;

@@ -1,0 +1,8 @@
+let beer = "Sierra Nevada"
+if beer == "Blue Moon" {
+    burp("Blue Moon")
+} else if beer == "Ballast Point" {
+    burp("Ballast Point")
+} else {
+    burp("true")
+}

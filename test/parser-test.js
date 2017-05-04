@@ -117,7 +117,7 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
-  describe('FuncDecl', () => {
+  describe('FuncDecl/Call', () => {
     it('simple function', () => {
       const ast = parse('let x = () => { burp("hey") }').toString();
       const expected = '(Program (Block (FuncDecl x = (Parameters ) => (Block (Print (StringLiteral "hey"))))))';
@@ -131,6 +131,21 @@ describe('Parser Test', () => {
     it('Const FuncDecl', () => {
       const ast = parse('set x = (dog, cat, jim) => { let x = 45 }').toString();
       const expected = '(Program (Block (ConstFuncDecl x = (Parameters dog,cat,jim) => (Block (VariableDecl (Variable x = (FloatLiteral 45.0))))))';
+      assert.equal(ast, expected);
+    });
+    it('simple func call no param', () => {
+      const ast = parse(`fun()`).toString();
+      const expected = '(Program (Block (FunctionCall fun ())))'
+      assert.equal(ast, expected);
+    });
+    it('funCall array no params', () => {
+      const ast = parse(`fun[4]()`).toString();
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) ())))'
+      assert.equal(ast, expected);
+    });
+    it('funCall array one params', () => {
+      const ast = parse(`fun[4](yup)`).toString();
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) (Args yup))))'
       assert.equal(ast, expected);
     });
   });

@@ -1,4 +1,4 @@
-const Literal = require('../entities/literal.js');
+const Literal = require('../entities/Literal.js');
 const Type = require('../entities/Type.js');
 
 class FloatLiteral extends Literal {

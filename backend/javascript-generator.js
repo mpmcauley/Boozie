@@ -11,7 +11,6 @@
  *   require('./backend/javascript-generator');
  *   program.gen();
  */
-
  const ArrayConstDecl = require('../entities/ArrayConstDecl');
  const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
  const BinaryExpression = require('../entities/BinaryExpression');
@@ -37,12 +36,15 @@
  const Type = require('../entities/Type');
  const UnaryExpression = require('../entities/UnaryExpression');
  const VariableDecl = require('../entities/VariableDecl');
+ const Variable= require('../entities/Variable');
  const WhileStatement = require('../entities/WhileStatement');
+ const VarReassign = require('../entities/VarReassign.js');
 
  const indentPadding = 2;
  let indentLevel = 0;
 
  function emit(line) {
+   console.log("hello");
    console.log(`${' '.repeat(indentPadding * indentLevel)}${line}`);
  }
 
@@ -57,21 +59,21 @@
    return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
  }
 
- Object.assign(ArrayConstDecl.prototype, {
-   gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.value.map(v => v.gen());
-     emit(`const [${ids}] = [${values}];`);
-   },
- });
+ // Object.assign(ArrayConstDecl.prototype, {
+ //   gen() {
+ //     const ids = this.id.map(i => i.gen());
+ //     const values = this.value.map(v => v.gen());
+ //     emit(`const [${ids}] = [${values}];`);
+ //   },
+ // });
 
- Object.assign(ArrayVariableDecl.prototype, {
-   gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.value.map(v => v.gen());
-     emit(`let [${ids}] = [${values}];`);
-   },
- });
+ // Object.assign(ArrayVariableDecl.prototype, {
+ //   gen() {
+ //     const ids = this.id.map(i => i.gen());
+ //     const values = this.value.map(v => v.gen());
+ //     emit(`let [${ids}] = [${values}];`);
+ //   },
+ // });
 
  Object.assign(BinaryExpression.prototype, {
    gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
@@ -84,14 +86,13 @@
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
  });
-
- Object.assign(ConstDecl.prototype, {
-   gen() {
-     const ids = this.id.map(i => i.gen());
-     const values = this.value.map(v => v.gen());
-     emit(`set [${ids}] = [${values}];`);
-   },
- });
+ // Object.assign(ConstDecl.prototype, {
+ //   gen() {
+ //     const ids = this.id.map(i => i.gen());
+ //     const values = this.value.map(v => v.gen());
+ //     emit(`set [${ids}] = [${values}];`);
+ //   },
+ // });
 
  Object.assign(ElseIfStatement.prototype, {
    gen() {
@@ -156,10 +157,6 @@
 
  // if
 
- // MatchStatement
-
- // MatchPattern
-
  Object.assign(Print.prototype, {
    gen() {
      emit(`console.log(${this.argument});`);
@@ -169,9 +166,12 @@
  Object.assign(Program.prototype, {
    gen() {
      // generateLibraryFunctions();
-     this.statements.forEach(statement => statement.gen());
-   },
- });
+     for (let e = 0; e < this.statements.length; e++) {
+       e.gen();
+      }
+    //  this.statements.forEach(statement => statement.gen());
+    },
+  });
 
  Object.assign(ReturnStatement.prototype, {
    gen() {
@@ -195,8 +195,17 @@
  Object.assign(VariableDecl.prototype, {
    gen() {
      const ids = this.id.map(i => i.gen());
+     const values = this.initializer.map(v => v.gen());
+     if (this.signifier == "let") {
+       emit(`let [${ids}] = [${values}];`);
+     }
+   },
+ });
+ Object.assign(Variable.prototype, {
+   gen() {
+     const ids = this.id.map(i => i.gen());
      const values = this.value.map(v => v.gen());
-     emit(`let [${ids}] = [${values}];`);
+     emit(`${ids} = ${values}`);
    },
  });
 

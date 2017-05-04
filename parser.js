@@ -15,10 +15,15 @@ const BoozieArray = require('./entities/BoozieArray.js');
 const FuncDecl = require('./entities/FuncDecl.js');
 const Params = require('./entities/Params.js');
 const Param = require('./entities/Param.js');
+const VarReassign = require('./entities/VarReassign.js');
+const FunctionCall = require('./entities/FunctionCall');
+const Args = require('./entities/Args.js');
+const VarSubscript = require('./entities/VarSubscript.js');
 // const ConstDecl = require('./entities/ConstDecl.js');
 // const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
 // const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
 const IdExpression = require('./entities/IdExpression.js');
+const AssignmentStatement = require('./entities/AssignmentStatement.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
 const UnaryExpression = require('./entities/UnaryExpression.js');
 const Literal = require('./entities/Literal.js');
@@ -26,6 +31,7 @@ const FloatLiteral = require('./entities/FloatLiteral.js');
 const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
 const Print = require('./entities/Print.js');
+const Var = require('./entities/Variable.js');
 
 
 const ohm = require('ohm-js');
@@ -57,12 +63,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   IfStmt_simpleif(i, con, brac1, block, brac2) {
     return new IfStatement(con.ast(), block.ast());
   },
-
-  // Stmt_ifelse(f, con, fl, b, fr, e, l, els, r) {
-  //   return new IfElseStatement(con.ast(), b.ast(), els.ast());
-  // },
-  // Stmt_elseif(f, con, fl, b, fr, elif, elifcon, sl, elsifst, sr, els, l, el, r) {
-  //   return new ElseIfStatement(con.ast(), b.ast(), elifcon.ast(), elsifst.ast(), el.ast());
+  // Stmt_assign(idExp, assignOp, exp) {
+  //   return new AssignmentStatement(idExp.ast(), assignOp.sourceString, exp.ast());
   // },
   FunDecl_func(sig, id, eq, params, arrow, br1, block, br2) {
     return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast())
@@ -103,6 +105,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp_and(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
+  Exp1_reassign(old, eq, _new) {
+    return new VarReassign(old.sourceString, _new.ast());
+  },
   Exp1_relop(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -121,14 +126,23 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Exp5_array(left, array, right) {
     return new BoozieArray(array.ast());
   },
-  Exp5_funcall(id, l, args, r) {
-    return new FunctionCall(id.ast(), args.ast());
+  Exp5_funcall(varExp, args) {
+    return new FunctionCall(varExp.ast(), args.ast());
+  },
+  VarExp_subscript(varExp, l, exp, r) {
+    return new VarSubscript(varExp.ast(), exp.ast());
+  },
+  Args_ids(l, ids, r) {
+    return new Args(ids.ast());
   },
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
     return (this.sourceString);
   },
+  // IdExp(id) {
+  //   return new IdExpression(this.sourceString);
+  // },
   floatlit(float) {
     return new FloatLiteral(this.sourceString);
   },
@@ -138,8 +152,8 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   stringlit(string) {
     return new StringLiteral(this.sourceString);
   },
-  DeclaredVar_declaredVariable(word) {
-    return new DeclaredVariable(word.ast());
+  _terminal() {
+    return (this.sourceString);
   },
 });
 /* eslint-enable */
