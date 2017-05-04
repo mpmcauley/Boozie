@@ -3,8 +3,6 @@ class FunctionCall {
     // super();
     this.exp = exp;
     this.args = args;
-    console.log(this.args);
-    console.log("funcall")
     // this.function = new FunctionCall(id, params, body);
   }
   analyze(context) {
