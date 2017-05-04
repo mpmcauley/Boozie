@@ -139,7 +139,17 @@
    gen() { emit(`${this.id}(${this.args});`); },
  });
 
- Object.assign(IfElseStatement.prototype, {
+ Object.assign(IfElseIfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body);
+     emit(`} else if (${this.elseCond}) {`);
+     genStatementList(this.else);
+     emit('}');
+   },
+ });
+
+  Object.assign(IfElseStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
      genStatementList(this.body);
