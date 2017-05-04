@@ -11,11 +11,14 @@
  *   require('./backend/javascript-generator');
  *   program.gen();
  */
+ const Args = require('../entities/Args');
  const ArrayConstDecl = require('../entities/ArrayConstDecl');
  const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
+ const AssignmentStatement = require('../entities/AssignmentStatement');
  const BinaryExpression = require('../entities/BinaryExpression');
  const Block = require('../entities/Block');
  const BooleanLiteral = require('../entities/BooleanLiteral');
+ const BoozieArray = require('../entities/BoozieArray');
  const ConstDecl = require('../entities/ConstDecl');
  const Context = require('../entities/Context');
  const ElseIfStatement = require('../entities/ElseIfStatement');
@@ -24,21 +27,26 @@
  const ForStatement = require('../entities/ForStatement');
  const FuncDecl = require('../entities/FuncDecl');
  const FunctionCall = require('../entities/FunctionCall');
+ const FunctionObject = require('../entities/FunctionObject');
  const IdExpression = require('../entities/IdExpression');
+ const IfElseIfStatement = require('../entities/IfElseIfStatement');
  const IfElseStatement = require('../entities/IfElseStatement');
  const IfStatement = require('../entities/IfStatement');
- const Literal = require('../entities/Literal');
+ const Literal = require('../entities/literal');
+ const Param = require('../entities/Param');
+ const Params = require('../entities/Params');
  const Print = require('../entities/Print');
- const Program = require('../entities/Program');
+ const Program = require('../entities/program');
  const ReturnStatement = require('../entities/ReturnStatement');
  const Statement = require('../entities/Statement');
  const StringLiteral = require('../entities/StringLiteral');
  const Type = require('../entities/Type');
  const UnaryExpression = require('../entities/UnaryExpression');
- const VariableDecl = require('../entities/VariableDecl');
  const Variable= require('../entities/Variable');
+ const VariableDecl = require('../entities/VariableDecl');
+ const VarReassign= require('../entities/VarReassign');
+ const VarSubscript= require('../entities/VarSubscript');
  const WhileStatement = require('../entities/WhileStatement');
- const VarReassign = require('../entities/VarReassign.js');
 
  const indentPadding = 2;
  let indentLevel = 0;
@@ -80,12 +88,13 @@
  });
 
  Object.assign(Block.prototype, {
-   gen() { this.statements.gen(); },
+   gen() { this.statements.forEach(s => s.gen()); },
  });
 
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
  });
+
  // Object.assign(ConstDecl.prototype, {
  //   gen() {
  //     const ids = this.id.map(i => i.gen());
@@ -105,7 +114,6 @@
      emit('}');
    },
  });
-
 
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
