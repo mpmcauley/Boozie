@@ -50,9 +50,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt1) {
     return new Block(stmt1.ast());
   },
-  Stmt(body) {
-    return new Statement(body.ast());
-  },
+  // Stmt(body) {
+  //   return new Statement(body.ast());
+  // },
   IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },

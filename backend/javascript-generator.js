@@ -48,18 +48,20 @@
  const WhileStatement = require('../entities/WhileStatement');
  const VarReassign = require('../entities/VarReassign');
 
+ const util = require('util');
+
  const indentPadding = 2;
  let indentLevel = 0;
 
  function emit(line) {
-   console.log("hello");
+  //  console.log("hello");
    console.log(`${' '.repeat(indentPadding * indentLevel)}${line}`);
  }
 
  function genStatementList(statements) {
    indentLevel += 1;
-   console.log("Statement: ", statements);
-   statements.forEach(statement => statement.gen());
+  //  console.log("Statement: ", util.inspect(statements, { depth : null }));
+   statements.forEach(statement => {statement.gen(); });
    indentLevel -= 1;
  }
 
@@ -108,7 +110,7 @@
 
  Object.assign(Block.prototype, {
    gen() {
-     console.log(this.statements.toString());
+    //  console.log(this.statements.toString());
      genStatementList(this.statements);
     //  this.statements.gen();
     //  this.statements.forEach(s => s.gen());
