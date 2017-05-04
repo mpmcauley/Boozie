@@ -10,6 +10,7 @@ const WhileStatement = require('./entities/WhileStatement.js');
 const PrintStatement = require('./entities/Print.js');
 const ReturnStatement = require('./entities/ReturnStatement.js');
 const VariableDecl = require('./entities/VariableDecl.js');
+const DeclaredVariable = require('./entities/DeclaredVariable.js');
 const BoozieArray = require('./entities/BoozieArray.js');
 const FuncDecl = require('./entities/FuncDecl.js');
 const Params = require('./entities/Params.js');
@@ -79,7 +80,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new WhileStatement(e.ast(), b.ast());
   },
   Print(b, lp, arg, rp) {
-    return new PrintStatement(arg.ast());
+    return new Print(arg.ast());
   },
   ReturnStmt(r, b) {
     return new ReturnStatement(b.ast());
@@ -136,6 +137,9 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   stringlit(string) {
     return new StringLiteral(this.sourceString);
+  },
+  DeclaredVar_declaredVariable(word) {
+    return new DeclaredVariable(word.ast());
   },
 });
 /* eslint-enable */

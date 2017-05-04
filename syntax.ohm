@@ -8,6 +8,7 @@ Stmt            = IfStmt                                    -- if
                   | Decl                                    -- decl
                   | Print                                   -- print
                   | Exp                                     -- exp
+                  | DeclaredVar                             -- declVar
 IfStmt          = "if" Exp "{" Block "}" "else if" Exp "{" Block "}" "else" "{" Block "}"                   -- ifelsifelse
                   | "if" Exp "{" Block "}" "else if" Exp "{" Block "}"  -- ifelsif
                   | "if" Exp "{" Block "}" "else" "{" Block "}"     -- ifelse
@@ -21,7 +22,7 @@ Param           = id
 Other           = "_"                                     -- wildcard
 ReturnStmt      = "return" Exp
 VarDecl         = ("let" | "set") Ids "=" Exps              -- decl
-Print           = "burp" "(" Exp ")"
+Print           = "burp" "(" (Exp | DeclaredVar) ")"
 Exp             = Exp1 "and" Exp                            -- and
                   | Exp1 "or" Exp                           -- or
                   | Exp1
@@ -57,6 +58,7 @@ stringlit       = "\"" char* "\""                             -- string
 keyword         = ("let"    | "set"   | "burp"  | "for"   | "in"
                   | "while" | "match" | "if"    | "else"  | "new"
                   | "true"  | "false" | "return") ~idrest
+DeclaredVar     = ~keyword letter+                          -- declaredVariable
 id              = ~keyword letter idrest*                   -- id
 idrest          = "_" | alnum
 comment         = "//" (~"\n" any)* "\n"

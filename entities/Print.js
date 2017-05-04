@@ -4,6 +4,7 @@ class Print extends Statement {
   constructor(body) {
     super();
     this.body = body;
+    console.log("!!!!!!!!!!!!!!!" + body);
   }
     // if(this.argument.type !== Type.STRING) {
     //   error('You can only print strings')

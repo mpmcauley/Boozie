@@ -99,37 +99,16 @@ describe('Parser Test', () => {
     });
   });
 
-
   describe('ConstDecl', () => {
-<<<<<<< HEAD
-      it('simple ConstDecl', () => {
-        const ast = parse('set x = 5').toString();
-        const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0))))';
-        assert.equal(ast, expected);
-      });
-      it('multiple constants decl', () => {
-      const ast = parse('set x,y = 5,6').toString();
-      const expected = '(Program (Block (ConstDecl ((IdExpression x) = (FloatLiteral 5.0) (IdExpression y) = (FloatLiteral 6.0)))))'
-      })
-    });
-    describe('Drunken ConstDecl', () => {
-        it('types do not matter in declaration', () => {
-          const ast = parse('set beer, yup, fuzz = ["hi",[1,2],"you"], 15, "hey"').toString();
-          const expected = '(Program (Block (ConstDecl ((IdExpression beer) = (BoozieArray (StringLiteral "hi"),(BoozieArray (FloatLiteral 1.0),(FloatLiteral 2.0)),(StringLiteral "you"))),((IdExpression yup) = (FloatLiteral 15.0)),((IdExpression fuzz) = (StringLiteral "hey"))))';
-          assert.equal(ast, expected);
-        });
-      });
-
-=======
     it('simple ConstDecl', () => {
       const ast = parse('set x = 5').toString();
       const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0))))';
       assert.equal(ast, expected);
     });
     it('multiple constants decl', () => {
-    const ast = parse('set x,y = 5,6').toString();
-    const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)) (Variable y = (FloatLiteral 6.0)))))'
-  });
+      const ast = parse('set x,y = 5,6').toString();
+      const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)) (Variable y = (FloatLiteral 6.0)))))'
+    });
   });
   describe('Drunken ConstDecl', () => {
     it('types do not matter in declaration', () => {
@@ -155,5 +134,4 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
   });
->>>>>>> 41982e012d962bf53b4a8104d1b56c4a60b59eb5
 });
