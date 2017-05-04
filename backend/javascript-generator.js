@@ -12,41 +12,41 @@
  *   program.gen();
  */
  const Args = require('../entities/Args');
- const ArrayConstDecl = require('../entities/ArrayConstDecl');
- const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
- const AssignmentStatement = require('../entities/AssignmentStatement');
- const BinaryExpression = require('../entities/BinaryExpression');
- const Block = require('../entities/Block');
- const BooleanLiteral = require('../entities/BooleanLiteral');
- const BoozieArray = require('../entities/BoozieArray');
- const ConstDecl = require('../entities/ConstDecl');
- const Context = require('../entities/Context');
- const ElseIfStatement = require('../entities/ElseIfStatement');
- const Expression = require('../entities/Expression');
- const FloatLiteral = require('../entities/FloatLiteral');
- const ForStatement = require('../entities/ForStatement');
- const FuncDecl = require('../entities/FuncDecl');
- const FunctionCall = require('../entities/FunctionCall');
- const FunctionObject = require('../entities/FunctionObject');
- const IdExpression = require('../entities/IdExpression');
- const IfElseIfStatement = require('../entities/IfElseIfStatement');
- const IfElseStatement = require('../entities/IfElseStatement');
- const IfStatement = require('../entities/IfStatement');
- const Literal = require('../entities/literal');
- const Param = require('../entities/Param');
- const Params = require('../entities/Params');
- const Print = require('../entities/Print');
- const Program = require('../entities/program');
- const ReturnStatement = require('../entities/ReturnStatement');
- const Statement = require('../entities/Statement');
- const StringLiteral = require('../entities/StringLiteral');
- const Type = require('../entities/Type');
- const UnaryExpression = require('../entities/UnaryExpression');
- const Variable = require('../entities/Variable');
- const VariableDecl = require('../entities/VariableDecl');
- const VarReassign = require('../entities/VarReassign');
- const VarSubscript = require('../entities/VarSubscript');
- const WhileStatement = require('../entities/WhileStatement');
+ // const ArrayConstDecl = require('./entities/ArrayConstDecl');
+ // const ArrayVariableDecl = require('./entities/ArrayVariableDecl');
+ const AssignmentStatement = require('./entities/AssignmentStatement');
+ const BinaryExpression = require('./entities/BinaryExpression');
+ const Block = require('./entities/Block');
+ const BooleanLiteral = require('./entities/BooleanLiteral');
+ const BoozieArray = require('./entities/BoozieArray');
+ // const ConstDecl = require('./entities/ConstDecl');
+ const Context = require('./entities/Context');
+ const ElseIfStatement = require('./entities/ElseIfStatement');
+ const Expression = require('./entities/Expression');
+ const FloatLiteral = require('./entities/FloatLiteral');
+ const ForStatement = require('./entities/ForStatement');
+ const FuncDecl = require('./entities/FuncDecl');
+ const FunctionCall = require('./entities/FunctionCall');
+ const FunctionObject = require('./entities/FunctionObject');
+ const IdExpression = require('./entities/IdExpression');
+ const IfElseStatement = require('./entities/IfElseStatement');
+ const IfElseIfStatement = require('./entities/IfElseIfStatement');
+ const IfStatement = require('./entities/IfStatement');
+ const Literal = require('./entities/Literal');
+ const Print = require('./entities/Print');
+ const Param = require('./entities/Param');
+ const Params = require('./entities/Params');
+ const Program = require('./entities/Program');
+ const ReturnStatement = require('./entities/ReturnStatement');
+ const Statement = require('./entities/Statement');
+ const StringLiteral = require('./entities/StringLiteral');
+ // const Type = require('../entities/Type');
+ const UnaryExpression = require('./entities/UnaryExpression');
+ const VariableDecl = require('./entities/VariableDecl');
+ const VarSubscript = require('./entities/VarSubscript');
+ const Variable = require('./entities/Variable');
+ const WhileStatement = require('./entities/WhileStatement');
+ const VarReassign = require('./entities/VarReassign.js');
 
  const indentPadding = 2;
  let indentLevel = 0;
@@ -60,6 +60,24 @@
    indentLevel += 1;
    statements.forEach(statement => statement.gen());
    indentLevel -= 1;
+ }
+
+ const jsName = (() => {
+   let lastId = 0;
+   const map = new Map();
+   return (v) => {
+     if (!(map.has(v))) {
+       map.set(v, ++lastId); // eslint-disable-line no-plusplus
+     }
+     return `${v.id}_${map.get(v)}`;
+   };
+ })();
+
+function generateLibraryFunctions() {
+   function generateLibraryStub(name, params, body) {
+     const entity = Context.INITIAL.localVariables[name];
+     emit(`function ${jsName(entity)}(${params}) {${body}}`);
+   }
  }
 
 // TODO - unary negation operator could clash with binary subtract if implemented this way
@@ -83,7 +101,15 @@
  //   },
  // });
 
- Object.assign(BinaryExpression.prototype, {
+ Object.assign(Args.prototype, {
+   gen() {
+     let argArray = [];
+     this.args.forEach(arg => argArray.push(arg.gen()));
+     let argString = argArray.join(", ");
+     return `(${argString})`; },
+ });
+
+  Object.assign(BinaryExpression.prototype, {
    gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
  });
 
