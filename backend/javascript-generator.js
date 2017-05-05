@@ -120,19 +120,6 @@
    gen() { return `${this.values}`; },
  });
 
- Object.assign(ElseIfStatement.prototype, {
-   gen() {
-     emit(`if (${this.condition.gen()}) {`);
-     genStatementList(this.body);
-     emit(`} else if (${this.elseCond}) {`);
-     genStatementList(this.elseIf);
-     emit('} else {');
-     genStatementList(this.else);
-     emit('}');
-   },
- });
-
-
  Object.assign(FloatLiteral.prototype, {
    gen() { return `${this.value}`; },
  });
@@ -179,6 +166,19 @@
      emit('}');
    },
  });
+
+ // TODO map this to single IfStmt
+ Object.assign(ElseIfStatement.prototype, {
+    gen() {
+      emit(`if (${this.condition.gen()}) {`);
+      genStatementList(this.body.statements);
+      emit(`} else if (${this.elseCond}) {`);
+      genStatementList(this.elseIf);
+      emit('} else {');
+      genStatementList(this.else);
+      emit('}');
+    },
+  });
 
  Object.assign(IfElseIfStatement.prototype, {
    gen() {
@@ -256,7 +256,7 @@
    gen() {
      const vars = this.ids.map(i => i.gen());
      const values = this.initializers.map(v => v.gen());
-     if (this.signifier === "let") {
+     if (this.signifier === 'let') {
        emit(`let [${vars}] = [${values}];`);
      }
    },

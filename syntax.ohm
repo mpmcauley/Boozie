@@ -39,7 +39,7 @@ Exp3            = Exp4 mulOp Exp4                           -- mulop
 Exp4            = "-" Exp5                                 -- negop
                   | Exp5
 Exp5            = Literal
-                  | VarExp  Args                          -- funcall
+                  | VarExp  Params                          -- funcall
                   | VarExp
                   | "(" Exp ")"                            -- parens
                   | "[" Exps "]"                            -- array

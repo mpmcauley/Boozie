@@ -16,7 +16,7 @@ const IfStatement = require('./entities/IfStatement');
 const Print = require('./entities/Print');
 const Param = require('./entities/Param');
 const Params = require('./entities/Params');
-const Program = require('../entities/Program');
+const Program = require('./entities/Program');
 const ReturnStatement = require('./entities/ReturnStatement');
 const StringLiteral = require('./entities/StringLiteral');
 // const Type = require('../entities/Type');
@@ -31,7 +31,6 @@ const ohm = require('ohm-js');
 const fs = require('fs');
 
 const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
-
 /* eslint-disable no-unused-vars */
 const semantics = grammar.createSemantics().addOperation('ast', {
 
