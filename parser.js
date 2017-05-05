@@ -1,37 +1,28 @@
 const Args = require('./entities/Args');
-// const ArrayConstDecl = require('./entities/ArrayConstDecl');
-// const ArrayVariableDecl = require('./entities/ArrayVariableDecl');
 const AssignmentStatement = require('./entities/AssignmentStatement');
 const BinaryExpression = require('./entities/BinaryExpression');
 const Block = require('./entities/Block');
 const BooleanLiteral = require('./entities/BooleanLiteral');
 const BoozieArray = require('./entities/BoozieArray');
-const ConstDecl = require('./entities/ConstDecl');
-const Context = require('./entities/Context');
 const ElseIfStatement = require('./entities/ElseIfStatement');
-const Expression = require('./entities/Expression');
 const FloatLiteral = require('./entities/FloatLiteral');
 const ForStatement = require('./entities/ForStatement');
 const FuncDecl = require('./entities/FuncDecl');
 const FunctionCall = require('./entities/FunctionCall');
-const FunctionObject = require('./entities/FunctionObject');
 const IdExpression = require('./entities/IdExpression');
 const IfElseStatement = require('./entities/IfElseStatement');
 const IfElseIfStatement = require('./entities/IfElseIfStatement');
 const IfStatement = require('./entities/IfStatement');
-const Literal = require('./entities/Literal');
 const Print = require('./entities/Print');
 const Param = require('./entities/Param');
 const Params = require('./entities/Params');
-const Program = require('./entities/Program');
+const Program = require('../entities/Program');
 const ReturnStatement = require('./entities/ReturnStatement');
-const Statement = require('./entities/Statement');
 const StringLiteral = require('./entities/StringLiteral');
 // const Type = require('../entities/Type');
 const UnaryExpression = require('./entities/UnaryExpression');
 const VariableDecl = require('./entities/VariableDecl');
 const VarSubscript = require('./entities/VarSubscript');
-const Variable = require('./entities/Variable');
 const WhileStatement = require('./entities/WhileStatement');
 const VarReassign = require('./entities/VarReassign.js');
 
@@ -50,9 +41,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   Block(stmt1) {
     return new Block(stmt1.ast());
   },
-  // Stmt(body) {
-  //   return new Statement(body.ast());
-  // },
   IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
   },
@@ -92,15 +80,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   VarDecl_decl(sig, ids, eq, values) {
     return new VariableDecl(sig.sourceString, ids.ast(), values.ast());
   },
-  // VarArrayDecl_arrdecl(l, id, eq, arr) {
-  //   return new VariableDecl(id.ast(), arr.ast());
-  // },
-  // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
-  //   return new ConstDecl(v.sourceString, nextv.sourceString);
-  // },
-  // ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
-  //   return new ArrayConstDecl(v.sourceString, nextv.sourceString);
-  // },
   Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -167,8 +146,3 @@ module.exports = (text) => {
   }
   return semantics(match).ast();
 };
-// function parse(text) {
-//   const match = grammar.match(text);
-//   return semantics(match).ast();
-// };
-// module.exports = parse;

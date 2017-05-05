@@ -8,7 +8,7 @@ class WhileStatement extends Statement {
     this.body = body;
     Object.assign(this, { condition, body });
   }
-  analyze(context) {
+  analyze(context) {n
     this.condition.analyze(context);
     const bodyContext = context.createChildContextForLoop();
     this.body.forEach(s => s.analyze(bodyContext));
