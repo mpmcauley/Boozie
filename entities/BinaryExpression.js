@@ -8,17 +8,10 @@ class BinaryExpression extends Expression {
     this.op = op;
     this.right = right;
     Object.assign(this, { left, op, right });
-    // console.log(this.left, this.right);
   }
   analyze(context) {
-    // console.log(this.left);
-    // console.log(context);
-    // console.log(this.left);
     this.left.analyze(context);
     this.right.analyze(context);
-    // this.e1.analyze(context);
-    // this.e2.analyze(context);
-    // const op = this.op;
     // switch (op) {
     //   case '<':
     //   case '<=':

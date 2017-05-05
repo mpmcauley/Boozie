@@ -3,12 +3,12 @@
 const Statement = require('../entities/Statement.js');
 
 class IfElseIfStatement extends Statement {
-  constructor(condition, body, elseIfCond, elseStmt) {
+  constructor(condition, body, elseIfCond, elseIfStmt, elseStmt) {
     super();
     this.condition = condition;
     this.body = body;
     this.elseIfCond = elseIfCond;
-    this.elseIf
+    this.elseIfStmt = elseIfStmt;
     this.elseStmt = elseStmt;
   }
   analyze(context) {

@@ -9,9 +9,6 @@ class AssignmentStatement extends Statement {
   }
 
   analyze(context) {
-    // if (this.left.length !== this.right.length) {
-    //   throw new Error('Number of variables does not equal number of expressions');
-    // }
     this.left.analyze(context);
     this.right.analyze(context);
   }

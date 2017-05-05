@@ -9,7 +9,6 @@ class Program {
     this.block.analyze(context);
   }
   optimize() {
-    // this.block.map(s => s.optimize()).filter(s => s !== null);
     this.block = this.block.optimize();
 
     return this;
@@ -17,8 +16,5 @@ class Program {
   toString() {
     return (`(Program ${this.block})`);
   }
-  // Program.prototype.analyze = (context) => {
-  //   this.body.analyze(context);
-  // }
 }
 module.exports = Program;

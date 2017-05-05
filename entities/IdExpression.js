@@ -6,11 +6,7 @@ class IdExpression {
     this.id = id;
   }
   analyze(context) {
-    // this.id()
-    this.id = context.lookup(this.id); // not used I believe
-    // if (!context.lookup(this.idValue)) {
-    //   throw new Error(`${this.idValue} has not been declared`);
-    // }
+    this.id = context.lookup(this.id);
   }
   optimize() {
     return this;

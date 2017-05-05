@@ -15,12 +15,6 @@ class VarSubscript {
   toString() {
     return (`(${this.varExp} [${this.subscript}])`);
   }
-  // Block.prototype.analyze = (context) => {
-  //   localContext = context.createChildContext();
-  //   for statements in this.body {
-  //     this.body.analyze(localContext);
-  //   }
-  // }
 }
 
 module.exports = VarSubscript;

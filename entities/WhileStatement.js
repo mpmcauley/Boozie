@@ -9,18 +9,9 @@ class WhileStatement extends Statement {
     Object.assign(this, { condition, body });
   }
   analyze(context) {
-    // console.log("while");
     this.condition.analyze(context);
     const bodyContext = context.createChildContextForLoop();
     this.body.forEach(s => s.analyze(bodyContext));
-    // this.body.forEach(s => s.analyze(bodyContext));
-    // this.condition.type.mustBeBoolean('Condition in while statement');
-    // if (this.condition.type !== Type.BOOL) {
-    //   error('While condition must be boolean');
-    // }
-    // for (let e = 0; e < this.body.length; e++) {
-    //   e.analyze(bodyContext);
-    // }
   }
   optimize() {
     this.condition = this.condition.optimize();

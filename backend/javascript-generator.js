@@ -11,15 +11,12 @@
  *   require('./backend/javascript-generator');
  *   program.gen();
  */
- // const ArrayConstDecl = require('../entities/ArrayConstDecl');
- // const ArrayVariableDecl = require('../entities/ArrayVariableDecl');
  const Args = require('../entities/Args');
  const AssignmentStatement = require('../entities/AssignmentStatement');
  const BinaryExpression = require('../entities/BinaryExpression');
  const Block = require('../entities/Block');
  const BooleanLiteral = require('../entities/BooleanLiteral');
  const BoozieArray = require('../entities/BoozieArray');
- // const ConstDecl = require('../entities/ConstDecl');
  const Context = require('../entities/Context');
  const ElseIfStatement = require('../entities/ElseIfStatement');
  const Expression = require('../entities/Expression');
@@ -54,7 +51,6 @@
  let indentLevel = 0;
 
  function emit(line) {
-  //  console.log("hello");
    console.log(`${' '.repeat(indentPadding * indentLevel)}${line}`);
  }
 
@@ -106,22 +102,6 @@
    },
  });
 
- // Object.assign(ArrayConstDecl.prototype, {
- //   gen() {
- //     const ids = this.id.map(i => i.gen());
- //     const values = this.value.map(v => v.gen());
- //     emit(`const [${ids}] = [${values}];`);
- //   },
- // });
-
- // Object.assign(ArrayVariableDecl.prototype, {
- //   gen() {
- //     const ids = this.id.map(i => i.gen());
- //     const values = this.value.map(v => v.gen());
- //     emit(`let [${ids}] = [${values}];`);
- //   },
- // });
-
  Object.assign(BinaryExpression.prototype, {
    gen() {
      console.log('LEFT', this.left);
@@ -131,10 +111,7 @@
 
  Object.assign(Block.prototype, {
    gen() {
-    //  console.log(this.statements.toString());
      genStatementList(this.statements);
-    //  this.statements.gen();
-    //  this.statements.forEach(s => s.gen());
    },
  });
 
@@ -145,14 +122,6 @@
  Object.assign(BoozieArray.prototype, {
    gen() { return `${this.values}`; },
  });
-
- // Object.assign(ConstDecl.prototype, {
- //   gen() {
- //     const ids = this.id.map(i => i.gen());
- //     const values = this.value.map(v => v.gen());
- //     emit(`set [${ids}] = [${values}];`);
- //   },
- // });
 
  Object.assign(ElseIfStatement.prototype, {
    gen() {
@@ -182,9 +151,6 @@
  Object.assign(FuncDecl.prototype, {
    gen() {
      return this.function.gen();
-    //  emit(`let ${this.id} = (${this.params}) => {`);
-    //  genStatementList(this.body);
-    //  emit('}');
    },
  });
 
@@ -196,7 +162,6 @@
      fun.params.forEach((p, i) => { params[p.id] = i; });
      this.args.forEach((a, i) => { args[a.isPositionalArgument ? i : params[a.id]] = a; });
      return `${jsName(fun)}(${args.map(a => (a ? a.gen() : 'undefined')).join(', ')})`;
-    //  emit(`${this.id}(${this.args});`);
    },
  });
 
@@ -250,7 +215,6 @@
    gen() { return this.id.gen(); },
  });
 
-// TODO params
  Object.assign(Params.prototype, {
    gen() { return this.params.map(p => p.gen()).join(' ,'); },
  });
@@ -265,10 +229,6 @@
  Object.assign(Program.prototype, {
    gen() {
      generateLibraryFunctions();
-    //  for (let e = 0; e < this.statements.length; e++) {
-    //    e.gen();
-    //   }
-    // console.log(this.statements);
      this.block.gen();
    },
  });
@@ -306,7 +266,6 @@
  });
  Object.assign(Variable.prototype, {
    gen() {
-    //  return jsName(this);
      console.log('VARS:', this.ids);
      const ids = this.id.gen();
      const values = this.value.gen();

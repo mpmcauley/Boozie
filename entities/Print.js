@@ -9,8 +9,6 @@ class Print extends Statement {
     //   error('You can only print strings')
     // }
   analyze(context) {
-    // this.body.analyze(context);
-    // console.log(this.body);
   }
   optimize() {
     if (this.body) {
@@ -21,9 +19,6 @@ class Print extends Statement {
   toString() {
     return (`(Print ${this.body})`);
   }
-  // Print.prototype.analyze = (context) => {
-  //   this.body.analyze(context);
-  // }
 
 }
 
