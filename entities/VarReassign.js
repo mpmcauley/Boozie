@@ -4,11 +4,16 @@ class VarReassign {
     this.value = value;
   }
   analyze(context) {
-    // context.replace(this.id, this.value);
+    this.id.analyze(context);
+    this.value.analyze(context);
   }
+
   optimize() {
+    this.id = this.id.optimize();
+    this.value = this.value.optimize();
     return this;
   }
+
   toString() {
     return (`(Reassign ${this.id} to ${this.value})`);
   }

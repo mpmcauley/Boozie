@@ -137,17 +137,17 @@ describe('Parser Test', () => {
     });
     it('simple func call no param', () => {
       const ast = parse('fun()').toString();
-      const expected = '(Program (Block (FunctionCall fun ())))';
+      const expected = '(Program (Block (FunctionCall fun())))';
       assert.equal(ast, expected);
     });
     it('funCall array no params', () => {
       const ast = parse('fun[4]()').toString();
-      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) ())))';
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)])())))';
       assert.equal(ast, expected);
     });
     it('funCall array one params', () => {
       const ast = parse('fun[4](yup)').toString();
-      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) (yup))))';
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)])(Args yup))))';
       assert.equal(ast, expected);
     });
   });

@@ -16,9 +16,5 @@ class FloatLiteral extends Literal {
     return (`(FloatLiteral ${this.value}.0)`);
   }
 }
-//
-// FloatLiteral.prototype.analyze = (context) => {
-//   this.type = Type.FLOAT;
-// };
 
 module.exports = FloatLiteral;
