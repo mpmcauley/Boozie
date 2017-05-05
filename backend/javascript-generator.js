@@ -60,8 +60,8 @@
 
  function genStatementList(statements) {
    indentLevel += 1;
-  //  console.log("Statement: ", util.inspect(statements, { depth : null }));
-   statements.forEach(statement => {statement.gen(); });
+   console.log("STATEMENT: ", util.inspect(statements, { depth : null }));
+   statements.forEach(statement => { statement.gen(); });
    indentLevel -= 1;
  }
 
@@ -76,6 +76,14 @@
    };
  })();
 
+ // function bracketIfNecessary(a) {
+ //   if (a.length === 1) {
+ //     return `${a}`;
+ //   }
+ //   return `[${a.join(', ')}]`;
+ // }
+
+
  function generateLibraryFunctions() {
    function generateLibraryStub(name, params, body) {
      const entity = Context.INITIAL.localVariables[name];
@@ -87,6 +95,16 @@
  function makeOp(op) {
    return op || { and: '&&', or: '||', '-': '!', '==': '===', '!=': '!==' }[op];
  }
+
+ Object.assign(Args.prototype, {
+   gen() { return this.args.gen(); },
+ });
+
+ Object.assign(AssignmentStatement.prototype, {
+   gen() {
+     emit(`${(this.left)} = ${(this.right)}}`);
+   },
+ });
 
  // Object.assign(ArrayConstDecl.prototype, {
  //   gen() {
@@ -105,7 +123,10 @@
  // });
 
  Object.assign(BinaryExpression.prototype, {
-   gen() { return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`; },
+   gen() {
+     console.log('LEFT', this.left);
+     return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`;
+   },
  });
 
  Object.assign(Block.prototype, {
@@ -120,6 +141,11 @@
  Object.assign(BooleanLiteral.prototype, {
    gen() { return `${this.value}`; },
  });
+
+ Object.assign(BoozieArray.prototype, {
+   gen() { return `${this.values}`; },
+ });
+
  // Object.assign(ConstDecl.prototype, {
  //   gen() {
  //     const ids = this.id.map(i => i.gen());
@@ -147,8 +173,8 @@
 
  Object.assign(ForStatement.prototype, {
    gen() {
-     emit(`for (${this.for} in ${this.in}) {`);
-     genStatementList(this.body);
+     emit(`for (${this.Identitier} in ${this.structure}) {`);
+     genStatementList(this.body.statements);
      emit('}');
    },
  });
@@ -164,20 +190,40 @@
 
  Object.assign(FunctionCall.prototype, {
    gen() {
-     const fun = this.exp.referent;
-     const args = {};
-     const params = Array(this.params.length).fill(undefined);
-     fun.args.forEach((a, i) => { args[a.id] = i; });
-     this.params.forEach((p,i) => { params[p.isPositionalArgument ? i : args[p.id]] = p; });
-     return `${jsName(fun)}(${params.map(p => (p ? p.gen() : 'undefined')).join(', ')})`;
+     const fun = this.exp.id;
+     const params = {};
+     const args = Array(this.args.length).fill(undefined);
+     fun.params.forEach((p, i) => { params[p.id] = i; });
+     this.args.forEach((a, i) => { args[a.isPositionalArgument ? i : params[a.id]] = a; });
+     return `${jsName(fun)}(${args.map(a => (a ? a.gen() : 'undefined')).join(', ')})`;
     //  emit(`${this.id}(${this.args});`);
+   },
+ });
+
+ Object.assign(FunctionObject.prototype, {
+   gen() {
+     emit(`function ${jsName(this)}(${this.params.gen()}) {`);
+     genStatementList(this.body.statements);
+     emit('}');
    },
  });
 
  Object.assign(IfElseStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
-     genStatementList(this.body);
+     genStatementList(this.body.statements);
+     emit('} else {');
+     genStatementList(this.elseStmt.statements);
+     emit('}');
+   },
+ });
+
+ Object.assign(IfElseIfStatement.prototype, {
+   gen() {
+     emit(`if (${this.condition.gen()}) {`);
+     genStatementList(this.body.statements);
+     emit(`} else if (${this.elseIfCond}) {`);
+     genStatementList(this.elseStmt.statements);
      emit('} else {');
      genStatementList(this.else);
      emit('}');
@@ -187,18 +233,32 @@
  Object.assign(IfStatement.prototype, {
    gen() {
      emit(`if (${this.condition.gen()}) {`);
-     genStatementList(this.body);
+     console.log('IF STATEMENT:', this.condition);
+     genStatementList(this.body.statements);
      emit('}');
    },
  });
 
  Object.assign(IdExpression.prototype, {
-   gen() { return `${this.id}`; },
+   gen() {
+     console.log('IDEXP:', this.id);
+     return this.id;
+   },
+ });
+
+ Object.assign(Param.prototype, {
+   gen() { return this.id.gen(); },
+ });
+
+// TODO params
+ Object.assign(Params.prototype, {
+   gen() { return this.params.map(p => p.gen()).join(' ,'); },
  });
 
  Object.assign(Print.prototype, {
    gen() {
-     emit(`console.log(${this.argument});`);
+     console.log('CONSOLE LOG', this.body);
+     emit(`console.log(${this.body.gen()});`);
    },
  });
 
@@ -224,7 +284,10 @@
  });
 
  Object.assign(StringLiteral.prototype, {
-   gen() { return `${this.value}`; },
+   gen() {
+     console.log('STRINGLIT', this.value);
+     return `${this.value}`;
+   },
  });
 
 
@@ -234,25 +297,40 @@
 
  Object.assign(VariableDecl.prototype, {
    gen() {
-     const ids = this.ids.map(i => i.gen());
+     const vars = this.ids.map(i => i.gen());
      const values = this.initializers.map(v => v.gen());
      if (this.signifier === "let") {
-       emit(`let [${ids}] = [${values}];`);
+       emit(`let [${vars}] = [${values}];`);
      }
    },
  });
  Object.assign(Variable.prototype, {
    gen() {
+    //  return jsName(this);
+     console.log('VARS:', this.ids);
      const ids = this.id.gen();
      const values = this.value.gen();
      emit(`${ids} = ${values}`);
    },
  });
 
+ Object.assign(VarReassign.prototype, {
+   gen() {
+     emit(`${(this.id)} = ${(this.value)}`);
+   },
+ });
+
+ Object.assign(VarSubscript.prototype, {
+   gen() {
+     emit(`(${this.varExp} [${this.subscript}]);`);
+   },
+ });
+
+
  Object.assign(WhileStatement.prototype, {
    gen() {
-     emit(`while (${this.condition}) {`);
-     genStatementList(this.body);
+     emit(`while (${this.condition.gen()}) {`);
+     genStatementList(this.body.statements);
      emit('}');
    },
  });

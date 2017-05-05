@@ -1,8 +1,8 @@
 const Statement = require('../entities/Statement.js');
 
-class ReturnStatement extends Statement {
+class ReturnStatement {
   constructor(returnValue) {
-    super();
+    // super();
     this.returnValue = returnValue;
   }
   analyze(context) {

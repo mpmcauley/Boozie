@@ -16,7 +16,6 @@ class VariableDecl {
   }
 
   analyze(context) {
-    // console.log("jey");
     if (this.ids.length !== this.initializers.length) {
       throw new Error('Number of variables does not equal number of initializers');
     }
@@ -24,6 +23,7 @@ class VariableDecl {
     // this.initializers.forEach(e =>
     //   this.variables.push(this.ids.map(id => new Variable(id, e))));
     // this.variables = this.ids.map(id => new Variable(id));
+    console.log(this.variables);
     this.variables.forEach(variable => context.add(variable));
   }
   optimize() {

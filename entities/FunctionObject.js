@@ -10,7 +10,7 @@ class FunctionObject {
   }
   analyze(context) {
     console.log(this.params);
-    this.params.forEach(p => p.analyze(context));
+    // this.params.analyze(context);
     this.requiredParameterNames = new Set();
     this.allParameterNames = new Set();
     this.params.forEach((p) => {
@@ -40,9 +40,9 @@ class FunctionObject {
     return this;
   }
 
-  toString() {
-    return (`(Funcall ${this.id} ${this.params} ${this.body})`);
-  }
+  // toString() {
+  //   return (`(Funcall ${this.id} ${this.params} ${this.body})`);
+  // }
 }
 
 module.exports = FunctionObject;

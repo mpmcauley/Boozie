@@ -12,7 +12,7 @@ class WhileStatement extends Statement {
     // console.log("while");
     this.condition.analyze(context);
     const bodyContext = context.createChildContextForLoop();
-    this.body.analyze(bodyContext);
+    this.body.forEach(s => s.analyze(bodyContext));
     // this.body.forEach(s => s.analyze(bodyContext));
     // this.condition.type.mustBeBoolean('Condition in while statement');
     // if (this.condition.type !== Type.BOOL) {

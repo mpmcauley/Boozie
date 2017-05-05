@@ -11,8 +11,8 @@ class BoozieArray {
     return this;
   }
   toString() {
-      return (`(BoozieArray ${this.values})`);
+    return (`(BoozieArray ${this.values})`);
   }
-};
+}
 
 module.exports = BoozieArray;

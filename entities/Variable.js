@@ -6,7 +6,7 @@ class Variable {
 
   analyze(context) { // eslint-disable-line class-methods-use-this
     this.value = context.lookup(this.id);
-    console.log(this.id);
+    console.log(this.id, this.value);
     // this.value = context.lookup(this.)
     // console.log(this.id.value);
     // Someday we'll have types and we can do something here...

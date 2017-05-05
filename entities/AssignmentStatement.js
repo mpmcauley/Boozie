@@ -1,16 +1,19 @@
 const Statement = require('../entities/Statement.js');
 
 class AssignmentStatement extends Statement {
-  constructor(left, op, right) {
+  constructor(left, right) {
     super();
     this.left = left;
-    this.op = op;
+    // this.op = op;
     this.right = right;
   }
 
   analyze(context) {
+    // if (this.left.length !== this.right.length) {
+    //   throw new Error('Number of variables does not equal number of expressions');
+    // }
     this.left.analyze(context);
-    this.left.analyze(context);
+    this.right.analyze(context);
   }
 
   optimize() {

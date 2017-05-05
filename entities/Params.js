@@ -2,6 +2,9 @@ class Params {
   constructor(pOne, restParams) {
     this.params = pOne.concat((restParams.length > 0) ? restParams[0] : restParams);
   }
+  analyze(context) {
+    this.params.forEach(s => s.analyze(context));
+  }
   optimize() {
     return this;
   }
