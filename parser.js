@@ -1,3 +1,4 @@
+// <<<<<<< HEAD
 const Program = require('./entities/Program.js');
 const Block = require('./entities/Block.js');
 const Statement = require('./entities/Statement.js');
@@ -16,29 +17,26 @@ const FuncDecl = require('./entities/FuncDecl.js');
 const Params = require('./entities/Params.js');
 const Param = require('./entities/Param.js');
 const VarReassign = require('./entities/VarReassign.js');
-const FunctionCall = require('./entities/FunctionCall');
+// =======
 const Args = require('./entities/Args.js');
-const VarSubscript = require('./entities/VarSubscript.js');
-// const ConstDecl = require('./entities/ConstDecl.js');
-// const ArrayVariableDecl = require('./entities/ArrayVariableDecl.js');
-// const ArrayConstDecl = require('./entities/ArrayConstDecl.js');
-const IdExpression = require('./entities/IdExpression.js');
 const AssignmentStatement = require('./entities/AssignmentStatement.js');
 const BinaryExpression = require('./entities/BinaryExpression.js');
-const UnaryExpression = require('./entities/UnaryExpression.js');
-const Literal = require('./entities/Literal.js');
-const FloatLiteral = require('./entities/FloatLiteral.js');
-const StringLiteral = require('./entities/StringLiteral.js');
 const BooleanLiteral = require('./entities/BooleanLiteral.js');
-const Print = require('./entities/Print.js');
-const Var = require('./entities/Variable.js');
+const FloatLiteral = require('./entities/FloatLiteral.js');
+// >>>>>>> 0064ccb133af1a3a6acaea6a9b1d6ab2b2842a98
+const FunctionCall = require('./entities/FunctionCall');
+const IdExpression = require('./entities/IdExpression');
+const Print = require('./entities/Print');
+const StringLiteral = require('./entities/StringLiteral');
+// const Type = require('../entities/Type');
+const UnaryExpression = require('./entities/UnaryExpression');
+const VarSubscript = require('./entities/VarSubscript');
 
 
 const ohm = require('ohm-js');
 const fs = require('fs');
 
 const grammar = ohm.grammar(fs.readFileSync('./syntax.ohm'));
-
 /* eslint-disable no-unused-vars */
 const semantics = grammar.createSemantics().addOperation('ast', {
 
@@ -47,9 +45,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   },
   Block(stmt1) {
     return new Block(stmt1.ast());
-  },
-  Stmt(body) {
-    return new Statement(body.ast());
   },
   IfStmt_ifelsifelse(i, con1, brac1, block1, brac2, elsi, con2, brac3, block2, brac4, els, brac5, block3, brac6) {
     return new ElseIfStatement(con1.ast(), block1.ast(), con2.ast(), block2.ast(), block3.ast());
@@ -67,7 +62,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   //   return new AssignmentStatement(idExp.ast(), assignOp.sourceString, exp.ast());
   // },
   FunDecl_func(sig, id, eq, params, arrow, br1, block, br2) {
-    return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast())
+    return new FuncDecl(sig.sourceString, id.ast(), params.ast(), block.ast());
   },
   Params(l, param, comma, rest, r) {
     return new Params(param.ast(), rest.ast());
@@ -90,15 +85,6 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   VarDecl_decl(sig, ids, eq, values) {
     return new VariableDecl(sig.sourceString, ids.ast(), values.ast());
   },
-  // VarArrayDecl_arrdecl(l, id, eq, arr) {
-  //   return new VariableDecl(id.ast(), arr.ast());
-  // },
-  // ConstDecl(s, id, comma1, nextId, eq, v, comma2, nextv) {
-  //   return new ConstDecl(v.sourceString, nextv.sourceString);
-  // },
-  // ConstArrayDecl(s, id, eq, brac1, v, comma1, nextv, brac2) {
-  //   return new ArrayConstDecl(v.sourceString, nextv.sourceString);
-  // },
   Exp_or(e1, op, e2) {
     return new BinaryExpression(e1.ast(), op.sourceString, e2.ast());
   },
@@ -138,7 +124,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
-    return (this.sourceString);
+    return new IdExpression(this.sourceString);
   },
   // IdExp(id) {
   //   return new IdExpression(this.sourceString);
@@ -165,8 +151,3 @@ module.exports = (text) => {
   }
   return semantics(match).ast();
 };
-// function parse(text) {
-//   const match = grammar.match(text);
-//   return semantics(match).ast();
-// };
-// module.exports = parse;

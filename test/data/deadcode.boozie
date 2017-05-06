@@ -1,0 +1,6 @@
+let x = 1
+if x == 1 {
+    set y = 2
+    return true
+    set z = 3
+}

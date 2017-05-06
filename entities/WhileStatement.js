@@ -1,25 +1,17 @@
 const Statement = require('../entities/Statement.js');
 const BooleanLiteral = require('../entities/BooleanLiteral.js');
 
-class WhileStatement {
+class WhileStatement extends Statement {
   constructor(condition, body) {
-    // super();
-    // this.condition = condition;
-    // this.body = body;
+    super();
+    this.condition = condition;
+    this.body = body;
     Object.assign(this, { condition, body });
   }
-  analyze(context) {
-    // console.log("while");
+  analyze(context) {n
     this.condition.analyze(context);
     const bodyContext = context.createChildContextForLoop();
-    this.body.analyze(bodyContext);
-    // this.condition.type.mustBeBoolean('Condition in while statement');
-    // if (this.condition.type !== Type.BOOL) {
-    //   error('While condition must be boolean');
-    // }
-    // for (let e = 0; e < this.body.length; e++) {
-    //   e.analyze(bodyContext);
-    // }
+    this.body.forEach(s => s.analyze(bodyContext));
   }
   optimize() {
     this.condition = this.condition.optimize();

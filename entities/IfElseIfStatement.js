@@ -3,16 +3,17 @@
 const Statement = require('../entities/Statement.js');
 
 class IfElseIfStatement extends Statement {
-  constructor(condition, body, elseCond, elseStmt) {
+  constructor(condition, body, elseIfCond, elseIfStmt, elseStmt) {
     super();
     this.condition = condition;
     this.body = body;
-    this.elseCond = elseCond;
-    this.else = elseStmt;
+    this.elseIfCond = elseIfCond;
+    this.elseIfStmt = elseIfStmt;
+    this.elseStmt = elseStmt;
   }
   analyze(context) {
     this.condition.analyze(context);
-    this.condition.type.mustBeBoolean('Condition in "else if" statement must be boolean');
+    // this.condition.type.mustBeBoolean('Condition in "else if" statement must be boolean');
     this.body.analyze(context);
     if (this.elseIf) {
       return this.elseIf.analyze(context);

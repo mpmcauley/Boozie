@@ -1,4 +1,4 @@
-const Literal = require('../entities/literal.js');
+const Literal = require('../entities/Literal.js');
 const Type = require('../entities/Type.js');
 
 class StringLiteral extends Literal {
@@ -7,7 +7,6 @@ class StringLiteral extends Literal {
     this.value = string;
   }
   analyze(context) {
-    console.log("stringlit analyze");
     // this.value = context.lookup(this.value);
     // this.type = Type.STRING;
   }

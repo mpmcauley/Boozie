@@ -107,7 +107,8 @@ describe('Parser Test', () => {
     });
     it('multiple constants decl', () => {
       const ast = parse('set x,y = 5,6').toString();
-      const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)) (Variable y = (FloatLiteral 6.0)))))'
+      const expected = '(Program (Block (ConstDecl (Variable x = (FloatLiteral 5.0)),(Variable y = (FloatLiteral 6.0))))';
+      assert.equal(ast, expected);
     });
   });
   describe('Drunken ConstDecl', () => {
@@ -134,18 +135,18 @@ describe('Parser Test', () => {
       assert.equal(ast, expected);
     });
     it('simple func call no param', () => {
-      const ast = parse(`fun()`).toString();
-      const expected = '(Program (Block (FunctionCall fun ())))';
+      const ast = parse('fun()').toString();
+      const expected = '(Program (Block (FunctionCall fun())))';
       assert.equal(ast, expected);
     });
     it('funCall array no params', () => {
-      const ast = parse(`fun[4]()`).toString();
-      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) ())))';
+      const ast = parse('fun[4]()').toString();
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)])())))';
       assert.equal(ast, expected);
     });
     it('funCall array one params', () => {
-      const ast = parse(`fun[4](yup)`).toString();
-      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)]) (yup))))';
+      const ast = parse('fun[4](yup)').toString();
+      const expected = '(Program (Block (FunctionCall (fun [(FloatLiteral 4.0)])(Args yup))))';
       assert.equal(ast, expected);
     });
   });

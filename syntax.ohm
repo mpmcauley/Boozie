@@ -1,4 +1,4 @@
-Boozie {
+ Boozie {
 Program         = Block
 Block           = (Stmt)*
 Stmt            = IfStmt                                    -- if

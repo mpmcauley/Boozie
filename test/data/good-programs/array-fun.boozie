@@ -1,0 +1,2 @@
+let booze = [beerFinder]
+burp(booze[0]())
