@@ -1,4 +1,4 @@
-let beer = "Ballast Point"
+ let beer = "Ballast Point"
 if beer == "Ballast Point" {
     burp("true")
 }

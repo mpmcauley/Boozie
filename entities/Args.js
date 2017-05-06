@@ -10,8 +10,7 @@ class Args {
     return this;
   }
   toString() {
-    console.log(this.args)
-    return (`(Args ${this.args})`);
+    return (`(${this.args})`);
   }
   // Block.prototype.analyze = (context) => {
   //   localContext = context.createChildContext();

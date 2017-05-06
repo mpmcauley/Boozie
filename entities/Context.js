@@ -12,7 +12,6 @@ class Context {
   }
 
   add(variable) {
-    console.log("Added variable");
     if (variable.id in this.localVariables) {
       throw new Error(`Identitier ${variable.id} already declared in this scope`);
     }
@@ -27,7 +26,6 @@ class Context {
 
 
   lookup(id) {
-    console.log('Lookup function called');
     if (id in this.localVariables) {
       return this.localVariables[value];
     }

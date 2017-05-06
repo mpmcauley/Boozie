@@ -153,7 +153,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
     return new StringLiteral(this.sourceString);
   },
   _terminal() {
-    return (this.sourceString);
+    return (this.primitiveValue);
   },
 });
 /* eslint-enable */
