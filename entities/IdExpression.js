@@ -7,15 +7,15 @@ class IdExpression extends Expression {
   }
   analyze(context) {
     this.referent = context.lookup(this.id); // not used I believe
-    // if (!context.lookup(this.idValue)) {
-    //   throw new Error(`${this.idValue} has not been declared`);
-    // }
+    if (!context.lookup(this.id)) {
+      throw new Error(`${this.id} has not been declared`);
+    }
   }
   optimize() {
     return this;
   }
   toString() {
-    return (`(IdExpression ${this.id})`);
+    return (`${this.id}`);
   }
 }
 

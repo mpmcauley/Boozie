@@ -137,7 +137,7 @@ const semantics = grammar.createSemantics().addOperation('ast', {
   NonemptyListOf(first, _, rest) { return [first.ast()].concat(rest.ast()); },
   // little confused on these ones
   id(idValue) {
-    return (this.sourceString);
+    return new IdExpression(this.sourceString);
   },
   // IdExp(id) {
   //   return new IdExpression(this.sourceString);
